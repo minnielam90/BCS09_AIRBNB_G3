@@ -1,11 +1,22 @@
-import { DatePicker } from "antd";
+import { BrowserRouter, Route, Routes } from "react-router-dom";
+import _ from "lodash";
+import { adminRoute } from "./admin/route/adminRoute";
 
 function App() {
+  const createRoutes = (routeList) =>
+    _.values(routeList).map(({ path, element }) => (
+      <Route key={path} path={path} element={element} />
+    ));
+
   return (
-    <div className="App">
-      <h1 className="bg-red-500">hello</h1>
-      <DatePicker />
-    </div>
+    <>
+      <BrowserRouter>
+        <Routes>
+          {/* {createRoutes(userRoute)} */}
+          {createRoutes(adminRoute)}
+        </Routes>
+      </BrowserRouter>
+    </>
   );
 }
 
