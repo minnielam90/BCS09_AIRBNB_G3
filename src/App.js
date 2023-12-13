@@ -1,5 +1,4 @@
 // App.js
-import React from "react";
 import _ from "lodash";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import adminRoute from "./admin/route/adminRoute";
