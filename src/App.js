@@ -1,4 +1,6 @@
-import { DatePicker } from "antd";
+import { BrowserRouter, Route, Routes } from "react-router-dom";
+import _ from "lodash";
+import { adminRoute } from "./admin/route/adminRoute";
 
 function App() {
   const createRoutes = (routeList) =>
