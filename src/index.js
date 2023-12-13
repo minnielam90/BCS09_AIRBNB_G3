@@ -6,11 +6,20 @@ import { BrowserRouter } from "react-router-dom";
 
 // redux
 import { Provider } from "react-redux";
-import { store } from "./redux/configStore";
+import { configureStore } from "@reduxjs/toolkit";
+// import { store } from "./redux/configStore";
 
 //react router-dom
 
 const root = ReactDOM.createRoot(document.getElementById("root"));
+
+export const store = configureStore({
+  reducer: {
+    // ...adminReducer,
+    // ...userReducer
+  },
+});
+
 root.render(
   <BrowserRouter>
     <Provider store={store}>
