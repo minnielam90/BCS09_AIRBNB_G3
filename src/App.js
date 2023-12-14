@@ -1,7 +1,6 @@
-// App.js
+import { BrowserRouter, Route, Routes } from "react-router-dom";
 import _ from "lodash";
-import { BrowserRouter, Routes, Route } from "react-router-dom";
-import adminRoute from "./admin/route/adminRoute";
+import { adminRoute } from "./admin/route/adminRoute";
 
 function App() {
   const createRoutes = (routeList) =>
