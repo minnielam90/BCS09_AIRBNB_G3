@@ -1,0 +1,30 @@
+import { https } from "../../services/configServ";
+import { store } from "../../index";
+import { setLoadingOff, setLoadingOn } from "../redux/spinnerSlice";
+
+https.interceptors.request.use(
+  function (config) {
+    const { url } = config;
+    switch (url) {
+      case "/api/users":
+        store.dispatch(setLoadingOn());
+        break;
+      case "/api/phong-thue":
+        store.dispatch(setLoadingOn());
+        break;
+      case "/api/vi-tri":
+        store.dispatch(setLoadingOn());
+        break;
+      case "/api/dat-phong":
+        store.dispatch(setLoadingOn());
+        break;
+      default:
+        break;
+    }
+    return config;
+  },
+  function (error) {
+    store.dispatch(setLoadingOff());
+    return Promise.reject(error);
+  }
+);

@@ -1,7 +1,11 @@
 import React, { useState } from "react";
 import { Layout, theme } from "antd";
 
+import HeaderAdmin from "./HeaderAdmin";
+import MenuAdmin from "./MenuAdmin";
+
 const { Sider, Content } = Layout;
+
 const AdminIndex = () => {
   const [collapsed, setCollapsed] = useState(false);
   const {
@@ -11,16 +15,17 @@ const AdminIndex = () => {
   return (
     <Layout className="layout h-auto">
       <Sider trigger={null} collapsible collapsed={collapsed}>
-        <div className="logo flex justify-center p-10">
+        <div className="logo flex justify-center p-5">
           <img
             src="https://www.theriver.asia/wp-content/uploads/2020/01/pngkey.com-airbnb-logo-png-605967.png"
             width="100%"
             height="100%"
           />
         </div>
+        <MenuAdmin />
       </Sider>
       <Layout>
-        {/* <Headers setCollapsed={setCollapsed} collapsed={collapsed} /> */}
+        <HeaderAdmin setCollapsed={setCollapsed} collapsed={collapsed} />
         <Content
           style={{
             margin: "24px 16px",
