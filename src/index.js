@@ -2,6 +2,7 @@ import React from "react";
 import ReactDOM from "react-dom/client";
 import "./index.css";
 import App from "./App";
+import { adminReducer } from "./admin/redux/adminReducer";
 
 // redux
 import { Provider } from "react-redux";
@@ -14,7 +15,7 @@ const root = ReactDOM.createRoot(document.getElementById("root"));
 
 export const store = configureStore({
   reducer: {
-    // ...adminReducer,
+    ...adminReducer,
     // ...userReducer
   },
 });

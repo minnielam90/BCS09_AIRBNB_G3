@@ -10,13 +10,13 @@ const MenuAdmin = () => {
   useEffect(() => {
     if (pathname) {
       switch (pathname) {
-        case adminRoute.room:
+        case adminRoute.room.path:
           handleSelectedKey(2);
           break;
-        case adminRoute.location:
+        case adminRoute.location.path:
           handleSelectedKey(3);
           break;
-        case adminRoute.booking:
+        case adminRoute.booking.path:
           handleSelectedKey(4);
           break;
         default:
@@ -41,22 +41,26 @@ const MenuAdmin = () => {
         {
           key: "1",
           icon: <i className="fas fa-user"></i>,
-          label: <NavLink to={adminRoute.user}>Người dùng</NavLink>,
+          label: <NavLink to={adminRoute.user.path}>Người dùng</NavLink>,
         },
         {
           key: "2",
           icon: <i className="fas fa-house"></i>,
-          label: <NavLink to={adminRoute.room}>Quản lý phòng</NavLink>,
+          label: <NavLink to={adminRoute.room.path}>Quản lý phòng</NavLink>,
         },
         {
           key: "3",
           icon: <i className="fas fa-location"></i>,
-          label: <NavLink to={adminRoute.location}>Quản lý vị trí</NavLink>,
+          label: (
+            <NavLink to={adminRoute.location.path}>Quản lý vị trí</NavLink>
+          ),
         },
         {
           key: "4",
           icon: <i className="fas fa-ticket"></i>,
-          label: <NavLink to={adminRoute.booking}>Quản lý đặt phòng</NavLink>,
+          label: (
+            <NavLink to={adminRoute.booking.path}>Quản lý đặt phòng</NavLink>
+          ),
         },
         {
           type: "divider",

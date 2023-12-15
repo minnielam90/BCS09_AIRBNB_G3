@@ -28,3 +28,39 @@ https.interceptors.request.use(
     return Promise.reject(error);
   }
 );
+
+https.interceptors.response.use(
+  function (response) {
+    const url = response.config.url;
+    switch (url) {
+      case "/users":
+        setTimeout(() => {
+          store.dispatch(setLoadingOff());
+        }, 500);
+        break;
+      case "/phong-thue":
+        setTimeout(() => {
+          store.dispatch(setLoadingOff());
+        }, 500);
+        break;
+      case "/vi-tri":
+        setTimeout(() => {
+          store.dispatch(setLoadingOff());
+        }, 500);
+        break;
+      case "/dat-phong":
+        setTimeout(() => {
+          store.dispatch(setLoadingOff());
+        }, 500);
+        break;
+      default:
+        store.dispatch(setLoadingOff());
+        break;
+    }
+    return response;
+  },
+  function (error) {
+    store.dispatch(setLoadingOff());
+    return Promise.reject(error);
+  }
+);

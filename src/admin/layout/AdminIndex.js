@@ -6,7 +6,7 @@ import MenuAdmin from "./MenuAdmin";
 
 const { Sider, Content } = Layout;
 
-const AdminIndex = () => {
+const AdminIndex = ({ children }) => {
   const [collapsed, setCollapsed] = useState(false);
   const {
     token: { colorBgContainer },
@@ -34,7 +34,7 @@ const AdminIndex = () => {
             background: colorBgContainer,
           }}
         >
-          {/* {children} */}
+          {children}
         </Content>
       </Layout>
     </Layout>
