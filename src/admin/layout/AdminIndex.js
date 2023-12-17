@@ -8,6 +8,7 @@ const { Sider, Content } = Layout;
 
 const AdminIndex = ({ children }) => {
   const [collapsed, setCollapsed] = useState(false);
+
   const {
     token: { colorBgContainer },
   } = theme.useToken();

@@ -9,7 +9,7 @@ const MenuAdmin = () => {
 
   useEffect(() => {
     if (pathname) {
-      switch (pathname) {
+      switch (pathname.pathname) {
         case adminRoute.room.path:
           handleSelectedKey(2);
           break;
@@ -26,8 +26,8 @@ const MenuAdmin = () => {
     }
   }, [pathname]);
 
-  const handleSelectedKey = (index) => {
-    setSelectKey([`${index}`]);
+  const handleSelectedKey = (key) => {
+    setSelectKey([`${key}`]);
   };
 
   return (
@@ -35,7 +35,7 @@ const MenuAdmin = () => {
       className="space-y-6 pt-5"
       theme="dark"
       mode="inline"
-      defaultSelectedKeys={selectKey}
+      defaultSelectedKeys={[pathname.pathname]}
       selectedKeys={selectKey}
       items={[
         {
