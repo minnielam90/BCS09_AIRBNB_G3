@@ -227,8 +227,6 @@ const Room = () => {
         options={{
           selectableRows: "none",
           caseSensitive: true,
-          download: false,
-          print: false,
           pagination: true,
           rowsPerPage: 8,
           customToolbar: () => <ButtonSortToolbar reverseData={reverseData} />,

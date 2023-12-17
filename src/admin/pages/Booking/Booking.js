@@ -3,8 +3,11 @@ import { bookingRoomServ } from "../../api/apiAdmin";
 import { Button, Table } from "antd";
 import moment from "moment";
 import { EditOutlined, DeleteOutlined } from "@ant-design/icons";
+import MUIDataTable from "mui-datatables";
+import ButtonSortToolbar from "../components/ButtonSortToolbar";
 
 const Booking = () => {
+  let [isOpen, setIsOpen] = useState(false);
   const [listBookingRoom, setListBookingRoom] = useState([]);
 
   const getData = () => {
@@ -37,21 +40,24 @@ const Booking = () => {
 
   const [sortToggle, setSortToggle] = useState(true);
   const dataSorted = sortToggle ? data : data.reverse();
+  const reverseData = () => {
+    setSortToggle(!sortToggle);
+  };
 
   const columns = [
     {
-      title: "STT",
+      label: "STT",
       dataIndex: "stt",
-      key: "stt",
+      name: "stt",
       options: {
         filter: true,
         sort: false,
       },
     },
     {
-      title: "Mã phòng",
+      label: "Mã phòng",
       dataIndex: "maPhong",
-      key: "maPhong",
+      name: "maPhong",
       options: {
         filter: true,
         sort: false,
@@ -59,81 +65,84 @@ const Booking = () => {
     },
 
     {
-      title: "Ngày đến",
+      label: "Ngày đến",
       dataIndex: "ngayDen",
-      key: "ngayDen",
+      name: "ngayDen",
       options: {
         filter: true,
         sort: false,
       },
     },
     {
-      title: "Ngày đi",
+      label: "Ngày đi",
       dataIndex: "ngayDi",
-      key: "ngayDi",
+      name: "ngayDi",
       options: {
         filter: true,
         sort: false,
       },
     },
     {
-      title: "Số lượng khách",
+      label: "Số lượng khách",
       dataIndex: "soLuongKhach",
-      key: "soLuongKhach",
+      name: "soLuongKhach",
       options: {
         filter: true,
         sort: false,
       },
     },
     {
-      title: "Mã người dùng",
+      label: "Mã người dùng",
       dataIndex: "maNguoiDung",
-      key: "maNguoiDung",
+      name: "maNguoiDung",
       options: {
         filter: true,
         sort: false,
       },
     },
     {
-      title: "Hành động",
+      label: "Hành động",
       dataIndex: "action",
-      key: "action",
+      name: "action",
       options: {
         filter: true,
         sort: false,
-      },
-      render: (value, record) => {
-        const bookingRoomId = record.id;
-        return (
-          <div>
-            <Button
-              classNames="button-edit"
-              type="warning"
-              icon={<EditOutlined />}
-              className="mr-2 mb-3 bg-orange-300 hover:bg-orange-400 text-white"
-              // onClick={() => handleEditRoom(roomId)}
-            ></Button>
-            <Button
-              className="button-delete"
-              type="primary"
-              danger
-              icon={<DeleteOutlined />}
-              // onClick={() => handleDeleteRoom(roomId)}
-            ></Button>
-          </div>
-        );
+        customBodyRender: (value, tableMeta) => {
+          const roomId = dataSorted[tableMeta.rowIndex].id;
+          return (
+            <div>
+              <Button
+                type="warning"
+                icon={<EditOutlined />}
+                className="mr-2 mb-3 bg-orange-300 hover:bg-orange-400 text-white"
+                // onClick={() => handleEditRoom(roomId)}
+              ></Button>
+              <Button
+                type="primary"
+                danger
+                icon={<DeleteOutlined />}
+                // onClick={() => handleDeleteRoom(roomId)}
+              ></Button>
+            </div>
+          );
+        },
       },
     },
   ];
 
   return (
     <div>
-      <h2 className="text-2xl font-bold mb-5">Quản lý thông tin đặt phòng</h2>
-
-      <Table
+      <MUIDataTable
+        title={"Quản lý đặt phòng"}
+        data={dataSorted}
         columns={columns}
-        dataSource={dataSorted}
-        pagination={{ pageSize: 10 }}
+        options={{
+          selectableRows: "none",
+          caseSensitive: true,
+          pagination: true,
+          rowsPerPage: 8,
+          customToolbar: () => <ButtonSortToolbar reverseData={reverseData} />,
+        }}
       />
     </div>
   );

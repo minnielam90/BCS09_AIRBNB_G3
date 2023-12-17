@@ -2,9 +2,15 @@ import { Button, Table } from "antd";
 import React, { useEffect, useState } from "react";
 import { locationServ } from "../../api/apiAdmin";
 import { EditOutlined, DeleteOutlined } from "@ant-design/icons";
+import ButtonSortToolbar from "../components/ButtonSortToolbar";
+import MUIDataTable from "mui-datatables";
 
 const Location = () => {
+  const [isOpen, setIsOpen] = useState(false);
   const [listLocation, setListLocation] = useState([]);
+  const [popoverStates, setPopoverStates] = useState(
+    listLocation.map(() => false)
+  );
 
   const getData = () => {
     locationServ
@@ -33,21 +39,24 @@ const Location = () => {
 
   const [sortToggle, setSortToggle] = useState(true);
   const dataSorted = sortToggle ? data : data.reverse();
+  const reverseData = () => {
+    setSortToggle(!sortToggle);
+  };
 
   const columns = [
     {
-      title: "STT",
+      label: "STT",
       dataIndex: "stt",
-      key: "stt",
+      name: "stt",
       options: {
         filter: true,
         sort: false,
       },
     },
     {
-      title: "Tên vị trí",
+      label: "Tên vị trí",
       dataIndex: "tenViTri",
-      key: "tenViTri",
+      name: "tenViTri",
       options: {
         filter: true,
         sort: false,
@@ -55,75 +64,85 @@ const Location = () => {
     },
 
     {
-      title: "Tỉnh thành",
+      label: "Tỉnh thành",
       dataIndex: "tinhThanh",
-      key: "tinhThanh",
+      name: "tinhThanh",
       options: {
         filter: true,
         sort: false,
       },
     },
     {
-      title: "Quốc gia",
+      label: "Quốc gia",
       dataIndex: "quocGia",
-      key: "quocGia",
+      name: "quocGia",
       options: {
         filter: true,
         sort: false,
       },
     },
     {
-      title: "Hình Ảnh",
+      label: "Hình Ảnh",
       dataIndex: "hinhAnh",
-      key: "hinhAnh",
+      name: "hinhAnh",
       options: {
         filter: true,
         sort: false,
-      },
-      render: (data) => {
-        return <img src={data} width="100" height="100" />;
+        customBodyRender: (value, tableMeta) => {
+          const imgUrl = value;
+          return <img src={imgUrl} width="100" height="100" alt="" />;
+        },
       },
     },
     {
-      title: "Hành động",
+      label: "Hành động",
       dataIndex: "action",
-      key: "action",
+      name: "action",
       options: {
         filter: true,
         sort: false,
-      },
-      render: (value, record) => {
-        const locationId = record.id;
-        return (
-          <div>
-            <Button
-              classNames="button-edit"
-              type="warning"
-              icon={<EditOutlined />}
-              className="mr-2 mb-3 bg-orange-300 hover:bg-orange-400 text-white"
-              // onClick={() => handleEditRoom(roomId)}
-            ></Button>
-            <Button
-              className="button-delete"
-              type="primary"
-              danger
-              icon={<DeleteOutlined />}
-              // onClick={() => handleDeleteRoom(roomId)}
-            ></Button>
-          </div>
-        );
+        customBodyRender: (value, tableMeta) => {
+          const locationId = data[tableMeta.rowIndex].id;
+          return (
+            <div>
+              <Button
+                type="warning"
+                icon={<EditOutlined />}
+                className="mr-2 mb-3 bg-orange-300 hover:bg-orange-400 text-white"
+                // onClick={() => handleEditRoom(roomId)}
+              ></Button>
+              <Button
+                type="primary"
+                danger
+                icon={<DeleteOutlined />}
+                // onClick={() => handleDeleteRoom(roomId)}
+              ></Button>
+            </div>
+          );
+        },
       },
     },
   ];
 
   return (
     <div>
-      <h2 className="text-2xl font-bold mb-5">Quản lý thông tin vị trí</h2>
-
-      <Table
+      <MUIDataTable
+        title={
+          <div>
+            <h2 className="text-2xl font-bold mb-5">
+              Quản lý thông tin vị trí
+            </h2>
+          </div>
+        }
+        data={dataSorted}
         columns={columns}
-        dataSource={dataSorted}
-        pagination={{ pageSize: 6 }}
+        options={{
+          selectableRows: "none",
+          caseSensitive: true,
+          pagination: true,
+          rowsPerPage: 6,
+          customToolbar: () => <ButtonSortToolbar reverseData={reverseData} />,
+        }}
       />
     </div>
   );

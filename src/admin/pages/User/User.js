@@ -3,8 +3,11 @@ import { userServ } from "../../api/apiAdmin";
 import dayjs from "dayjs";
 import { EditOutlined, DeleteOutlined } from "@ant-design/icons";
 import { Button, Table } from "antd";
+import MUIDataTable from "mui-datatables";
+import ButtonSortToolbar from "../components/ButtonSortToolbar";
 
 const User = () => {
+  let [isOpen, setIsOpen] = useState(false);
   const [listUser, setListUser] = useState([]);
 
   const getData = () => {
@@ -51,27 +54,27 @@ const User = () => {
 
   const columns = [
     {
-      title: "STT",
+      label: "STT",
       dataIndex: "stt",
-      key: "stt",
+      name: "stt",
       options: {
         filter: true,
         sort: false,
       },
     },
     {
-      title: "Tên tài khoản",
+      label: "Tên tài khoản",
       dataIndex: "name",
-      key: "name",
+      name: "name",
       options: {
         filter: true,
         sort: false,
       },
     },
     {
-      title: "Email",
+      label: "Email",
       dataIndex: "email",
-      key: "email",
+      name: "email",
       options: {
         filter: true,
         sort: false,
@@ -79,62 +82,72 @@ const User = () => {
     },
 
     {
-      title: "Ngày sinh",
+      label: "Ngày sinh",
       dataIndex: "birthday",
-      key: "birthday",
+      name: "birthday",
       options: {
         filter: true,
         sort: false,
       },
     },
     {
-      title: "Vai trò",
+      label: "Vai trò",
       dataIndex: "role",
-      key: "role",
+      name: "role",
       options: {
         filter: true,
         sort: false,
       },
     },
     {
-      title: "Hành động",
+      label: "Hành động",
       dataIndex: "action",
-      key: "action",
+      name: "action",
       options: {
         filter: true,
         sort: false,
-      },
-      render: (value, record) => {
-        const userId = record.id;
-        return (
-          <div>
-            <Button
-              classNames="button-edit"
-              type="warning"
-              icon={<EditOutlined />}
-              className="mr-2 mb-3 bg-orange-300 hover:bg-orange-400 text-white"
-              // onClick={() => handleEditRoom(roomId)}
-            ></Button>
-            <Button
-              className="button-delete"
-              type="primary"
-              danger
-              icon={<DeleteOutlined />}
-              // onClick={() => handleDeleteRoom(roomId)}
-            ></Button>
-          </div>
-        );
+        customBodyRender: (value, tableMeta) => {
+          const userId = dataSorted[tableMeta.rowIndex]?.id;
+          return (
+            <div>
+              <Button
+                type="warning"
+                icon={<EditOutlined />}
+                className="mr-2 mb-3 bg-orange-300 hover:bg-orange-400 text-white"
+                // onClick={() => handleEditRoom(roomId)}
+              ></Button>
+              <Button
+                type="primary"
+                danger
+                icon={<DeleteOutlined />}
+                // onClick={() => handleDeleteRoom(roomId)}
+              ></Button>
+            </div>
+          );
+        },
       },
     },
   ];
 
   return (
     <div>
-      <h2 className="text-2xl font-bold mb-5">Quản lý danh sách người dùng</h2>
-      <Table
+      <MUIDataTable
+        title={
+          <div>
+            <h2 className="text-2xl font-bold mb-5">
+              Quản lý danh sách người dùng
+            </h2>
+          </div>
+        }
+        data={dataSorted}
         columns={columns}
-        dataSource={dataSorted}
-        pagination={{ pageSize: 10 }}
+        options={{
+          selectableRows: "none",
+          caseSensitive: true,
+          pagination: true,
+          rowsPerPage: 8,
+          customToolbar: () => <ButtonSortToolbar reverseData={reverseData} />,
+        }}
       />
     </div>
   );
