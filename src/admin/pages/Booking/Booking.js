@@ -133,7 +133,13 @@ const Booking = () => {
   return (
     <div>
       <MUIDataTable
-        title={"Quản lý đặt phòng"}
+        title={
+          <div>
+            <h2 className="text-2xl font-bold mb-5">
+              Quản lý thông tin đặt phòng
+            </h2>
+          </div>
+        }
         data={dataSorted}
         columns={columns}
         options={{
