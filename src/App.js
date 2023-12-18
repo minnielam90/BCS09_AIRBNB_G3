@@ -1,6 +1,7 @@
 import { BrowserRouter, Route, Routes } from "react-router-dom";
 import _ from "lodash";
 import { adminRoute } from "./admin/route/adminRoute";
+import userRoute from "./user/route/userRoute";
 
 function App() {
   const createRoutes = (routeList) =>
@@ -12,7 +13,7 @@ function App() {
     <>
       <BrowserRouter>
         <Routes>
-          {/* {createRoutes(userRoute)} */}
+          {createRoutes(userRoute)}
           {createRoutes(adminRoute)}
         </Routes>
       </BrowserRouter>
