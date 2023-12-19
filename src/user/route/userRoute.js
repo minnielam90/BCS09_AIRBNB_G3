@@ -1,14 +1,14 @@
 import React from "react";
-import HomePages from "../layout/HomePages";
-import HomeUser from "../pages/Home/HomeUser";
+import HomePages from "../pages/Home/HomePages";
+import HomeIndex from "../layout/HomeIndex";
 
 export const userRoute = {
   home: {
     path: "/",
     element: (
-      <HomePages>
-        <HomeUser />
-      </HomePages>
+      <HomeIndex>
+        <HomePages />
+      </HomeIndex>
     ),
   },
 };
