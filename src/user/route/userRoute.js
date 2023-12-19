@@ -1,7 +1,14 @@
 import React from "react";
+import HomePages from "../layout/HomePages";
+import HomeUser from "../pages/Home/HomeUser";
 
-export const userRoute = () => {
-  return <div>userRoute</div>;
+export const userRoute = {
+  home: {
+    path: "/",
+    element: (
+      <HomePages>
+        <HomeUser />
+      </HomePages>
+    ),
+  },
 };
-
-export default userRoute;
