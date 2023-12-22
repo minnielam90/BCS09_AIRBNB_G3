@@ -5,6 +5,8 @@ import moment from "moment";
 import { EditOutlined, DeleteOutlined } from "@ant-design/icons";
 import MUIDataTable from "mui-datatables";
 import ButtonSortToolbar from "../components/ButtonSortToolbar";
+import ModalAddBooking from "./ModalAddBooking";
+import ModalEditBooking from "./ModalEditBooking";
 
 const Booking = () => {
   let [isOpen, setIsOpen] = useState(false);
@@ -47,8 +49,8 @@ const Booking = () => {
   const columns = [
     {
       label: "STT",
-      dataIndex: "stt",
-      name: "stt",
+      dataIndex: "id",
+      name: "id",
       options: {
         filter: true,
         sort: false,
@@ -132,6 +134,8 @@ const Booking = () => {
 
   return (
     <div>
+      <ModalAddBooking getData={getData} />
+      <ModalEditBooking getData={getData} />
       <MUIDataTable
         title={
           <div>
@@ -146,7 +150,7 @@ const Booking = () => {
           selectableRows: "none",
           caseSensitive: true,
           pagination: true,
-          rowsPerPage: 8,
+          rowsPerPage: 7,
           customToolbar: () => <ButtonSortToolbar reverseData={reverseData} />,
         }}
       />

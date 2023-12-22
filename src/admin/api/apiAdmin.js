@@ -8,8 +8,13 @@ export const userServ = {
 };
 
 export const roomServ = {
+  login: (info) => https.post(`/auth/signin`, info),
+
   getList: () => {
     return https.get("/api/phong-thue");
+  },
+  addRoom: (roomData) => {
+    return https.post("/api/phong-thue", roomData);
   },
 };
 

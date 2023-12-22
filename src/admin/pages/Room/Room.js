@@ -4,6 +4,8 @@ import { roomServ } from "../../api/apiAdmin";
 import { EditOutlined, DeleteOutlined } from "@ant-design/icons";
 import MUIDataTable from "mui-datatables";
 import ButtonSortToolbar from "../components/ButtonSortToolbar";
+import ModalAddRoom from "./ModalAddRoom";
+import ModalEditRoom from "./ModalEditRoom";
 
 const Room = () => {
   const [isOpen, setIsOpen] = useState(false);
@@ -63,8 +65,8 @@ const Room = () => {
   const columns = [
     {
       label: "STT",
-      dataIndex: "stt",
-      name: "stt",
+      dataIndex: "id",
+      name: "id",
       options: {
         filter: true,
         sort: false,
@@ -216,6 +218,8 @@ const Room = () => {
 
   return (
     <div>
+      <ModalAddRoom getData={getData} />
+      {/* <ModalEditRoom /> */}
       <MUIDataTable
         title={
           <div>
@@ -228,7 +232,7 @@ const Room = () => {
           selectableRows: "none",
           caseSensitive: true,
           pagination: true,
-          rowsPerPage: 8,
+          rowsPerPage: 10,
           customToolbar: () => <ButtonSortToolbar reverseData={reverseData} />,
         }}
       />

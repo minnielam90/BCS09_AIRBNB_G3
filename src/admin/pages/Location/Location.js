@@ -4,13 +4,12 @@ import { locationServ } from "../../api/apiAdmin";
 import { EditOutlined, DeleteOutlined } from "@ant-design/icons";
 import ButtonSortToolbar from "../components/ButtonSortToolbar";
 import MUIDataTable from "mui-datatables";
+import ModalEditLocation from "./ModalEditLocation";
+import ModalAddLocation from "./ModalAddLocation";
 
 const Location = () => {
   const [isOpen, setIsOpen] = useState(false);
   const [listLocation, setListLocation] = useState([]);
-  const [popoverStates, setPopoverStates] = useState(
-    listLocation.map(() => false)
-  );
 
   const getData = () => {
     locationServ
@@ -46,8 +45,8 @@ const Location = () => {
   const columns = [
     {
       label: "STT",
-      dataIndex: "stt",
-      name: "stt",
+      dataIndex: "id",
+      name: "id",
       options: {
         filter: true,
         sort: false,
@@ -126,6 +125,8 @@ const Location = () => {
 
   return (
     <div>
+      <ModalAddLocation getData={getData} />
+      {/* <ModalEditLocation /> */}
       <MUIDataTable
         title={
           <div>
@@ -140,7 +141,7 @@ const Location = () => {
           selectableRows: "none",
           caseSensitive: true,
           pagination: true,
-          rowsPerPage: 6,
+          rowsPerPage: 5,
           customToolbar: () => <ButtonSortToolbar reverseData={reverseData} />,
         }}
       />
