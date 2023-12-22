@@ -1,5 +1,6 @@
 import { https } from "../../services/configServ";
 import { store } from "../../index";
+import { userLocalStorage } from "./localService";
 import { setLoadingOff, setLoadingOn } from "../redux/spinnerSlice";
 
 https.interceptors.request.use(
@@ -33,22 +34,22 @@ https.interceptors.response.use(
   function (response) {
     const url = response.config.url;
     switch (url) {
-      case "/users":
+      case "/api/users":
         setTimeout(() => {
           store.dispatch(setLoadingOff());
         }, 500);
         break;
-      case "/phong-thue":
+      case "/api/phong-thue":
         setTimeout(() => {
           store.dispatch(setLoadingOff());
         }, 500);
         break;
-      case "/vi-tri":
+      case "/api/vi-tri":
         setTimeout(() => {
           store.dispatch(setLoadingOff());
         }, 500);
         break;
-      case "/dat-phong":
+      case "/api/dat-phong":
         setTimeout(() => {
           store.dispatch(setLoadingOff());
         }, 500);

@@ -5,6 +5,8 @@ import { EditOutlined, DeleteOutlined } from "@ant-design/icons";
 import { Button, Table } from "antd";
 import MUIDataTable from "mui-datatables";
 import ButtonSortToolbar from "../components/ButtonSortToolbar";
+import ModalAddUser from "./ModalAddUser";
+import ModalEditUser from "./ModalEditUser";
 
 const User = () => {
   let [isOpen, setIsOpen] = useState(false);
@@ -55,8 +57,8 @@ const User = () => {
   const columns = [
     {
       label: "STT",
-      dataIndex: "stt",
-      name: "stt",
+      dataIndex: "id",
+      name: "id",
       options: {
         filter: true,
         sort: false,
@@ -131,6 +133,8 @@ const User = () => {
 
   return (
     <div>
+      <ModalAddUser getData={getData} />
+      <ModalEditUser getData={getData} />
       <MUIDataTable
         title={
           <div>
@@ -145,7 +149,7 @@ const User = () => {
           selectableRows: "none",
           caseSensitive: true,
           pagination: true,
-          rowsPerPage: 8,
+          rowsPerPage: 7,
           customToolbar: () => <ButtonSortToolbar reverseData={reverseData} />,
         }}
       />
