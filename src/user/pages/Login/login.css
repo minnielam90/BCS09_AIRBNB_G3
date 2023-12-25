@@ -1,0 +1,6 @@
+.bg_login{
+    background-image: url(./image/logoBG.jpg);
+    height: 100vh;
+    background-repeat: no-repeat;
+    background-size: cover;
+}

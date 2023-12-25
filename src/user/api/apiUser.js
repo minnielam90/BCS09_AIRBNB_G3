@@ -1,7 +1,14 @@
-import React from 'react'
+import React from "react";
+import { https } from "../../services/configServ";
 
-export const apiUser = () => {
-  return (
-    <div>apiUser</div>
-  )
+export const itemKS = {
+  getAllItem: () => {
+    return https.get("/api/phong-thue");
+  },
+};
+
+export const detailRoom = {
+  getRoomDetail: (id)=>{
+    return https.get(`/api/phong-thue/${id}`)
+  }
 }
