@@ -1,9 +1,15 @@
-import React from 'react'
+import React from "react";
+import Footer from "./Footer";
+import Header from "./Header";
 
-const HomeIndex = () => {
+const HomeIndex = ({ children }) => {
   return (
-    <div>HomeIndex</div>
-  )
-}
+    <div>
+      <Header/>
+      <div className="px-3 lg:px-10 xl:px-20 pt-12">{children}</div>
+      <Footer />
+    </div>
+  );
+};
 
-export default HomeIndex
+export default HomeIndex;

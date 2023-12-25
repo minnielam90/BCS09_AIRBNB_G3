@@ -1,0 +1,4 @@
+.item_nav:hover h3{
+    border-bottom: 2px solid gray;
+    margin: 0 5px;
+}
