@@ -3,6 +3,8 @@ import { userRoute } from "../route/userRoute";
 import { GlobalOutlined } from "@ant-design/icons";
 import { Button, Dropdown, Space } from "antd";
 import { Link } from "react-router-dom";
+import { useSelector } from "react-redux";
+import "./header.css";
 const items = [
   {
     key: "1",
@@ -20,45 +22,10 @@ const items = [
       </Link>
     ),
   },
-  {
-    key: "3",
-    label: (
-      <a
-        target="_blank"
-        rel="noopener noreferrer"
-        href="https://www.luohanacademy.com"
-      >
-        Cho thuê nhà
-      </a>
-    ),
-  },
-  {
-    key: "4",
-    label: (
-      <a
-        target="_blank"
-        rel="noopener noreferrer"
-        href="https://www.luohanacademy.com"
-      >
-        Tổ chức trải nghiệm
-      </a>
-    ),
-  },
-  {
-    key: "5",
-    label: (
-      <a
-        target="_blank"
-        rel="noopener noreferrer"
-        href="https://www.luohanacademy.com"
-      >
-        Trợ giúp
-      </a>
-    ),
-  },
 ];
-
 const Header = () => {
+  const { user } = useSelector((state) => state.userSlice);
+
   return (
     <div className="container">
       {" "}
@@ -69,8 +36,6 @@ const Header = () => {
           width: "82.9%",
           backgroundColor: "white",
           borderBottom: "1px solid gray",
-          // borderBottomWidth: '',
-          // borderBlockWidth: '100%',
         }}
       >
         {/* logo */}
@@ -119,59 +84,103 @@ const Header = () => {
           {/* language */}
           <GlobalOutlined />
           {/* user */}
-          <div>
-            <Space direction="vertical">
-              <Space wrap>
-                <Dropdown
-                  menu={{
-                    items,
+          {user ? (
+            <div className="dropdown">
+              <button className="dropbtn flex space-x-2 items-center">
+                <svg
+                  viewBox="0 0 32 32"
+                  xmlns="http://www.w3.org/2000/svg"
+                  aria-hidden="true"
+                  role="presentation"
+                  focusable="false"
+                  style={{
+                    display: "block",
+                    fill: "none",
+                    height: 16,
+                    width: 16,
+                    stroke: "currentcolor",
+                    strokeWidth: 3,
+                    overflow: "visible",
+                    color: "black"
                   }}
-                  placement="bottomLeft"
                 >
-                  <Button className="rounded-full flex items-center py-5">
-                    <svg
-                      viewBox="0 0 32 32"
-                      xmlns="http://www.w3.org/2000/svg"
-                      aria-hidden="true"
-                      role="presentation"
-                      focusable="false"
-                      style={{
-                        display: "block",
-                        fill: "none",
-                        height: 16,
-                        width: 16,
-                        stroke: "currentcolor",
-                        strokeWidth: 3,
-                        overflow: "visible",
-                      }}
-                    >
-                      <g fill="none" fillRule="nonzero">
-                        <path d="m2 16h28" />
-                        <path d="m2 24h28" />
-                        <path d="m2 8h28" />
-                      </g>
-                    </svg>
-                    <svg
-                      className="ml-3"
-                      viewBox="0 0 32 32"
-                      xmlns="http://www.w3.org/2000/svg"
-                      aria-hidden="true"
-                      role="presentation"
-                      focusable="false"
-                      style={{
-                        display: "block",
-                        height: "30px",
-                        width: "30px",
-                        fill: "currentcolor",
-                      }}
-                    >
-                      <path d="m16 .7c-8.437 0-15.3 6.863-15.3 15.3s6.863 15.3 15.3 15.3 15.3-6.863 15.3-15.3-6.863-15.3-15.3-15.3zm0 28c-4.021 0-7.605-1.884-9.933-4.81a12.425 12.425 0 0 1 6.451-4.4 6.507 6.507 0 0 1 -3.018-5.49c0-3.584 2.916-6.5 6.5-6.5s6.5 2.916 6.5 6.5a6.513 6.513 0 0 1 -3.019 5.491 12.42 12.42 0 0 1 6.452 4.4c-2.328 2.925-5.912 4.809-9.933 4.809z" />
-                    </svg>
-                  </Button>
-                </Dropdown>
+                  <g fill="none" fillRule="nonzero">
+                    <path d="m2 16h28" />
+                    <path d="m2 24h28" />
+                    <path d="m2 8h28" />
+                  </g>
+                </svg>
+                <img
+                  style={{
+                    width: 30,
+                    height: 30,
+                    borderRadius: 50,
+                  }}
+                  src={user.user.avatar}
+                  alt=""
+                />
+              </button>
+              <div className="dropdown-content">
+                <a href="#">{user.user.name}</a>
+                <a href="#">Link 2</a>
+                <a href="#">Đăng xuất</a>
+              </div>
+            </div>
+          ) : (
+            <div>
+              <Space direction="vertical">
+                <Space wrap>
+                  <Dropdown
+                    menu={{
+                      items,
+                    }}
+                    placement="bottomLeft"
+                  >
+                    <Button className="rounded-full flex items-center py-5">
+                      <svg
+                        viewBox="0 0 32 32"
+                        xmlns="http://www.w3.org/2000/svg"
+                        aria-hidden="true"
+                        role="presentation"
+                        focusable="false"
+                        style={{
+                          display: "block",
+                          fill: "none",
+                          height: 16,
+                          width: 16,
+                          stroke: "currentcolor",
+                          strokeWidth: 3,
+                          overflow: "visible",
+                        }}
+                      >
+                        <g fill="none" fillRule="nonzero">
+                          <path d="m2 16h28" />
+                          <path d="m2 24h28" />
+                          <path d="m2 8h28" />
+                        </g>
+                      </svg>
+                      <svg
+                        className="ml-3"
+                        viewBox="0 0 32 32"
+                        xmlns="http://www.w3.org/2000/svg"
+                        aria-hidden="true"
+                        role="presentation"
+                        focusable="false"
+                        style={{
+                          display: "block",
+                          height: "30px",
+                          width: "30px",
+                          fill: "currentcolor",
+                        }}
+                      >
+                        <path d="m16 .7c-8.437 0-15.3 6.863-15.3 15.3s6.863 15.3 15.3 15.3 15.3-6.863 15.3-15.3-6.863-15.3-15.3-15.3zm0 28c-4.021 0-7.605-1.884-9.933-4.81a12.425 12.425 0 0 1 6.451-4.4 6.507 6.507 0 0 1 -3.018-5.49c0-3.584 2.916-6.5 6.5-6.5s6.5 2.916 6.5 6.5a6.513 6.513 0 0 1 -3.019 5.491 12.42 12.42 0 0 1 6.452 4.4c-2.328 2.925-5.912 4.809-9.933 4.809z" />
+                      </svg>
+                    </Button>
+                  </Dropdown>
+                </Space>
               </Space>
-            </Space>
-          </div>
+            </div>
+          )}
         </div>
       </div>
     </div>

@@ -8,7 +8,13 @@ export const itemKS = {
 };
 
 export const detailRoom = {
-  getRoomDetail: (id)=>{
-    return https.get(`/api/phong-thue/${id}`)
-  }
-}
+  getRoomDetail: (id) => {
+    return https.get(`/api/phong-thue/${id}`);
+  },
+};
+// Đăng nhập
+export const loginUser = {
+  loginUser: (data) => {
+    return https.post("/api/auth/signin", data);
+  },
+};
