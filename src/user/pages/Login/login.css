@@ -4,3 +4,14 @@
     background-repeat: no-repeat;
     background-size: cover;
 }
+.btnDangNhap:hover{
+    background-color: #991B1B !important;
+}
+.btnQuenMK:hover{
+    color: red !important;
+    border-bottom: 1px solid red;
+}
+.btnDangKyNgay:hover{
+    color: red !important;
+    border-bottom: 1px solid red;
+}
