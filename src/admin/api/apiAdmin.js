@@ -5,10 +5,22 @@ export const userServ = {
   getList: () => {
     return https.get("/api/users");
   },
+  addUser: (userData) => {
+    return https.post("/api/users", userData);
+  },
+  deleteUser: (id) => {
+    return https.delete(`/api/users?id=${id}`);
+  },
+  getDetailUser: (id) => {
+    return https.get(`/api/users/${id}`);
+  },
+  editUser: (id, values) => {
+    return https.put(`/api/users/${id}`, values);
+  },
 };
 
 export const roomServ = {
-  login: (info) => https.post(`/auth/signin`, info),
+  // login: (info) => https.post(`/api/auth/signin`, info),
 
   getList: () => {
     return https.get("/api/phong-thue");

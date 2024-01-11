@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react";
 import { userServ } from "../../api/apiAdmin";
 import dayjs from "dayjs";
 import { EditOutlined, DeleteOutlined } from "@ant-design/icons";
-import { Button, Table } from "antd";
+import { Button, message } from "antd";
 import MUIDataTable from "mui-datatables";
 import ButtonSortToolbar from "../components/ButtonSortToolbar";
 import ModalAddUser from "./ModalAddUser";
@@ -10,13 +10,14 @@ import ModalEditUser from "./ModalEditUser";
 
 const User = () => {
   let [isOpen, setIsOpen] = useState(false);
-  const [listUser, setListUser] = useState([]);
+  const [listUsers, setListUsers] = useState([]);
+  const [editUser, setEditUser] = useState({});
 
   const getData = () => {
     userServ
       .getList()
       .then((res) => {
-        setListUser(res.data.content);
+        setListUsers(res.data.content);
       })
       .catch((err) => {
         console.log(err);
@@ -27,7 +28,7 @@ const User = () => {
     getData();
   }, []);
 
-  const data = listUser?.map((user, index) => {
+  const data = listUsers?.map((user, index) => {
     let convertBirthday = dayjs(user.birthday, "DD/MM/YYYY");
     let convertBirthday2 = dayjs(user.birthday, "YYYY-MM-DD");
     let birthday = "";
@@ -116,13 +117,13 @@ const User = () => {
                 type="warning"
                 icon={<EditOutlined />}
                 className="mr-2 mb-3 bg-orange-300 hover:bg-orange-400 text-white"
-                // onClick={() => handleEditRoom(roomId)}
+                onClick={() => handleEditUser(userId)}
               ></Button>
               <Button
                 type="primary"
                 danger
                 icon={<DeleteOutlined />}
-                // onClick={() => handleDeleteRoom(roomId)}
+                onClick={() => handleDeleteUser(userId)}
               ></Button>
             </div>
           );
@@ -131,10 +132,41 @@ const User = () => {
     },
   ];
 
+  const handleDeleteUser = (userId) => {
+    userServ
+      .deleteUser(userId)
+      .then(() => {
+        setListUsers((prevListUsers) =>
+          prevListUsers.filter((user) => user.id !== userId)
+        );
+        message.success("Xóa thành công");
+        getData();
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+  };
+  const handleEditUser = (userId) => {
+    userServ
+      .getDetailUser(userId)
+      .then((res) => {
+        setEditUser(res.data.content);
+        setIsOpen(true);
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+  };
+
   return (
     <div>
       <ModalAddUser getData={getData} />
-      <ModalEditUser getData={getData} />
+      <ModalEditUser
+        setIsOpen={setIsOpen}
+        isOpen={isOpen}
+        editUser={editUser}
+        getData={getData}
+      />
       <MUIDataTable
         title={
           <div>
