@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { Button, Space, Table, Tag, Popover } from "antd";
+import { Button, Space, Table, Tag, Popover, message } from "antd";
 import { roomServ } from "../../api/apiAdmin";
 import { EditOutlined, DeleteOutlined } from "@ant-design/icons";
 import MUIDataTable from "mui-datatables";
@@ -10,9 +10,12 @@ import ModalEditRoom from "./ModalEditRoom";
 const Room = () => {
   const [isOpen, setIsOpen] = useState(false);
   const [listRooms, setListRooms] = useState([]);
+  const [editData, setEditData] = useState({});
   const [popoverStates, setPopoverStates] = useState(
     listRooms.map(() => false)
   );
+
+  const [modalEditRoomVisible, setModalEditRoomVisible] = useState(false);
 
   const hidePopover = (index) => {
     const newStates = [...popoverStates];
@@ -200,14 +203,14 @@ const Room = () => {
                 type="warning"
                 icon={<EditOutlined />}
                 className="mr-2 mb-3 bg-orange-300 hover:bg-orange-400 text-white"
-                // onClick={() => handleEditRoom(roomId)}
+                onClick={() => handleEditRoom(roomId)}
               ></Button>
               <Button
                 className="button-delete"
                 type="primary"
                 danger
                 icon={<DeleteOutlined />}
-                // onClick={() => handleDeleteRoom(roomId)}
+                onClick={() => handleDeleteRoom(roomId)}
               ></Button>
             </div>
           );
@@ -216,10 +219,41 @@ const Room = () => {
     },
   ];
 
+  const handleEditRoom = (roomId) => {
+    roomServ
+      .getDetailRoom(roomId)
+      .then((res) => {
+        setEditData(res.data.content);
+        setModalEditRoomVisible(true);
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+  };
+  const handleDeleteRoom = (roomId) => {
+    roomServ
+      .deleteRoom(roomId)
+      .then(() => {
+        setListRooms((prevListRooms) =>
+          prevListRooms.filter((room) => room.id !== roomId)
+        );
+        message.success("Xóa thành công");
+        getData();
+      })
+      .catch((err) => {
+        message.error("Không có quyền xóa");
+      });
+  };
+
   return (
     <div>
       <ModalAddRoom getData={getData} />
-      {/* <ModalEditRoom /> */}
+      <ModalEditRoom
+        isOpen={modalEditRoomVisible}
+        setIsOpen={setModalEditRoomVisible}
+        editData={editData}
+        getData={getData}
+      />
       <MUIDataTable
         title={
           <div>

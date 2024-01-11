@@ -36,6 +36,15 @@ const validationSchema = yup.object().shape({
     .typeError("Vui lòng nhập giá tiền là chữ số")
     .min(0, "Giá tiền phải lớn hơn hoặc bằng 0")
     .required("Vui lòng nhập giá tiền"),
+  mayGiat: yup.boolean().required("Vui lòng nhập máy giặt"),
+  banLa: yup.boolean().required("Vui lòng nhập ban la"),
+  tivi: yup.boolean().required("Vui lòng nhập tivi"),
+  dieuHoa: yup.boolean().required("Vui lòng nhập điều hòa"),
+  wifi: yup.boolean().required("Vui lòng nhập wifi"),
+  bep: yup.boolean().required("Vui lòng nhập bếp"),
+  doXe: yup.boolean().required("Vui lòng nhập đỗ xe"),
+  hoBoi: yup.boolean().required("Vui lòng nhập hồ bơi"),
+  banUi: yup.boolean().required("Vui lòng nhập bàn ủi"),
   maViTri: yup.number().required("Vui lòng nhập mã vị trí"),
   hinhAnh: yup.string().required("Vui lòng nhập hình ảnh"),
 });
@@ -85,15 +94,16 @@ const ModalAddRoom = ({ getData }) => {
 
   const onSubmit = (values) => {
     const formData = new FormData();
-    Object.entries(values).forEach(([key, value]) => {
-      if (key === "hinhAnh") {
+
+    for (let key in values) {
+      if (key == "hinhAnh") {
         // Append the image file to FormData
-        formData.append("hinhAnh", value);
+        formData.append("file", values[key]);
       } else {
         // Append other form fields
-        formData.append(key, value);
+        formData.append(key, values[key]);
       }
-    });
+    }
     console.log("FormData:", formData);
 
     const updateValues = {
@@ -123,16 +133,25 @@ const ModalAddRoom = ({ getData }) => {
         console.log(err);
       });
     setIsOpen(false);
+
+    roomServ
+      .addRoomImage(formData)
+      .then((res) => {
+        // Handle the response, e.g., get the image URL
+        // const imageUrl = res.data.url;
+        setImage("");
+
+        // Add the image URL to your form data or use it as needed
+        // formData.append("imageUrl", imageUrl);
+      })
+      .catch((err) => {
+        // Handle image upload error
+        console.error("Image Upload Error:", err);
+      });
   };
 
   const onChange = (e, fieldName) => {
     setValue(fieldName, e.target.checked);
-  };
-
-  const onImageChange = (e) => {
-    // Set the hinhAnh field directly with the selected file
-    setValue("hinhAnh", e.target.files[0]);
-    console.log("Selected File:", e.target.files[0]);
   };
 
   const CustomCheckbox = ({ name, title, onchange }) => {
@@ -149,6 +168,8 @@ const ModalAddRoom = ({ getData }) => {
       </div>
     );
   };
+
+  const [image, setImage] = useState("");
 
   return (
     <div>
@@ -327,18 +348,30 @@ const ModalAddRoom = ({ getData }) => {
             </div>
           </div>
           <div className="relative z-0 w-full mb-6 group">
-            <input
-              type="file"
-              name="hinhAnh"
-              className="block py-2.5 px-0 w-full text-sm text-gray-900 bg-transparent border-0 border-b-2 border-gray-300 appearance-none dark:text-white dark:border-gray-600 dark:focus:border-blue-500 focus:outline-none focus:ring-0 focus:border-blue-600 peer"
-              placeholder=" "
-              onChange={onImageChange}
-              {...register("hinhAnh")}
-            />
-            <ErrorMessage err={errors.hinhAnh} />
             <label className="peer-focus:font-medium absolute text-sm text-gray-500 dark:text-gray-400 duration-300 transform -translate-y-6 scale-75 top-3 -z-10 origin-[0] peer-focus:left-0 peer-focus:text-blue-600 peer-focus:dark:text-blue-500 peer-placeholder-shown:scale-100 peer-placeholder-shown:translate-y-0 peer-focus:scale-75 peer-focus:-translate-y-6">
               Hình ảnh
             </label>
+            <img className="pt-5" width={300} src={image} alt="" />
+            <input
+              type="file"
+              name="hinhAnh"
+              placeholder=" "
+              accept="image/*"
+              onChange={(event) => {
+                // lấy dữu liệu về file được gửi lên
+                // console.log(event.target.files[0]);
+                const img = event.target.files[0];
+                console.log(img);
+                // tạo ra 1 đường dẫn cho tấm hình và lưu trữ vào state
+                if (img) {
+                  const urlImg = URL.createObjectURL(img);
+                  console.log(urlImg);
+                  setImage(urlImg);
+                }
+                setValue("hinhAnh", img);
+              }}
+            />
+            <ErrorMessage err={errors.hinhAnh} />
           </div>
           <button
             type="submit"

@@ -11,3 +11,8 @@ export const userLocalStorage = {
     localStorage.removeItem("ADMIN");
   },
 };
+
+export const getLocalStore = (key) => {
+  const data = localStorage.getItem(key);
+  return data ? JSON.parse(data) : null;
+};
