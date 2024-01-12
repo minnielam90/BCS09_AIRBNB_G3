@@ -1,4 +1,4 @@
-import { Button, Table } from "antd";
+import { Button, message } from "antd";
 import React, { useEffect, useState } from "react";
 import { locationServ } from "../../api/apiAdmin";
 import { EditOutlined, DeleteOutlined } from "@ant-design/icons";
@@ -8,7 +8,8 @@ import ModalEditLocation from "./ModalEditLocation";
 import ModalAddLocation from "./ModalAddLocation";
 
 const Location = () => {
-  const [isOpen, setIsOpen] = useState(false);
+  let [isOpen, setIsOpen] = useState(false);
+  const [editData, setEditData] = useState({});
   const [listLocation, setListLocation] = useState([]);
 
   const getData = () => {
@@ -108,13 +109,13 @@ const Location = () => {
                 type="warning"
                 icon={<EditOutlined />}
                 className="mr-2 mb-3 bg-orange-300 hover:bg-orange-400 text-white"
-                // onClick={() => handleEditRoom(roomId)}
+                onClick={() => handleEditLocation(locationId)}
               ></Button>
               <Button
                 type="primary"
                 danger
                 icon={<DeleteOutlined />}
-                // onClick={() => handleDeleteRoom(roomId)}
+                onClick={() => handleDeleteLocation(locationId)}
               ></Button>
             </div>
           );
@@ -123,10 +124,42 @@ const Location = () => {
     },
   ];
 
+  const handleEditLocation = (locationId) => {
+    locationServ
+      .getDetailLocation(locationId)
+      .then((res) => {
+        setEditData(res.data.content);
+        setIsOpen(true);
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+  };
+  const handleDeleteLocation = (locationId) => {
+    locationServ
+      .deleteLocation(locationId)
+      .then(() => {
+        setListLocation((prevListLocation) =>
+          prevListLocation.filter((location) => location.id !== locationId)
+        );
+        getData();
+        message.success("Xóa thành công!");
+      })
+      .catch((err) => {
+        message.error("Xảy ra lỗi");
+        console.log(err);
+      });
+  };
+
   return (
     <div>
       <ModalAddLocation getData={getData} />
-      {/* <ModalEditLocation /> */}
+      <ModalEditLocation
+        isOpen={isOpen}
+        setIsOpen={setIsOpen}
+        getData={getData}
+        editData={editData}
+      />
       <MUIDataTable
         title={
           <div>
@@ -141,7 +174,7 @@ const Location = () => {
           selectableRows: "none",
           caseSensitive: true,
           pagination: true,
-          rowsPerPage: 5,
+          rowsPerPage: 10,
           customToolbar: () => <ButtonSortToolbar reverseData={reverseData} />,
         }}
       />

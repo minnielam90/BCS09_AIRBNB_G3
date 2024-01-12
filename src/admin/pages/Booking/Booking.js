@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { bookingRoomServ } from "../../api/apiAdmin";
-import { Button, Table } from "antd";
+import { Button, Table, message } from "antd";
 import moment from "moment";
 import { EditOutlined, DeleteOutlined } from "@ant-design/icons";
 import MUIDataTable from "mui-datatables";
@@ -10,6 +10,7 @@ import ModalEditBooking from "./ModalEditBooking";
 
 const Booking = () => {
   let [isOpen, setIsOpen] = useState(false);
+  const [editData, setEditData] = useState({});
   const [listBookingRoom, setListBookingRoom] = useState([]);
 
   const getData = () => {
@@ -117,13 +118,13 @@ const Booking = () => {
                 type="warning"
                 icon={<EditOutlined />}
                 className="mr-2 mb-3 bg-orange-300 hover:bg-orange-400 text-white"
-                // onClick={() => handleEditRoom(roomId)}
+                onClick={() => handleEditBookingRoom(roomId)}
               ></Button>
               <Button
                 type="primary"
                 danger
                 icon={<DeleteOutlined />}
-                // onClick={() => handleDeleteRoom(roomId)}
+                onClick={() => handleDeleteBookingRoom(roomId)}
               ></Button>
             </div>
           );
@@ -132,10 +133,51 @@ const Booking = () => {
     },
   ];
 
+  const handleEditBookingRoom = (roomId) => {
+    bookingRoomServ
+      .getDetailBookingRoom(roomId)
+      .then((res) => {
+        const editedNgayDen = moment(res.data.content.ngayDen).startOf("day");
+        const editedNgayDi = moment(res.data.content.ngayDi).startOf("day");
+
+        const editedData = {
+          ...res.data.content,
+          ngayDen: editedNgayDen,
+          ngayDi: editedNgayDi,
+        };
+
+        setEditData(editedData);
+        setIsOpen(true);
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+  };
+  const handleDeleteBookingRoom = (roomId) => {
+    bookingRoomServ
+      .deleteBookingRoom(roomId)
+      .then(() => {
+        setListBookingRoom((prevListBookingRoom) =>
+          prevListBookingRoom.filter((room) => room.id !== roomId)
+        );
+        getData();
+        message.success("Xóa thành công!");
+      })
+      .catch((err) => {
+        message.error("Xảy ra lỗi!");
+        console.log(err);
+      });
+  };
+
   return (
     <div>
       <ModalAddBooking getData={getData} />
-      <ModalEditBooking getData={getData} />
+      <ModalEditBooking
+        isOpen={isOpen}
+        setIsOpen={setIsOpen}
+        getData={getData}
+        editData={editData}
+      />
       <MUIDataTable
         title={
           <div>
@@ -150,7 +192,7 @@ const Booking = () => {
           selectableRows: "none",
           caseSensitive: true,
           pagination: true,
-          rowsPerPage: 7,
+          rowsPerPage: 10,
           customToolbar: () => <ButtonSortToolbar reverseData={reverseData} />,
         }}
       />

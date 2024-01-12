@@ -181,7 +181,7 @@ const User = () => {
           selectableRows: "none",
           caseSensitive: true,
           pagination: true,
-          rowsPerPage: 7,
+          rowsPerPage: 10,
           customToolbar: () => <ButtonSortToolbar reverseData={reverseData} />,
         }}
       />

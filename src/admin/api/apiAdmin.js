@@ -1,4 +1,3 @@
-import React from "react";
 import { https } from "../../services/configServ";
 
 export const userServ = {
@@ -46,10 +45,37 @@ export const locationServ = {
   getList: () => {
     return https.get("/api/vi-tri");
   },
+  addLocation: (locationData) => {
+    return https.post("/api/vi-tri", locationData);
+  },
+  addLocationImage: (formData) => {
+    return https.post("/api/vi-tri/upload-hinh-vitri", formData);
+  },
+  deleteLocation: (id) => {
+    return https.delete(`/api/vi-tri/${id}`);
+  },
+  getDetailLocation: (id) => {
+    return https.get(`/api/vi-tri/${id}`);
+  },
+  editLocation: (id, locationData) => {
+    return https.put(`/api/vi-tri/${id}`, locationData);
+  },
 };
 
 export const bookingRoomServ = {
   getList: () => {
     return https.get("/api/dat-phong");
+  },
+  addBookingRoom: (bookingRoomData) => {
+    return https.post("/api/dat-phong", bookingRoomData);
+  },
+  deleteBookingRoom: (id) => {
+    return https.delete(`/api/dat-phong/${id}`);
+  },
+  getDetailBookingRoom: (id) => {
+    return https.get(`/api/dat-phong/${id}`);
+  },
+  editBookingRoom: (id, roomData) => {
+    return https.put(`/api/dat-phong/${id}`, roomData);
   },
 };
