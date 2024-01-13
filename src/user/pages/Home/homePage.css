@@ -2,3 +2,15 @@
     border-bottom: 2px solid gray;
     margin: 0 5px;
 }
+.content_item{
+    background-color: pink;
+    border-radius: 10px !important;
+    height: 500px;
+}
+.content_item img{
+    object-fit: cover;
+    object-position: 0% 50%;
+    width:500px;
+    height:300px;
+    border-radius: 10px;
+}

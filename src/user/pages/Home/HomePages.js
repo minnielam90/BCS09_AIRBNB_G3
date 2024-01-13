@@ -285,15 +285,17 @@ const HomePages = () => {
         </Carousel>
       </div>
       <div>
-        {listItem.map((item, index) => {
-          return (
-            <div key={index}>
-              <img src={item.hinhAnh} alt="" />
-              <h4></h4>
-              <p></p>
-            </div>
-          );
-        })}
+        <div className="grid grid-cols-4 gap-4">
+          {listItem.map((item, index) => {
+            return (
+              <div className="content_item" key={index}>
+                <img src={item.hinhAnh} alt="" />
+                <h4></h4>
+                <p></p>
+              </div>
+            );
+          })}
+        </div>
       </div>
     </div>
   );
