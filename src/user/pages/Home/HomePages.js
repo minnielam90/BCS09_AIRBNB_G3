@@ -2,6 +2,7 @@ import React, { useEffect, useState } from "react";
 import { Carousel } from "antd";
 import "./homePage.css";
 import { itemKS } from "../../api/apiUser";
+import { NavLink } from "react-router-dom";
 const contentStyle = {
   // marginLeft: '5px',
   height: "30px",
@@ -288,11 +289,15 @@ const HomePages = () => {
         <div className="grid grid-cols-4 gap-4">
           {listItem.map((item, index) => {
             return (
-              <div className="content_item" key={index}>
+              <NavLink to={`./detailItem/${item.id}`}>
+                <div className="content_item" key={index}>
                 <img src={item.hinhAnh} alt="" />
-                <h4></h4>
-                <p></p>
+                <i class="fa-regular fa-heart"></i>
+                <h4>{item.tenPhong}</h4>
+                <p><span>${item.giaTien}</span> đêm</p>
               </div>
+              </NavLink>
+              
             );
           })}
         </div>
