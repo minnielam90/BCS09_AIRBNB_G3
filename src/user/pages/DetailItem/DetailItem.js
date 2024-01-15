@@ -1,6 +1,8 @@
 import React, { useEffect, useState } from "react";
-import { detailRoom } from "../../api/apiUser";
+import { detailRoom, getComment } from "../../api/apiUser";
 import { useParams } from "react-router-dom";
+import moment from "moment";
+import { Rate } from "antd";
 
 const DetailItem = () => {
   const { id } = useParams();
@@ -9,8 +11,18 @@ const DetailItem = () => {
     detailRoom
       .getRoomDetail(id)
       .then((res) => {
-        console.log(res);
         setListItem(res.data.content);
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+  }, []);
+  const [binhLuan, setComment] = useState([]);
+  useEffect(() => {
+    getComment
+      .getComment(id)
+      .then((res) => {
+        setComment(res.data.content);
       })
       .catch((err) => {
         console.log(err);
@@ -44,7 +56,13 @@ const DetailItem = () => {
             alt=""
           />
         </div>
-        <div className="flex">
+        <div
+          className="flex"
+          style={{
+            borderBottom: "1px solid #E5E7EB",
+            paddingBottom: 20,
+          }}
+        >
           <div
             className="basis-7/12"
             style={{
@@ -91,12 +109,7 @@ const DetailItem = () => {
                 <p>Địa điểm tuyệt</p>
                 <p>Miễn phí hủy</p>
               </div>
-              <div
-                style={{
-                  borderBottom: "1px solid #E5E7EB",
-                  paddingBottom: 20,
-                }}
-              >
+              <div>
                 <h3
                   style={{
                     fontSize: 20,
@@ -1083,6 +1096,101 @@ const DetailItem = () => {
             </div>
           </div>
           <div className="basis-5/12">{listItem.moTa}</div>
+        </div>
+        <div
+          style={{
+            borderBottom: "1px solid #E5E7EB",
+            paddingBottom: 20,
+          }}
+        >
+          <h3
+            style={{
+              fontSize: 20,
+              fontWeight: "650",
+              marginBottom: 15,
+            }}
+          >
+            Đánh giá
+          </h3>
+          <div className="grid grid-cols-2 gap-4">
+            {binhLuan.map((item, index) => {
+              return (
+                <div key={index} className="flex gap-4">
+                  <div>
+                    <img
+                      src={item.avatar}
+                      alt=""
+                      style={{
+                        width: 35,
+                        height: 35,
+                        borderRadius: 50,
+                      }}
+                    />
+                  </div>
+                  <div className="space-y-2">
+                    <h4
+                      style={{
+                        fontSize: 18,
+                        fontWeight: "650",
+                      }}
+                    >
+                      {item.tenNguoiBinhLuan}
+                    </h4>
+                    <Rate disabled value={item.saoBinhLuan} />
+                    <p>{moment(item.ngayBinhLuan).format("DD-MM-YYYY")}</p>
+                    <p>{item.noiDung}</p>
+                  </div>
+                </div>
+              );
+            })}
+          </div>
+        </div>
+        <div>
+          <div
+            className=" bg-white p-2 pt-4 rounded "
+            style={{
+              marginTop: 15,
+              filter: "drop-shadow(25px 25px 25px rgb(0 0 0 / 0.15))",
+              marginBottom: 15,
+            }}
+          >
+            <div className="flex ml-3">
+              <div className="mr-3">
+                <img
+                  src="http://picsum.photos/50"
+                  alt
+                  className="rounded-full"
+                />
+              </div>
+              <div>
+                <h1 className="font-semibold">Itay Buyoy</h1>
+                <p className="text-xs text-gray-500">2 seconds ago</p>
+              </div>
+            </div>
+            <div
+              style={{
+                padding: "0 20px",
+                marginTop: 15,
+              }}
+            >
+              <Rate />
+            </div>
+            <div className="mt-3 p-3 w-full">
+              <textarea
+                rows={3}
+                className="border p-2 rounded w-full"
+                placeholder="Write something..."
+                defaultValue={""}
+              />
+            </div>
+            <div className="flex justify-between mx-3">
+              <div>
+                <button className="px-4 py-1 bg-gray-800 text-white rounded font-light hover:bg-gray-700">
+                  Submit
+                </button>
+              </div>
+            </div>
+          </div>
         </div>
       </div>
     </div>
