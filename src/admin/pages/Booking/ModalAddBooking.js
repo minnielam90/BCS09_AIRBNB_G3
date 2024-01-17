@@ -98,7 +98,7 @@ const ModalAddBooking = ({ getData }) => {
               disabled
               type="number"
               name="id"
-              className={`block py-2.5 px-0 w-full text-sm text-gray-900 bg-transparent border-0 border-b-2 border-gray-300 appearance-none dark:text-white dark:border-gray-600 dark:focus:border-blue-500 focus:outline-none focus:ring-0 focus:border-blue-600 peer`}
+              className={`block py-2.5 px-0 w-full text-sm text-gray-900 bg-transparent border-0 border-b-2 border-gray-300 appearance-none dark:text-white focus:outline-none focus:ring-0 focus:border-blue-600 peer`}
               placeholder=" "
               onChange={(e) => setValue("id", e.target.value)}
               {...register("id")}
@@ -112,7 +112,7 @@ const ModalAddBooking = ({ getData }) => {
             <input
               type="text"
               name="maPhong"
-              className={`block py-2.5 px-0 w-full text-sm text-gray-900 bg-transparent border-0 border-b-2 border-gray-300 appearance-none dark:text-white dark:border-gray-600 dark:focus:border-blue-500 focus:outline-none focus:ring-0 focus:border-blue-600 peer`}
+              className={`block py-2.5 px-0 w-full text-sm text-gray-900 bg-transparent border-0 border-b-2 border-gray-300 appearance-none focus:outline-none focus:ring-0 focus:border-blue-600 peer`}
               placeholder=" "
               onChange={(e) => setValue("maPhong", e.target.value)}
               {...register("maPhong")}
@@ -164,7 +164,7 @@ const ModalAddBooking = ({ getData }) => {
             <input
               type="number"
               name="soLuongKhach"
-              className={`block py-2.5 px-0 w-full text-sm text-gray-900 bg-transparent border-0 border-b-2 border-gray-300 appearance-none dark:text-white dark:border-gray-600 dark:focus:border-blue-500 focus:outline-none focus:ring-0 focus:border-blue-600 peer`}
+              className={`block py-2.5 px-0 w-full text-sm text-gray-900 bg-transparent border-0 border-b-2 border-gray-300 appearance-none focus:outline-none focus:ring-0 focus:border-blue-600 peer`}
               placeholder=" "
               onChange={(e) => setValue("soLuongKhach", e.target.value)}
               {...register("soLuongKhach")}
@@ -180,7 +180,7 @@ const ModalAddBooking = ({ getData }) => {
             <input
               type="number"
               name="maNguoiDung"
-              className={`block py-2.5 px-0 w-full text-sm text-gray-900 bg-transparent border-0 border-b-2 border-gray-300 appearance-none dark:text-white dark:border-gray-600 dark:focus:border-blue-500 focus:outline-none focus:ring-0 focus:border-blue-600 peer`}
+              className={`block py-2.5 px-0 w-full text-sm text-gray-900 bg-transparent border-0 border-b-2 border-gray-300 appearance-none focus:outline-none focus:ring-0 focus:border-blue-600 peer`}
               placeholder=" "
               onChange={(e) => setValue("maNguoiDung", e.target.value)}
               {...register("maNguoiDung")}

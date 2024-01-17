@@ -19,8 +19,6 @@ export const userServ = {
 };
 
 export const roomServ = {
-  // login: (info) => https.post(`/api/auth/signin`, info),
-
   getList: () => {
     return https.get("/api/phong-thue");
   },
@@ -30,6 +28,7 @@ export const roomServ = {
   addRoomImage: (data) => {
     return https.post("/api/phong-thue/upload-hinh-phong", data);
   },
+
   deleteRoom: (id) => {
     return https.delete(`/api/phong-thue/${id}`);
   },
@@ -38,6 +37,17 @@ export const roomServ = {
   },
   editRoom: (id, roomData) => {
     return https.put(`/api/phong-thue/${id}`, roomData);
+  },
+  changeImageRoom: (id, formFile) => {
+    return https.post(
+      `/api/phong-thue/upload-hinh-phong?maPhong=${id}`,
+      { formFile: formFile },
+      {
+        headers: {
+          "Content-Type": "multipart/form-data",
+        },
+      }
+    );
   },
 };
 
@@ -48,8 +58,8 @@ export const locationServ = {
   addLocation: (locationData) => {
     return https.post("/api/vi-tri", locationData);
   },
-  addLocationImage: (formData) => {
-    return https.post("/api/vi-tri/upload-hinh-vitri", formData);
+  addLocationImage: (data) => {
+    return https.post("/api/vi-tri/upload-hinh-vitri", data);
   },
   deleteLocation: (id) => {
     return https.delete(`/api/vi-tri/${id}`);

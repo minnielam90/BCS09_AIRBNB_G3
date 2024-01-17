@@ -1,7 +1,7 @@
-import adminSlice from "./adminSlice";
+// import adminSlice from "./adminSlice";
 import spinnerSlice from "./spinnerSlice";
 
 export const adminReducer = {
-  adminSlice: adminSlice,
+  // adminSlice: adminSlice,
   spinnerSlice: spinnerSlice,
 };

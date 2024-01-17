@@ -31,6 +31,8 @@ const validationSchema = yup.object().shape({
 });
 
 const ModalEditRoom = ({ getData, editData, isOpen, setIsOpen }) => {
+  const [imageUrl, setImageUrl] = useState("");
+
   const methods = useForm({
     defaultValues: {
       tenPhong: "",
@@ -85,6 +87,46 @@ const ModalEditRoom = ({ getData, editData, isOpen, setIsOpen }) => {
         console.log(err);
       });
   };
+
+  // const onSubmit = async (values) => {
+  //   try {
+  //     const formData = new FormData();
+  //     formData.append("image", values.hinhAnh);
+
+  //     // Log the FormData to see its content
+  //     console.log("FormData:", formData);
+
+  //     // Upload the image first
+  //     const imageResponse = await roomServ.changeImageRoom(id, formData);
+  //     console.log("Image Response:", imageResponse);
+
+  //     const imageUrl = imageResponse.data.url;
+  //     console.log("Image URL:", imageUrl);
+
+  //     // Prepare the room details for updating (excluding the image)
+  //     const roomDetails = { ...values };
+  //     delete roomDetails.hinhAnh;
+
+  //     console.log("Room Details:", roomDetails);
+
+  //     // Update other room details along with the image URL
+  //     await roomServ.editRoom(id, { ...roomDetails, hinhAnh: imageUrl });
+
+  //     message.success("Cập nhật phòng thành công");
+  //     setIsOpen(false);
+  //     getData();
+  //   } catch (err) {
+  //     message.error("Cập nhật phòng thất bại");
+  //     console.error(err);
+
+  //     if (err.response) {
+  //       console.error("Response data:", err.response.data);
+  //       console.error("Response status:", err.response.status);
+  //       console.error("Response headers:", err.response.headers);
+  //     }
+  //   }
+  // };
+
   function closeModal() {
     setIsOpen(false);
   }
@@ -308,13 +350,23 @@ const ModalEditRoom = ({ getData, editData, isOpen, setIsOpen }) => {
           </div>
         </div>
         <div className="relative z-0 w-full mb-6 group">
-          <input
+          {/* <input
             type="text"
             name="hinhAnh"
             className="block py-2.5 px-0 w-full text-sm text-gray-900 bg-transparent border-0 border-b-2 border-gray-300 appearance-none dark:text-white dark:border-gray-600 dark:focus:border-blue-500 focus:outline-none focus:ring-0 focus:border-blue-600 peer"
             placeholder=" "
             onChange={(e) => setValue("hinhAnh", e.target.value)}
             {...register("hinhAnh")}
+          /> */}
+          <img src={editData.hinhAnh} alt="Lỗi hình" />
+          <input
+            type="file"
+            onChange={(e) => {
+              //call api update hình
+              let file = e.target.files[0];
+              roomServ.changeImageRoom(editData.id, file);
+              setValue("hinhAnh", e.target.value);
+            }}
           />
           <ErrorMessage err={errors.hinhAnh} />
           <label className="peer-focus:font-medium absolute text-sm text-gray-500 dark:text-gray-400 duration-300 transform -translate-y-6 scale-75 top-3 -z-10 origin-[0] peer-focus:left-0 peer-focus:text-blue-600 peer-focus:dark:text-blue-500 peer-placeholder-shown:scale-100 peer-placeholder-shown:translate-y-0 peer-focus:scale-75 peer-focus:-translate-y-6">

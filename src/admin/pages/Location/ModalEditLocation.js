@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import FormTemplate from "../components/FormTemplate";
 import { message } from "antd";
 import { locationServ } from "../../api/apiAdmin";
@@ -59,6 +59,8 @@ const ModalEditLocation = ({ setIsOpen, isOpen, editData, getData }) => {
     }
   }, [editData, reset]);
 
+  const [image, setImage] = useState("");
+
   return (
     <div>
       <FormTemplate
@@ -116,13 +118,25 @@ const ModalEditLocation = ({ setIsOpen, isOpen, editData, getData }) => {
             </label>
           </div>
           <div className="relative z-0 w-full mb-6 group">
+            <img width={300} src={image} alt="" />
             <input
-              type="text"
+              type="file"
               name="hinhAnh"
               className="block py-2.5 px-0 w-full text-sm text-gray-900 bg-transparent border-0 border-b-2 border-gray-300 appearance-none dark:text-white dark:border-gray-600 dark:focus:border-blue-500 focus:outline-none focus:ring-0 focus:border-blue-600 peer"
               placeholder=" "
-              onChange={(e) => setValue("hinhAnh", e.target.value)}
-              {...register("hinhAnh")}
+              onChange={(event) => {
+                // lấy dữu liệu về file được gửi lên
+                // console.log(event.target.files[0]);
+                const img = event.target.files[0];
+                console.log(img);
+                // tạo ra 1 đường dẫn cho tấm hình và lưu trữ vào state
+                if (img) {
+                  const urlImg = URL.createObjectURL(img);
+                  console.log(urlImg);
+                  setImage(urlImg);
+                }
+                setValue("hinhAnh", img);
+              }}
             />
             {errors.hinhAnh && (
               <p className="text-red-500">{errors.hinhAnh.message}</p>
