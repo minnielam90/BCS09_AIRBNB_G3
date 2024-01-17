@@ -1,6 +1,5 @@
 import { https } from "../../services/configServ";
 import { store } from "../../index";
-import { userLocalStorage } from "./localService";
 import { setLoadingOff, setLoadingOn } from "../redux/spinnerSlice";
 
 https.interceptors.request.use(
