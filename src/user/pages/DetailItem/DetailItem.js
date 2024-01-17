@@ -2,9 +2,45 @@ import React, { useEffect, useState } from "react";
 import { detailRoom, getComment } from "../../api/apiUser";
 import { useParams } from "react-router-dom";
 import moment from "moment";
-import { Rate } from "antd";
+import { DatePicker, Rate } from "antd";
+import { useFormik } from "formik";
 
 const DetailItem = () => {
+  const dateFormat = "DD/MM/YYYY";
+  const [time, setTime] = useState(new Date());
+
+  useEffect(() => {
+    const intervalId = setInterval(() => {
+      setTime(new Date());
+    }, 60000);
+    return () => {
+      clearInterval(intervalId);
+    };
+  });
+  const formik = useFormik({
+    initialValues: {
+      id: "",
+      maPhong: "",
+      maNguoiBinhLuan: "",
+      ngayBinhLuan: "",
+      noiDung: "",
+      saoBinhLuan: "",
+    },
+
+    onSubmit: (values) => {
+      console.log(values);
+    },
+  });
+  const {
+    handleChange,
+    handleBlur,
+    handleSubmit,
+    values,
+    errors,
+    touched,
+    resetForm,
+    setFieldValue,
+  } = formik;
   const { id } = useParams();
   const [listItem, setListItem] = useState([]);
   useEffect(() => {
@@ -1146,51 +1182,68 @@ const DetailItem = () => {
           </div>
         </div>
         <div>
-          <div
-            className=" bg-white p-2 pt-4 rounded "
-            style={{
-              marginTop: 15,
-              filter: "drop-shadow(25px 25px 25px rgb(0 0 0 / 0.15))",
-              marginBottom: 15,
-            }}
-          >
-            <div className="flex ml-3">
-              <div className="mr-3">
-                <img
-                  src="http://picsum.photos/50"
-                  alt
-                  className="rounded-full"
-                />
-              </div>
-              <div>
-                <h1 className="font-semibold">Itay Buyoy</h1>
-                <p className="text-xs text-gray-500">2 seconds ago</p>
-              </div>
-            </div>
+          <form action="" onSubmit={handleSubmit}>
             <div
+              className=" bg-white p-2 pt-4 rounded "
               style={{
-                padding: "0 20px",
                 marginTop: 15,
+                filter: "drop-shadow(25px 25px 25px rgb(0 0 0 / 0.15))",
+                marginBottom: 15,
               }}
             >
-              <Rate />
-            </div>
-            <div className="mt-3 p-3 w-full">
-              <textarea
-                rows={3}
-                className="border p-2 rounded w-full"
-                placeholder="Write something..."
-                defaultValue={""}
-              />
-            </div>
-            <div className="flex justify-between mx-3">
-              <div>
-                <button className="px-4 py-1 bg-gray-800 text-white rounded font-light hover:bg-gray-700">
-                  Submit
-                </button>
+              <div className="flex ml-3">
+                <div className="mr-3">
+                  <img
+                    src="http://picsum.photos/50"
+                    alt
+                    className="rounded-full"
+                  />
+                </div>
+                <div>
+                  <h1 className="font-semibold">Itay Buyoy</h1>
+                  <p className="text-xs text-gray-500">2 seconds ago</p>
+                </div>
+              </div>
+              <div
+                style={{
+                  padding: "0 20px",
+                  marginTop: 15,
+                }}
+              >
+                <Rate />
+              </div>
+              <div className="mt-3 p-3 w-full">
+                <textarea
+                  id="noiDung"
+                  name="noiDung"
+                  rows={3}
+                  className="border p-2 rounded w-full"
+                  placeholder="Write something..."
+                  value={values.noiDung}
+                  onChange={handleChange}
+                  onBlur={handleBlur}
+                />
+              </div>
+              <div className="flex justify-between mx-3">
+                <div>
+                  <button className="px-4 py-1 bg-gray-800 text-white rounded font-light hover:bg-gray-700">
+                    Submit
+                  </button>
+                </div>
+                <div>
+                  {/* <p>{`${moment(time)}`} </p> */}
+                  <DatePicker defaultValue={moment()} format={dateFormat} />
+                  {/* <input
+                    type="date"
+                    id="ngayBinhLuan"
+                    name="ngayBinhLuan"
+                    value={`${moment(time)}`}
+                  />
+                  <input type="date" /> */}
+                </div>
               </div>
             </div>
-          </div>
+          </form>
         </div>
       </div>
     </div>

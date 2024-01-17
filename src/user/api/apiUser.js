@@ -25,3 +25,9 @@ export const getComment = {
     return https.get(`/api/binh-luan/lay-binh-luan-theo-phong/${maPhong}`);
   },
 };
+// đăng kí
+export const registerPost = {
+  registerPost: (data) => {
+    return https.post("/api/auth/signup",data);
+  },
+};

@@ -4,12 +4,10 @@ import "./homePage.css";
 import { itemKS } from "../../api/apiUser";
 import { NavLink } from "react-router-dom";
 const contentStyle = {
-  // marginLeft: '5px',
   height: "30px",
   color: "gray",
   lineHeight: "30px",
   textAlign: "center",
-  // background: "#364d79",
 };
 function SampleNextArrow(props) {
   const { className, style, onClick } = props;
