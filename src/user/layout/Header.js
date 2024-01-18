@@ -18,20 +18,11 @@ const items = [
 ];
 const Header = () => {
   const { user } = useSelector((state) => state.userSlice);
-  console.log(user);
   return (
     <header>
       <div className="container">
         {" "}
-        <div
-          className="flex justify-between py-7 items-center"
-          // style={{
-          //   position: "fixed",
-          //   width: "82.9%",
-          //   backgroundColor: "white",
-          //   borderBottom: "1px solid gray",
-          // }}
-        >
+        <div className="flex justify-between py-7 items-center">
           {/* logo */}
           <div className="logo">
             <a href={userRoute.home.path}>
@@ -135,7 +126,13 @@ const Header = () => {
                   </div>
                 </button>
                 <div className="dropdown-content">
-                  <a href="#">{user.user.name}</a>
+                  <p
+                    style={{
+                      padding: "5px 15px",
+                    }}
+                  >
+                    {user.user.name}
+                  </p>
                   <button
                     style={{
                       padding: "5px 15px",

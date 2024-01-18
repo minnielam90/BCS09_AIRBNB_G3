@@ -28,6 +28,12 @@ export const getComment = {
 // đăng kí
 export const registerPost = {
   registerPost: (data) => {
-    return https.post("/api/auth/signup",data);
+    return https.post("/api/auth/signup", data);
+  },
+};
+// post comment
+export const postComment = {
+  postComment: (data) => {
+    return https.post("/api/binh-luan", data);
   },
 };

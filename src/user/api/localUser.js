@@ -11,5 +11,5 @@ export const getLocalStore = (key) => {
 //  đăng xuất
 export const logout = () => {
   localStorage.clear();
-  window.location.href = "/";
+  window.location.href = "/login";
 };
