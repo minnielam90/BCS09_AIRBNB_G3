@@ -55,7 +55,7 @@ const DetailItem = () => {
       postComment
         .postComment(values, { resetForm })
         .then((res) => {
-          window.location.reload()
+          window.location.reload();
           resetForm();
         })
         .catch((err) => {
@@ -168,14 +168,227 @@ const DetailItem = () => {
                 </div>
               </div>
               <div
+                className="space-y-6"
                 style={{
                   borderBottom: "1px solid #E5E7EB",
                   paddingBottom: 20,
+                  marginTop: 20,
                 }}
               >
-                <p>Chủ nhà siêu cấp</p>
-                <p>Địa điểm tuyệt</p>
-                <p>Miễn phí hủy</p>
+                <div className="flex">
+                  <div
+                    style={{
+                      paddingTop: 7,
+                      marginRight: 10,
+                    }}
+                  >
+                    <svg
+                      viewBox="0 0 32 32"
+                      xmlns="http://www.w3.org/2000/svg"
+                      aria-hidden="true"
+                      role="presentation"
+                      focusable="false"
+                      style={{
+                        display: "inline-block",
+                        height: 24,
+                        width: 24,
+                        fill: "currentcolor",
+                      }}
+                    >
+                      <path d="m16 17c3.8659932 0 7 3.1340068 7 7s-3.1340068 7-7 7-7-3.1340068-7-7 3.1340068-7 7-7zm0 2c-2.7614237 0-5 2.2385763-5 5s2.2385763 5 5 5 5-2.2385763 5-5-2.2385763-5-5-5zm9.6666667-18.66666667c1.0543618 0 1.9181651.81587779 1.9945142 1.85073766l.0054858.14926234v6.38196601c0 .70343383-.3690449 1.35080636-.9642646 1.71094856l-.1413082.0779058-9.6666667 4.8333334c-.5067495.2533747-1.0942474.2787122-1.6171466.0760124l-.1717078-.0760124-9.66666666-4.8333334c-.62917034-.3145851-1.04315599-.93418273-1.09908674-1.62762387l-.00648607-.16123049v-6.38196601c0-1.05436179.81587779-1.91816512 1.85073766-1.99451426l.14926234-.00548574zm0 2h-19.33333337v6.38196601l9.66666667 4.83333336 9.6666667-4.83333336z" />
+                    </svg>
+                  </div>
+                  <div>
+                    <h3
+                      style={{
+                        fontSize: 20,
+                        fontWeight: "650",
+                      }}
+                    >
+                      Sungwon là Chủ nhà siêu cấp
+                    </h3>
+                    <p
+                      style={{
+                        color: "#6B7280",
+                      }}
+                    >
+                      Chủ nhà siêu cấp là những chủ nhà có kinh nghiệm, được
+                      đánh giá cao và là những người cam kết mang lại quãng thời
+                      gian ở tuyệt vời cho khách.
+                    </p>
+                  </div>
+                </div>
+                <div className="flex">
+                  <div
+                    style={{
+                      paddingTop: 7,
+                      marginRight: 10,
+                    }}
+                  >
+                    <svg
+                      viewBox="0 0 32 32"
+                      xmlns="http://www.w3.org/2000/svg"
+                      aria-hidden="true"
+                      role="presentation"
+                      focusable="false"
+                      style={{
+                        display: "inline-block",
+                        height: 24,
+                        width: 24,
+                        fill: "currentcolor",
+                      }}
+                    >
+                      <path d="M16 0c6.627 0 12 5.373 12 12 0 6.337-3.814 12.751-11.346 19.257L16 31.82l-1.076-.932C7.671 24.509 4 18.218 4 12 4 5.423 9.397 0 16 0zm0 2C10.504 2 6 6.525 6 12c0 5.44 3.249 11.118 9.831 17.02l.169.149.576-.518c6.178-5.65 9.293-11.092 9.42-16.318L26 12c0-5.523-4.477-10-10-10zm0 5a5 5 0 1 1 0 10 5 5 0 0 1 0-10zm0 2a3 3 0 1 0 0 6 3 3 0 0 0 0-6z" />
+                    </svg>
+                  </div>
+                  <div>
+                    <h3
+                      style={{
+                        fontSize: 20,
+                        fontWeight: "650",
+                      }}
+                    >
+                      Địa điểm tuyệt vời
+                    </h3>
+                    <p
+                      style={{
+                        color: "#6B7280",
+                      }}
+                    >
+                      90% khách gần đây đã xếp hạng 5 sao cho vị trí này.
+                    </p>
+                  </div>
+                </div>
+                <div className="flex">
+                  <div
+                    style={{
+                      paddingTop: 7,
+                      marginRight: 10,
+                    }}
+                  >
+                    <svg
+                      viewBox="0 0 32 32"
+                      xmlns="http://www.w3.org/2000/svg"
+                      aria-hidden="true"
+                      role="presentation"
+                      focusable="false"
+                      style={{
+                        display: "inline-block",
+                        height: 24,
+                        width: 24,
+                        fill: "currentcolor",
+                      }}
+                    >
+                      <path d="m11.6667 0-.00095 1.666h8.667l.00055-1.666h2l-.00055 1.666 6.00065.00063c1.0543745 0 1.9181663.81587127 1.9945143 1.85073677l.0054857.14926323v15.91907c0 .4715696-.1664445.9258658-.4669028 1.2844692l-.1188904.1298308-8.7476886 8.7476953c-.3334303.3332526-.7723097.5367561-1.2381975.5778649l-.1758207.0077398h-12.91915c-2.68874373 0-4.88181754-2.1223321-4.99538046-4.7831124l-.00461954-.2168876v-21.66668c0-1.05436021.81587582-1.91815587 1.85073739-1.99450431l.14926261-.00548569 5.999-.00063.00095-1.666zm16.66605 11.666h-24.666v13.6673c0 1.5976581 1.24893332 2.9036593 2.82372864 2.9949072l.17627136.0050928 10.999-.0003.00095-5.6664c0-2.6887355 2.122362-4.8818171 4.7832071-4.9953804l.2168929-.0046196 5.66595-.0006zm-.081 8-5.58495.0006c-1.5977285 0-2.9037573 1.2489454-2.9950071 2.8237299l-.0050929.1762701-.00095 5.5864zm-18.586-16-5.999.00062v5.99938h24.666l.00065-5.99938-6.00065-.00062.00055 1.66733h-2l-.00055-1.66733h-8.667l.00095 1.66733h-2z" />
+                    </svg>
+                  </div>
+                  <div>
+                    <h3
+                      style={{
+                        fontSize: 20,
+                        fontWeight: "650",
+                      }}
+                    >
+                      Miễn phí hủy trong 48 giờ.
+                    </h3>
+                  </div>
+                </div>
+              </div>
+              <div
+                style={{
+                  borderBottom: "1px solid #E5E7EB",
+                  paddingBottom: 20,
+                  marginTop: 20,
+                }}
+              >
+                <img
+                  src="https://a0.muscache.com/im/pictures/54e427bb-9cb7-4a81-94cf-78f19156faad.jpg"
+                  alt
+                  className="h-7 mb-4"
+                />
+                <p>
+                  Mọi đặt phòng đều được bảo vệ miễn phí trong trường hợp Chủ
+                  nhà hủy, thông tin nhà/phòng cho thuê không chính xác và những
+                  vấn đề khác như sự cố trong quá trình nhận phòng.
+                </p>
+                <button
+                  style={{
+                    fontWeight: "650",
+                    marginTop: 10,
+                  }}
+                  className="underline text-gray-800"
+                >
+                  Tìm hiểu thêm
+                </button>
+              </div>
+              <div
+                style={{
+                  borderBottom: "1px solid #E5E7EB",
+                  paddingBottom: 20,
+                  marginTop: 20,
+                }}
+              >
+                <div className="flex">
+                  <svg
+                    viewBox="0 0 16 16"
+                    xmlns="http://www.w3.org/2000/svg"
+                    aria-hidden="true"
+                    role="presentation"
+                    focusable="false"
+                    style={{
+                      display: "block",
+                      height: 16,
+                      width: 16,
+                      fill: "currentcolor",
+                    }}
+                  >
+                    <path d="M9 0a1 1 0 0 1 .993.883L10 1v5h5a1 1 0 0 1 .993.883L16 7v8a1 1 0 0 1-.883.993L15 16H7a1 1 0 0 1-.993-.883L6 15v-5H1a1 1 0 0 1-.993-.883L0 9V1A1 1 0 0 1 .883.007L1 0h8zm1.729 7l-1.393.495.233.217.13.132c.125.127.227.245.308.352l.073.103.048.073.045.077H7.308v1.309h1.207l.166.52.09.266.112.29a6.294 6.294 0 0 0 1.109 1.789c-.495.315-1.119.607-1.87.87l-.331.112-.346.108-.445.134L7.72 15l.407-.125.386-.128c1.007-.349 1.836-.752 2.486-1.214.57.405 1.277.764 2.12 1.08l.369.134.386.128.406.125.72-1.153-.445-.134-.26-.08-.345-.115c-.783-.27-1.43-.57-1.94-.895a6.3 6.3 0 0 0 1.068-1.694l.128-.32.114-.33.165-.521h1.208V8.449H11.64l-.093-.231a3.696 3.696 0 0 0-.554-.917l-.126-.149-.14-.152zm1.35 2.758l-.042.133-.076.224-.103.264A4.985 4.985 0 0 1 11 11.76a4.952 4.952 0 0 1-.743-1.127l-.115-.254-.103-.264-.076-.224-.042-.133h2.158zM9 1H1v8h5V7c0-.057.005-.113.014-.167H3.827L3.425 8H2l2.257-6h1.486l1.504 4H9V1zM5 3.411L4.253 5.6h1.502L5 3.411z" />
+                  </svg>
+                  <p
+                    style={{
+                      marginLeft: 10,
+                    }}
+                  >
+                    Một số thông tin đã được dịch tự động.
+                  </p>
+                  <button
+                    style={{
+                      fontWeight: "650",
+                    }}
+                    className="underline text-gray-800"
+                  >
+                    Hiển thị ngôn ngữ gốc
+                  </button>
+                </div>
+                <p
+                  style={{
+                    marginTop: 20,
+                  }}
+                >
+                  Nhà nghỉ thôn dã hình lưỡi liềm trong một ngôi làng nghệ thuật
+                  gốm hai nghìn năm. Một ngôi nhà nguyên khối lớn với sân thượng
+                  ba tầng của Bảo tàng Văn hóa Guitar Serra, nổi tiếng với mặt
+                  tiền đặc sắc trong một ngôi làng nghệ thuật gốm hai nghìn năm
+                  pha trộn rất tốt với thiên nhiên.
+                </p>
+                <p
+                  style={{
+                    marginTop: 20,
+                  }}
+                >
+                  Tận hưởng kỳ nghỉ dưỡng sức cảm xúc thư giãn trong một căn phòng ấm cúng, chào...
+                </p>
+                <button
+                  style={{
+                    fontWeight: "650",
+                    marginTop: 10,
+                    marginRight: 5,
+                  }}
+                  className="underline text-gray-800"
+                >
+                  Hiển thị thêm
+                </button>
+                <i class="fa-solid fa-angle-right"></i>
               </div>
               <div>
                 <h3
@@ -183,6 +396,7 @@ const DetailItem = () => {
                     fontSize: 20,
                     fontWeight: "650",
                     marginBottom: 15,
+                    marginTop: 20,
                   }}
                 >
                   Nơi này có những gì cho bạn
@@ -1213,6 +1427,7 @@ const DetailItem = () => {
               fontSize: 20,
               fontWeight: "650",
               marginBottom: 15,
+              marginTop: 20,
             }}
           >
             Đánh giá
