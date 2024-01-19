@@ -93,19 +93,6 @@ const ModalAddRoom = ({ getData }) => {
   }
 
   const onSubmit = (values) => {
-    const formData = new FormData();
-
-    for (let key in values) {
-      if (key == "hinhAnh") {
-        // Append the image file to FormData
-        formData.append("file", values[key]);
-      } else {
-        // Append other form fields
-        formData.append(key, values[key]);
-      }
-    }
-    console.log("FormData:", formData);
-
     const updateValues = {
       ...values,
       mayGiat: values.mayGiat !== "" ? values.mayGiat : false,
@@ -119,35 +106,21 @@ const ModalAddRoom = ({ getData }) => {
       banUi: values.banUi !== "" ? values.banUi : false,
     };
 
-    console.log("Request Payload:", updateValues);
+    message.info("Hãy cập nhật hình ảnh sau khi thêm phòng");
 
     roomServ
       .addRoom(updateValues)
       .then(() => {
         message.success("Thêm phòng thành công");
         getData();
+        methods.reset();
       })
       .catch((err) => {
         message.error("Thêm phòng thất bại");
-        console.error("API Error:", err.response.data);
-        console.log(err);
+        // console.error("API Error:", err.response.data);
+        // console.log(err);
       });
     setIsOpen(false);
-
-    roomServ
-      .addRoomImage(formData)
-      .then((res) => {
-        // Handle the response, e.g., get the image URL
-        // const imageUrl = res.data.url;
-        setImage("");
-
-        // Add the image URL to your form data or use it as needed
-        // formData.append("imageUrl", imageUrl);
-      })
-      .catch((err) => {
-        // Handle image upload error
-        console.error("Image Upload Error:", err);
-      });
   };
 
   const onChange = (e, fieldName) => {
@@ -168,8 +141,6 @@ const ModalAddRoom = ({ getData }) => {
       </div>
     );
   };
-
-  const [image, setImage] = useState("");
 
   return (
     <div>
@@ -348,30 +319,18 @@ const ModalAddRoom = ({ getData }) => {
             </div>
           </div>
           <div className="relative z-0 w-full mb-6 group">
-            <label className="peer-focus:font-medium absolute text-sm text-gray-500 dark:text-gray-400 duration-300 transform -translate-y-6 scale-75 top-3 -z-10 origin-[0] peer-focus:left-0 peer-focus:text-blue-600 peer-focus:dark:text-blue-500 peer-placeholder-shown:scale-100 peer-placeholder-shown:translate-y-0 peer-focus:scale-75 peer-focus:-translate-y-6">
-              Hình ảnh
-            </label>
-            <img className="pt-5" width={300} src={image} alt="" />
             <input
-              type="file"
+              type="text"
               name="hinhAnh"
+              className="block py-2.5 px-0 w-full text-sm text-gray-900 bg-transparent border-0 border-b-2 border-gray-300 appearance-none dark:text-white dark:border-gray-600 dark:focus:border-blue-500 focus:outline-none focus:ring-0 focus:border-blue-600 peer"
               placeholder=" "
-              accept="image/*"
-              onChange={(event) => {
-                // lấy dữu liệu về file được gửi lên
-                // console.log(event.target.files[0]);
-                const img = event.target.files[0];
-                console.log(img);
-                // tạo ra 1 đường dẫn cho tấm hình và lưu trữ vào state
-                if (img) {
-                  const urlImg = URL.createObjectURL(img);
-                  console.log(urlImg);
-                  setImage(urlImg);
-                }
-                setValue("hinhAnh", img);
-              }}
+              onChange={(e) => setValue("hinhAnh", e.target.value)}
+              {...register("hinhAnh")}
             />
             <ErrorMessage err={errors.hinhAnh} />
+            <label className="peer-focus:font-medium absolute text-sm text-gray-500 dark:text-gray-400 duration-300 transform -translate-y-6 scale-75 top-3 -z-10 origin-[0] peer-focus:left-0 peer-focus:text-blue-600 peer-focus:dark:text-blue-500 peer-placeholder-shown:scale-100 peer-placeholder-shown:translate-y-0 peer-focus:scale-75 peer-focus:-translate-y-6">
+              Tên hình ảnh
+            </label>
           </div>
           <button
             type="submit"

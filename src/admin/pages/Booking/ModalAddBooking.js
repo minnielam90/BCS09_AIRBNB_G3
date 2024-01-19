@@ -66,6 +66,7 @@ const ModalAddBooking = ({ getData }) => {
       .then((res) => {
         getData();
         message.success("Thêm đặt phòng thành công");
+        methods.reset();
       })
       .catch((err) => {
         console.error("Error adding booking:", err);

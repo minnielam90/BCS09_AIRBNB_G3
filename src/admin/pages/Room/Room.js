@@ -37,7 +37,7 @@ const Room = () => {
         setIsOpen(true);
       })
       .catch((err) => {
-        console.log(err);
+        // console.log(err);
       });
   };
 
@@ -227,7 +227,7 @@ const Room = () => {
         setModalEditRoomVisible(true);
       })
       .catch((err) => {
-        console.log(err);
+        // console.log(err);
       });
   };
   const handleDeleteRoom = (roomId) => {

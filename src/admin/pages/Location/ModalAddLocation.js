@@ -38,62 +38,21 @@ const ModalAddLocation = ({ getData }) => {
     setIsOpen(false);
   }
 
-  // const onSubmit = (values) => {
-  //   const formData = new FormData();
-  //   for (let key in values) {
-  //     if (key == "hinhAnh") {
-  //       formData.append("File", values[key]);
-  //     } else {
-  //       formData.append(key, values[key]);
-  //     }
-  //   }
+  const onSubmit = (values) => {
+    message.info("Hãy cập nhật hình ảnh sau khi thêm vị trí");
 
-  //   locationServ
-  //     .addLocation(values)
-  //     .then(() => {
-  //       getData();
-  //       message.success("Thêm vị trí thành công");
-  //     })
-  //     .catch((err) => {
-  //       message.error("Thêm vị trí thất bại");
-  //       console.log(err);
-  //     });
-  //   setIsOpen(false);
-  // };
-
-  const onSubmit = async (values) => {
-    try {
-      const locationData = {
-        id: values.id,
-        tenVitri: values.tenVitri,
-        tinhThanh: values.tinhThanh,
-        quocGia: values.quocGia,
-      };
-
-      // Call addLocation API
-      await locationServ.addLocation(locationData);
-
-      // Display success message
-      message.success("Thêm vị trí thành công");
-
-      // Refresh data
-      getData();
-
-      // Check if there is an image to upload
-      if (values.hinhAnh) {
-        const formData = new FormData();
-        formData.append("hinhAnh", values.hinhAnh);
-
-        // Call addLocationImage API
-        await locationServ.addLocationImage(formData);
-      }
-
-      // Close the modal
-      setIsOpen(false);
-    } catch (error) {
-      console.error("Error:", error);
-      message.error("Thêm vị trí thất bại");
-    }
+    locationServ
+      .addLocation(values)
+      .then(() => {
+        getData();
+        message.success("Thêm vị trí thành công");
+        methods.reset();
+      })
+      .catch((err) => {
+        message.error("Thêm vị trí thất bại");
+        console.log(err);
+      });
+    setIsOpen(false);
   };
 
   function closeModal() {
@@ -104,7 +63,7 @@ const ModalAddLocation = ({ getData }) => {
     setIsOpen(true);
   }
 
-  const [image, setImage] = useState("");
+  // const [image, setImage] = useState("");
 
   return (
     <div>
@@ -183,34 +142,19 @@ const ModalAddLocation = ({ getData }) => {
             </label>
           </div>
           <div className="relative z-0 w-full mb-6 group">
-            <img width={300} src={image} alt="" />
             <input
-              type="file"
+              type="text"
               name="hinhAnh"
               className={`block py-2.5 px-0 w-full text-sm text-gray-900 bg-transparent border-0 border-b-2 border-gray-300 appearance-none dark:text-white dark:border-gray-600 dark:focus:border-blue-500 focus:outline-none focus:ring-0 focus:border-blue-600 peer`}
               placeholder=" "
-              accept="image/*"
-              // onChange={(e) => setValue("hinhAnh", e.target.value)}
-              // {...register("hinhAnh")}
-              onChange={(event) => {
-                // lấy dữu liệu về file được gửi lên
-                // console.log(event.target.files[0]);
-                const img = event.target.files[0];
-                console.log(img);
-                // tạo ra 1 đường dẫn cho tấm hình và lưu trữ vào state
-                if (img) {
-                  const urlImg = URL.createObjectURL(img);
-                  console.log(urlImg);
-                  setImage(urlImg);
-                }
-                setValue("hinhAnh", img);
-              }}
+              onChange={(e) => setValue("hinhAnh", e.target.value)}
+              {...register("hinhAnh")}
             />
             {errors.hinhAnh && (
               <p className="text-red-500">{errors.hinhAnh.message}</p>
             )}
             <label className="peer-focus:font-medium absolute text-sm text-gray-500 dark:text-gray-400 duration-300 transform -translate-y-6 scale-75 top-3 -z-10 origin-[0] peer-focus:left-0 peer-focus:text-blue-600 peer-focus:dark:text-blue-500 peer-placeholder-shown:scale-100 peer-placeholder-shown:translate-y-0 peer-focus:scale-75 peer-focus:-translate-y-6">
-              Hình ảnh
+              Tên hình ảnh
             </label>
           </div>
           <button

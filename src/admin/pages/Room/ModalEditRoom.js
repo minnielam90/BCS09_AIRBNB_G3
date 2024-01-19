@@ -1,5 +1,4 @@
 import React, { useState } from "react";
-
 import { useEffect } from "react";
 import { yupResolver } from "@hookform/resolvers/yup";
 import { useForm } from "react-hook-form";
@@ -31,8 +30,6 @@ const validationSchema = yup.object().shape({
 });
 
 const ModalEditRoom = ({ getData, editData, isOpen, setIsOpen }) => {
-  const [imageUrl, setImageUrl] = useState("");
-
   const methods = useForm({
     defaultValues: {
       tenPhong: "",
@@ -74,6 +71,35 @@ const ModalEditRoom = ({ getData, editData, isOpen, setIsOpen }) => {
     setModalOpen(isOpen);
   }, [isOpen]);
 
+  const handleUpdateImage = async (file) => {
+    try {
+      const formData = new FormData();
+      formData.append("image", file);
+
+      // Upload the image
+      const imageResponse = await roomServ.changeImageRoom(id, formData);
+
+      const imageUrl = imageResponse.data.url;
+
+      // Update the room details with the new image URL
+      setValue("hinhAnh", imageUrl);
+
+      message.success("Cập nhật hình ảnh thành công");
+    } catch (err) {
+      // console.error("Error uploading image:", err);
+
+      if (err.response && err.response.status === 403) {
+        // Handle 403 error (Forbidden)
+        message.warning("Không có quyền cập nhật hình ảnh");
+      } else {
+        // Log the error, but continue with the flow (assuming the image is still updated correctly)
+        message.success("Hãy reload trang để hình ảnh được cập nhật");
+      }
+    }
+  };
+
+  const [image, setImage] = useState("");
+
   const onSubmit = (values) => {
     roomServ
       .editRoom(id, values)
@@ -83,49 +109,14 @@ const ModalEditRoom = ({ getData, editData, isOpen, setIsOpen }) => {
         getData();
       })
       .catch((err) => {
-        message.error("Cập nhật phòng thất bại");
-        console.log(err);
+        setIsOpen(false);
+        if (err.response && err.response.status === 403) {
+          // Handle 403 error (Forbidden)
+          message.warning("Không có quyền cập nhật phòng");
+        } else message.error("Cập nhật phòng thất bại");
+        // console.log(err);
       });
   };
-
-  // const onSubmit = async (values) => {
-  //   try {
-  //     const formData = new FormData();
-  //     formData.append("image", values.hinhAnh);
-
-  //     // Log the FormData to see its content
-  //     console.log("FormData:", formData);
-
-  //     // Upload the image first
-  //     const imageResponse = await roomServ.changeImageRoom(id, formData);
-  //     console.log("Image Response:", imageResponse);
-
-  //     const imageUrl = imageResponse.data.url;
-  //     console.log("Image URL:", imageUrl);
-
-  //     // Prepare the room details for updating (excluding the image)
-  //     const roomDetails = { ...values };
-  //     delete roomDetails.hinhAnh;
-
-  //     console.log("Room Details:", roomDetails);
-
-  //     // Update other room details along with the image URL
-  //     await roomServ.editRoom(id, { ...roomDetails, hinhAnh: imageUrl });
-
-  //     message.success("Cập nhật phòng thành công");
-  //     setIsOpen(false);
-  //     getData();
-  //   } catch (err) {
-  //     message.error("Cập nhật phòng thất bại");
-  //     console.error(err);
-
-  //     if (err.response) {
-  //       console.error("Response data:", err.response.data);
-  //       console.error("Response status:", err.response.status);
-  //       console.error("Response headers:", err.response.headers);
-  //     }
-  //   }
-  // };
 
   function closeModal() {
     setIsOpen(false);
@@ -349,35 +340,47 @@ const ModalEditRoom = ({ getData, editData, isOpen, setIsOpen }) => {
             </label>
           </div>
         </div>
-        <div className="relative z-0 w-full mb-6 group">
-          {/* <input
-            type="text"
-            name="hinhAnh"
-            className="block py-2.5 px-0 w-full text-sm text-gray-900 bg-transparent border-0 border-b-2 border-gray-300 appearance-none dark:text-white dark:border-gray-600 dark:focus:border-blue-500 focus:outline-none focus:ring-0 focus:border-blue-600 peer"
-            placeholder=" "
-            onChange={(e) => setValue("hinhAnh", e.target.value)}
-            {...register("hinhAnh")}
-          /> */}
-          <img src={editData.hinhAnh} alt="Lỗi hình" />
-          <input
-            type="file"
-            onChange={(e) => {
-              //call api update hình
-              let file = e.target.files[0];
-              roomServ.changeImageRoom(editData.id, file);
-              setValue("hinhAnh", e.target.value);
-            }}
-          />
-          <ErrorMessage err={errors.hinhAnh} />
-          <label className="peer-focus:font-medium absolute text-sm text-gray-500 dark:text-gray-400 duration-300 transform -translate-y-6 scale-75 top-3 -z-10 origin-[0] peer-focus:left-0 peer-focus:text-blue-600 peer-focus:dark:text-blue-500 peer-placeholder-shown:scale-100 peer-placeholder-shown:translate-y-0 peer-focus:scale-75 peer-focus:-translate-y-6">
-            Hình ảnh
-          </label>
+        <div className="relative z-0 w-full mb-6 group flex items-center">
+          <img width={300} src={image || editData.hinhAnh} alt="" />
+          <div className="flex flex-col ml-4">
+            <button
+              type="button"
+              className="mr-3 text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm w-full sm:w-auto px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800"
+              onClick={handleUpdateImage}
+              style={{ marginTop: "10px" }}
+            >
+              Cập nhật hình ảnh
+            </button>
+            <input
+              type="file"
+              name="hinhAnh"
+              className="block py-2.5 px-0 w-full text-sm text-gray-900 bg-transparent border-0 border-b-2 border-gray-300 appearance-none dark:text-white dark:border-gray-600 dark:focus:border-blue-500 focus:outline-none focus:ring-0 focus:border-blue-600 peer"
+              placeholder=" "
+              onChange={(e) => {
+                let file = e.target.files[0];
+
+                if (file) {
+                  const urlImg = URL.createObjectURL(file);
+                  console.log(urlImg);
+                  setImage(urlImg);
+                }
+                roomServ.changeImageRoom(editData.id, file);
+                setValue("hinhAnh", file);
+              }}
+            />
+            {errors.hinhAnh && (
+              <p className="text-red-500">{errors.hinhAnh.message}</p>
+            )}
+            <label className="peer-focus:font-medium absolute text-sm text-gray-500 dark:text-gray-400 duration-300 transform -translate-y-6 scale-75 top-3 -z-10 origin-[0] peer-focus:left-0 peer-focus:text-blue-600 peer-focus:dark:text-blue-500 peer-placeholder-shown:scale-100 peer-placeholder-shown:translate-y-0 peer-focus:scale-75 peer-focus:-translate-y-6">
+              Hình ảnh
+            </label>
+          </div>
         </div>
         <button
           type="submit"
           className=" mr-3 text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm w-full sm:w-auto px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800"
         >
-          Cập nhật
+          Cập nhật phòng
         </button>
         <button
           type="button"

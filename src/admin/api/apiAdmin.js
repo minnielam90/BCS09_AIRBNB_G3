@@ -70,6 +70,17 @@ export const locationServ = {
   editLocation: (id, locationData) => {
     return https.put(`/api/vi-tri/${id}`, locationData);
   },
+  changeImageLocation: (id, formFile) => {
+    return https.post(
+      `/api/vi-tri/upload-hinh-vitri?maViTri=${id}`,
+      { formFile: formFile },
+      {
+        headers: {
+          "Content-Type": "multipart/form-data",
+        },
+      }
+    );
+  },
 };
 
 export const bookingRoomServ = {

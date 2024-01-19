@@ -72,6 +72,7 @@ const ModalAddUser = ({ getData }) => {
       .then(() => {
         message.success("Thêm người dùng thành công");
         getData();
+        methods.reset();
       })
       .catch((err) => {
         console.log(err);
