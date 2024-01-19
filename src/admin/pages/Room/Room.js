@@ -169,6 +169,7 @@ const Room = () => {
                 type="link"
                 onClick={() => handleOpenPopover(index)}
                 className="-ml-4"
+                style={{ border: "none", background: "none" }}
               >
                 Xem chi tiết
               </Button>

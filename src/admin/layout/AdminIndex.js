@@ -29,7 +29,7 @@ const AdminIndex = ({ children }) => {
         <HeaderAdmin setCollapsed={setCollapsed} collapsed={collapsed} />
         <Content
           style={{
-            margin: "24px 16px",
+            margin: "60px 16px",
             padding: 24,
             minHeight: "100vh",
             background: colorBgContainer,

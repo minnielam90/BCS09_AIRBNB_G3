@@ -2,6 +2,7 @@ import React, { useEffect, useState } from "react";
 import { Menu } from "antd";
 import adminRoute from "../route/adminRoute";
 import { NavLink, useLocation } from "react-router-dom";
+import { userRoute } from "../../user/route/userRoute";
 
 const MenuAdmin = () => {
   const [selectKey, setSelectKey] = useState(null);
@@ -69,7 +70,7 @@ const MenuAdmin = () => {
         {
           key: "5",
           icon: <i className="fas fa-arrow-rotate-left"></i>,
-          label: <NavLink>Trang chủ</NavLink>,
+          label: <NavLink to={userRoute.home.path}>Trang chủ</NavLink>,
         },
       ]}
     />

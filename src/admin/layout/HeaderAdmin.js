@@ -17,6 +17,7 @@ const HeaderAdmin = ({ setCollapsed, collapsed }) => {
         display: "flex",
         alignItems: "center",
         justifyContent: "space-between",
+        height: "40px",
       }}
     >
       <Button
@@ -24,9 +25,14 @@ const HeaderAdmin = ({ setCollapsed, collapsed }) => {
         icon={collapsed ? <MenuUnfoldOutlined /> : <MenuFoldOutlined />}
         onClick={() => setCollapsed(!collapsed)}
         style={{
-          fontSize: "16px",
-          width: 64,
-          height: 64,
+          fontSize: "15px",
+          width: 40,
+          height: 40,
+          backgroundColor: "#FF5A5F",
+          transition: "0.3s ease",
+          ":hover": {
+            color: "#fff",
+          },
         }}
       />
     </Header>
