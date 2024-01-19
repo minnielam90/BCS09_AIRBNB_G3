@@ -6,9 +6,12 @@ import * as Yup from "yup";
 import { loginUser } from "../../api/apiUser";
 import { message } from "antd";
 import { saveLocalStore } from "../../api/localUser";
-import { useNavigate } from "react-router-dom";
+import { NavLink, useNavigate } from "react-router-dom";
+import { useDispatch } from "react-redux";
+import { saveInfoUser } from "../../redux/userSlice";
 
 const Login = () => {
+  const dispatch = useDispatch();
   const [messageApi, contextHolder] = message.useMessage();
   const navigate = useNavigate();
   const formik = useFormik({
@@ -25,6 +28,7 @@ const Login = () => {
             content: "Đăng nhập thành công",
           });
           saveLocalStore(res.data.content, "user_info");
+          dispatch(saveInfoUser(res.data.content));
           setTimeout(() => {
             navigate("/");
           }, 1000);
@@ -211,14 +215,15 @@ const Login = () => {
               >
                 <p>
                   Chưa có tài khoản{" "}
-                  <a
+                  <NavLink
                     className="btnDangKyNgay"
                     style={{
                       color: "#991B1B",
                     }}
+                    to={"/register"}
                   >
                     Đăng ký ngay
-                  </a>
+                  </NavLink>
                 </p>
               </div>
             </form>
