@@ -6,6 +6,7 @@ import { Alert, DatePicker, Rate } from "antd";
 import { useFormik } from "formik";
 import { useSelector } from "react-redux";
 import * as Yup from "yup";
+import Booking from "../Booking/Booking";
 
 const DetailItem = () => {
   const { user } = useSelector((state) => state.userSlice);
@@ -365,18 +366,15 @@ const DetailItem = () => {
                     marginTop: 20,
                   }}
                 >
-                  Nhà nghỉ thôn dã hình lưỡi liềm trong một ngôi làng nghệ thuật
-                  gốm hai nghìn năm. Một ngôi nhà nguyên khối lớn với sân thượng
-                  ba tầng của Bảo tàng Văn hóa Guitar Serra, nổi tiếng với mặt
-                  tiền đặc sắc trong một ngôi làng nghệ thuật gốm hai nghìn năm
-                  pha trộn rất tốt với thiên nhiên.
+                  {listItem.moTa}
                 </p>
                 <p
                   style={{
                     marginTop: 20,
                   }}
                 >
-                  Tận hưởng kỳ nghỉ dưỡng sức cảm xúc thư giãn trong một căn phòng ấm cúng, chào...
+                  Tận hưởng kỳ nghỉ dưỡng sức cảm xúc thư giãn trong một căn
+                  phòng ấm cúng, chào...
                 </p>
                 <button
                   style={{
@@ -528,9 +526,7 @@ const DetailItem = () => {
                       </svg>
                       <span className="ms-1">Máy giặt</span>
                     </p>
-                  ) : (
-                    <></>
-                  )}
+                  ) : null}
                   {listItem.banLa ? (
                     <p className="flex">
                       <svg
@@ -625,9 +621,7 @@ const DetailItem = () => {
                       </svg>
                       <span className="ms-1">Bàn là</span>
                     </p>
-                  ) : (
-                    <></>
-                  )}
+                  ) : null}
                   {listItem.tivi ? (
                     <p className="flex">
                       <svg
@@ -738,9 +732,7 @@ const DetailItem = () => {
                       </svg>
                       <span className="ms-1">Tivi</span>
                     </p>
-                  ) : (
-                    <></>
-                  )}
+                  ) : null}
                   {listItem.dieuHoa ? (
                     <p className="flex">
                       <svg
@@ -899,9 +891,7 @@ const DetailItem = () => {
                       </svg>
                       <span className="ms-1">Điều hòa</span>
                     </p>
-                  ) : (
-                    <></>
-                  )}
+                  ) : null}
                   {listItem.wifi ? (
                     <p className="flex">
                       <svg
@@ -1077,9 +1067,7 @@ const DetailItem = () => {
                       </svg>
                       <span className="ms-1">Wifi</span>
                     </p>
-                  ) : (
-                    <></>
-                  )}
+                  ) : null}
                   {listItem.bep ? (
                     <p className="flex">
                       <svg
@@ -1190,9 +1178,7 @@ const DetailItem = () => {
                       </svg>
                       <span className="ms-1">Bếp</span>
                     </p>
-                  ) : (
-                    <></>
-                  )}
+                  ) : null}
                   {listItem.doXe ? (
                     <p className="flex">
                       <svg
@@ -1319,9 +1305,7 @@ const DetailItem = () => {
                       </svg>
                       <span className="ms-1">Bãi đỗ xe</span>
                     </p>
-                  ) : (
-                    <></>
-                  )}
+                  ) : null}
                   {listItem.hoBoi ? (
                     <p className="flex">
                       <svg
@@ -1341,9 +1325,7 @@ const DetailItem = () => {
                       </svg>
                       <span className="ms-1">Hồ bơi</span>
                     </p>
-                  ) : (
-                    <></>
-                  )}
+                  ) : null}
                   {listItem.banUi ? (
                     <p className="flex">
                       <svg
@@ -1406,15 +1388,41 @@ const DetailItem = () => {
                       </svg>
                       <span className="ms-1">Bàn ủi</span>
                     </p>
-                  ) : (
-                    <></>
-                  )}
+                  ) : null}
                 </div>
               </div>
             </div>
           </div>
           {/* Đặt phòng */}
-          <div className="basis-5/12">{listItem.moTa}</div>
+          <div className="basis-5/12">
+            <div className="w-5/6 sticky top-28">
+              <div className="mx-auto p-6 bg-white shadow-xl border rounded-xl w-full ml-9">
+                <div>
+                  <div className="flex justify-between">
+                    <div className="flex space-x-1 items-end">
+                      <span>$</span>
+                      <p
+                        style={{
+                          fontWeight: "650",
+                          fontSize: 22,
+                        }}
+                      >
+                        {listItem.giaTien}.000
+                      </p>
+                      <p>đêm</p>
+                    </div>
+                    <div>
+                      <p className="underline">đánh giá</p>
+                    </div>
+                  </div>
+                </div>
+                {/* đặt phòng */}
+                <div>
+                  <Booking maPhong={listItem.id} />
+                </div>
+              </div>
+            </div>
+          </div>
         </div>
         <div
           style={{
