@@ -1,6 +1,6 @@
 # Phân chia nhiệm vụ:
 
-# Lê Ngọc Vinh
+**Lê Ngọc Vinh**
 
 
 
@@ -8,7 +8,7 @@
 
 
 
-# Lâm Huệ Anh
+**Lâm Huệ Anh**
 [admin + responsive]
 - Quản lý người dùng
 - Quản lý phòng
