@@ -20,7 +20,7 @@ const Location = () => {
         setListLocation(res.data.content);
       })
       .catch((err) => {
-        console.log(err);
+        // console.log(err);
       });
   };
 
@@ -133,7 +133,7 @@ const Location = () => {
         setIsOpen(true);
       })
       .catch((err) => {
-        console.log(err);
+        // console.log(err);
       });
   };
   const handleDeleteLocation = (locationId) => {
@@ -148,7 +148,7 @@ const Location = () => {
       })
       .catch((err) => {
         message.error("Xảy ra lỗi");
-        console.log(err);
+        // console.log(err);
       });
   };
 

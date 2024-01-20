@@ -21,7 +21,7 @@ const User = () => {
         setListUsers(res.data.content);
       })
       .catch((err) => {
-        console.log(err);
+        // console.log(err);
       });
   };
 
@@ -144,7 +144,7 @@ const User = () => {
         getData();
       })
       .catch((err) => {
-        console.log(err);
+        // console.log(err);
       });
   };
   const handleEditUser = (userId) => {
@@ -155,7 +155,7 @@ const User = () => {
         setIsOpen(true);
       })
       .catch((err) => {
-        console.log(err);
+        // console.log(err);
       });
   };
 

@@ -83,7 +83,7 @@ const ModalAddLocation = ({ getData }) => {
               disabled
               type="number"
               name="id"
-              className={`block py-2.5 px-0 w-full text-sm text-gray-900 bg-transparent border-0 border-b-2 border-gray-300 appearance-none dark:text-white dark:border-gray-600 dark:focus:border-blue-500 focus:outline-none focus:ring-0 focus:border-blue-600 peer`}
+              className={`block py-2.5 px-0 w-full text-sm text-gray-900 bg-transparent border-0 border-b-2 border-gray-300 appearance-none dark:border-gray-600 dark:focus:border-blue-500 focus:outline-none focus:ring-0 focus:border-blue-600 peer`}
               placeholder=" "
               onChange={(e) => setValue("id", e.target.value)}
               {...register("id")}
@@ -97,7 +97,7 @@ const ModalAddLocation = ({ getData }) => {
             <input
               type="text"
               name="tenVitri"
-              className={`block py-2.5 px-0 w-full text-sm text-gray-900 bg-transparent border-0 border-b-2 border-gray-300 appearance-none dark:text-white dark:border-gray-600 dark:focus:border-blue-500 focus:outline-none focus:ring-0 focus:border-blue-600 peer`}
+              className={`block py-2.5 px-0 w-full text-sm text-gray-900 bg-transparent border-0 border-b-2 border-gray-300 appearance-none dark:border-gray-600 dark:focus:border-blue-500 focus:outline-none focus:ring-0 focus:border-blue-600 peer`}
               placeholder=" "
               onChange={(e) => setValue("tenVitri", e.target.value)}
               {...register("tenVitri")}
@@ -113,7 +113,7 @@ const ModalAddLocation = ({ getData }) => {
             <input
               type="text"
               name="tinhThanh"
-              className={`block py-2.5 px-0 w-full text-sm text-gray-900 bg-transparent border-0 border-b-2 border-gray-300 appearance-none dark:text-white dark:border-gray-600 dark:focus:border-blue-500 focus:outline-none focus:ring-0 focus:border-blue-600 peer`}
+              className={`block py-2.5 px-0 w-full text-sm text-gray-900 bg-transparent border-0 border-b-2 border-gray-300 appearance-none dark:border-gray-600 dark:focus:border-blue-500 focus:outline-none focus:ring-0 focus:border-blue-600 peer`}
               placeholder=" "
               onChange={(e) => setValue("tinhThanh", e.target.value)}
               {...register("tinhThanh")}
@@ -129,7 +129,7 @@ const ModalAddLocation = ({ getData }) => {
             <input
               type="text"
               name="quocGia"
-              className={`block py-2.5 px-0 w-full text-sm text-gray-900 bg-transparent border-0 border-b-2 border-gray-300 appearance-none dark:text-white dark:border-gray-600 dark:focus:border-blue-500 focus:outline-none focus:ring-0 focus:border-blue-600 peer`}
+              className={`block py-2.5 px-0 w-full text-sm text-gray-900 bg-transparent border-0 border-b-2 border-gray-300 appearance-none dark:border-gray-600 dark:focus:border-blue-500 focus:outline-none focus:ring-0 focus:border-blue-600 peer`}
               placeholder=" "
               onChange={(e) => setValue("quocGia", e.target.value)}
               {...register("quocGia")}
@@ -145,7 +145,7 @@ const ModalAddLocation = ({ getData }) => {
             <input
               type="text"
               name="hinhAnh"
-              className={`block py-2.5 px-0 w-full text-sm text-gray-900 bg-transparent border-0 border-b-2 border-gray-300 appearance-none dark:text-white dark:border-gray-600 dark:focus:border-blue-500 focus:outline-none focus:ring-0 focus:border-blue-600 peer`}
+              className={`block py-2.5 px-0 w-full text-sm text-gray-900 bg-transparent border-0 border-b-2 border-gray-300 appearance-none dark:border-gray-600 dark:focus:border-blue-500 focus:outline-none focus:ring-0 focus:border-blue-600 peer`}
               placeholder=" "
               onChange={(e) => setValue("hinhAnh", e.target.value)}
               {...register("hinhAnh")}

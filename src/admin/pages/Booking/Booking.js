@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { bookingRoomServ } from "../../api/apiAdmin";
-import { Button, Table, message } from "antd";
+import { Button, message } from "antd";
 import moment from "moment";
 import { EditOutlined, DeleteOutlined } from "@ant-design/icons";
 import MUIDataTable from "mui-datatables";
@@ -21,7 +21,7 @@ const Booking = () => {
         setListBookingRoom(res.data.content);
       })
       .catch((err) => {
-        console.log(err);
+        // console.log(err);
       });
   };
 
