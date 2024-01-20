@@ -1,0 +1,30 @@
+.responsive-table-container {
+    overflow-x: auto;
+  }
+
+.responsive-table-container .MuiTableCell-root {
+    min-width: 100px;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+  }
+  
+  @media (max-width: 900px) {
+    .responsive-table-container .MuiTableCell-head,
+    .responsive-table-container .MuiTableCell-body {
+      display: block;
+      width: 100%;
+    }
+  
+    .responsive-table-container .MuiTableRow-root {
+      display: flex;
+      flex-direction: column;
+      width: 100%;
+    }
+  
+    .responsive-table-container .MuiTableCell-root {
+      min-width: 0;
+      max-width: none;
+      width: 100%;
+    }
+  }

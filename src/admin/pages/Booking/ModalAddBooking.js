@@ -6,6 +6,7 @@ import { bookingRoomServ } from "../../api/apiAdmin";
 import { DatePicker, message } from "antd";
 import FormTemplate from "../components/FormTemplate";
 import { yupResolver } from "@hookform/resolvers/yup";
+import "./ModalBooking.css";
 
 const validationSchema = yup.object().shape({
   id: yup.number().required("Vui lòng nhập id"),
@@ -59,7 +60,7 @@ const ModalAddBooking = ({ getData }) => {
   };
 
   const onSubmit = (values) => {
-    console.log("Booking Data:", values);
+    // console.log("Booking Data:", values);
 
     bookingRoomServ
       .addBookingRoom(values)
@@ -69,7 +70,7 @@ const ModalAddBooking = ({ getData }) => {
         methods.reset();
       })
       .catch((err) => {
-        console.error("Error adding booking:", err);
+        // console.error("Error adding booking:", err);
         message.error("Thêm đặt phòng thất bại");
       });
 
@@ -128,13 +129,15 @@ const ModalAddBooking = ({ getData }) => {
           <div className="flex w-full relative">
             <div className=" z-0 w-full mb-6 group flex">
               <div className="flex w-full flex-col mr-3 ">
-                <DatePicker
-                  placeholder="DD/MM/YYYY"
-                  name="ngayDen"
-                  onChange={(date, dateString) => handleDate("ngayDen", date)}
-                  className="w-full mt-5"
-                  format="DD/MM/YYYY"
-                />
+                <div className="date-picker-booking">
+                  <DatePicker
+                    placeholder="DD/MM/YYYY"
+                    name="ngayDen"
+                    onChange={(date, dateString) => handleDate("ngayDen", date)}
+                    className="w-full mt-5"
+                    format="DD/MM/YYYY"
+                  />
+                </div>
                 {errors.ngayDen && (
                   <p className="text-red-500">{errors.ngayDen.message}</p>
                 )}
@@ -145,13 +148,15 @@ const ModalAddBooking = ({ getData }) => {
             </div>
             <div className=" z-0 w-full mb-6 group flex">
               <div className="flex w-full flex-col">
-                <DatePicker
-                  placeholder="DD/MM/YYYY"
-                  name="ngayDi"
-                  onChange={(date, dateString) => handleDate("ngayDi", date)}
-                  className="w-full mt-5"
-                  format="DD/MM/YYYY"
-                />
+                <div className="date-picker-booking">
+                  <DatePicker
+                    placeholder="DD/MM/YYYY"
+                    name="ngayDi"
+                    onChange={(date, dateString) => handleDate("ngayDi", date)}
+                    className="w-full mt-5"
+                    format="DD/MM/YYYY"
+                  />
+                </div>
                 {errors.ngayDi && (
                   <p className="text-red-500">{errors.ngayDi.message}</p>
                 )}

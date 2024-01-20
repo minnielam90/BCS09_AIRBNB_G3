@@ -7,6 +7,7 @@ import MUIDataTable from "mui-datatables";
 import ButtonSortToolbar from "../components/ButtonSortToolbar";
 import ModalAddBooking from "./ModalAddBooking";
 import ModalEditBooking from "./ModalEditBooking";
+import "../components/Admin.css";
 
 const Booking = () => {
   let [isOpen, setIsOpen] = useState(false);
@@ -170,7 +171,7 @@ const Booking = () => {
   };
 
   return (
-    <div>
+    <div className="responsive-table-container">
       <ModalAddBooking getData={getData} />
       <ModalEditBooking
         isOpen={isOpen}

@@ -6,6 +6,7 @@ import { userServ } from "../../api/apiAdmin";
 import { DatePicker, Select, message } from "antd";
 import * as yup from "yup";
 import ErrorMessage from "../components/ErrorMessage";
+import "./ModalUser.css";
 
 const validationSchema = yup.object().shape({
   name: yup.string().required("Vui lòng nhập tên tài khoản"),
@@ -192,13 +193,15 @@ const ModalAddUser = ({ getData }) => {
           </div>
           <div className="relative z-0 w-full mb-6 group flex justify-between items-center">
             <div className="flex w-1/2 flex-col mr-6">
-              <DatePicker
-                name="birthday"
-                placeholder="DD/MM/YYYY"
-                onChange={(date, dateString) => handleBirthday(dateString)}
-                className="w-full mt-5 border-0 "
-                format="DD/MM/YYYY"
-              />
+              <div className="date-picker-user">
+                <DatePicker
+                  name="birthday"
+                  placeholder="DD/MM/YYYY"
+                  onChange={(date, dateString) => handleBirthday(dateString)}
+                  className="w-full mt-5"
+                  format="DD/MM/YYYY"
+                />
+              </div>
               <ErrorMessage err={errors.birthday} />
               <label className="peer-focus:font-medium absolute text-sm text-gray-500 dark:text-gray-400 duration-300 transform -translate-y-6 scale-75 top-3 -z-10 origin-[0] peer-focus:left-0 peer-focus:text-blue-600 peer-focus:dark:text-blue-500 peer-placeholder-shown:scale-100 peer-placeholder-shown:translate-y-0 peer-focus:scale-75 peer-focus:-translate-y-6">
                 Ngày sinh nhật

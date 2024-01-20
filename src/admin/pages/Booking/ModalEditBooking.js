@@ -106,16 +106,18 @@ const ModalEditBooking = ({ setIsOpen, isOpen, editData, getData }) => {
           <div className="flex w-full relative">
             <div className=" z-0 w-full mb-6 group flex">
               <div className="flex w-full flex-col mr-3 ">
-                <DatePicker
-                  defaultValue={dayjs(editData.ngayDen)}
-                  name="ngayDen"
-                  onChange={(date, dateString) => {
-                    handleDate("ngayDen", date);
-                  }}
-                  className="w-full mt-5"
-                  format="DD/MM/YYYY"
-                  placeholder="DD/MM/YYYY"
-                />
+                <div className="date-picker-booking">
+                  <DatePicker
+                    defaultValue={dayjs(editData.ngayDen)}
+                    name="ngayDen"
+                    onChange={(date, dateString) => {
+                      handleDate("ngayDen", date);
+                    }}
+                    className="w-full mt-5"
+                    format="DD/MM/YYYY"
+                    placeholder="DD/MM/YYYY"
+                  />
+                </div>
                 {errors.ngayDen && (
                   <p className="text-red-500">{errors.ngayDen.message}</p>
                 )}
@@ -126,14 +128,16 @@ const ModalEditBooking = ({ setIsOpen, isOpen, editData, getData }) => {
             </div>
             <div className=" z-0 w-full mb-6 group flex">
               <div className="flex w-full flex-col">
-                <DatePicker
-                  defaultValue={dayjs(editData.ngayDi)}
-                  name="ngayDi"
-                  onChange={(date, dateString) => handleDate("ngayDi", date)}
-                  className="w-full mt-5"
-                  format="DD/MM/YYYY"
-                  placeholder="DD/MM/YYYY"
-                />
+                <div className="date-picker-booking">
+                  <DatePicker
+                    defaultValue={dayjs(editData.ngayDi)}
+                    name="ngayDi"
+                    onChange={(date, dateString) => handleDate("ngayDi", date)}
+                    className="w-full mt-5"
+                    format="DD/MM/YYYY"
+                    placeholder="DD/MM/YYYY"
+                  />
+                </div>
                 {errors.ngayDi && (
                   <p className="text-red-500">{errors.ngayDi.message}</p>
                 )}

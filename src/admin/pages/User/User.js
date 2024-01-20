@@ -7,6 +7,7 @@ import MUIDataTable from "mui-datatables";
 import ButtonSortToolbar from "../components/ButtonSortToolbar";
 import ModalAddUser from "./ModalAddUser";
 import ModalEditUser from "./ModalEditUser";
+import "../components/Admin.css";
 
 const User = () => {
   let [isOpen, setIsOpen] = useState(false);
@@ -159,7 +160,7 @@ const User = () => {
   };
 
   return (
-    <div>
+    <div className="responsive-table-container">
       <ModalAddUser getData={getData} />
       <ModalEditUser
         setIsOpen={setIsOpen}
@@ -182,6 +183,10 @@ const User = () => {
           caseSensitive: true,
           pagination: true,
           rowsPerPage: 10,
+          setTableProps: () => ({
+            style: { minWidth: "100%" },
+          }),
+          autoWidth: false,
           customToolbar: () => <ButtonSortToolbar reverseData={reverseData} />,
         }}
       />

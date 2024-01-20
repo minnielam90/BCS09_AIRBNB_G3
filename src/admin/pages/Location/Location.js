@@ -6,6 +6,7 @@ import ButtonSortToolbar from "../components/ButtonSortToolbar";
 import MUIDataTable from "mui-datatables";
 import ModalEditLocation from "./ModalEditLocation";
 import ModalAddLocation from "./ModalAddLocation";
+import "../components/Admin.css";
 
 const Location = () => {
   let [isOpen, setIsOpen] = useState(false);
@@ -152,7 +153,7 @@ const Location = () => {
   };
 
   return (
-    <div>
+    <div className="responsive-table-container">
       <ModalAddLocation getData={getData} />
       <ModalEditLocation
         isOpen={isOpen}

@@ -6,6 +6,7 @@ import MUIDataTable from "mui-datatables";
 import ButtonSortToolbar from "../components/ButtonSortToolbar";
 import ModalAddRoom from "./ModalAddRoom";
 import ModalEditRoom from "./ModalEditRoom";
+import "../components/Admin.css";
 
 const Room = () => {
   const [isOpen, setIsOpen] = useState(false);
@@ -247,7 +248,7 @@ const Room = () => {
   };
 
   return (
-    <div>
+    <div className="responsive-table-container">
       <ModalAddRoom getData={getData} />
       <ModalEditRoom
         isOpen={modalEditRoomVisible}
