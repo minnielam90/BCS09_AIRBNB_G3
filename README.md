@@ -1,9 +1,18 @@
-# Các thư viện sử dụng:
+# Phân chia nhiệm vụ:
 
-- react-router-dom (V6)
-- axios
-- tailwind css
-- redux-toolkit
-- ant
-- formik và yup
-- font-awesome (V6)
+# Lê Ngọc Vinh
+
+
+
+
+
+
+
+# Lâm Huệ Anh
+[admin + responsive]
+- Quản lý người dùng
+- Quản lý phòng
+- Quản lý vị trí
+- Quản lý đặt phòng
+- trang 404 admin
+
