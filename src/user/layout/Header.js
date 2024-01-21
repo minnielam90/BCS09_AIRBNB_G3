@@ -96,7 +96,7 @@ const Header = () => {
                     </g>
                   </svg>
                   <div>
-                    <NavLink to={`./personalPage/${user.user.id}`}>
+                    <NavLink to={`./personalPage/${user.user.id ? user.id : null}`}>
                       {user.user.avatar ? (
                         <img
                           style={{

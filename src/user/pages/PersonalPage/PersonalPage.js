@@ -1,11 +1,12 @@
 import React, { useEffect, useState } from "react";
-import Header from "../../layout/Header";
-import { useSelector } from "react-redux";
-import { Button, DatePicker, Modal } from "antd";
+import { useDispatch, useSelector } from "react-redux";
+import { DatePicker, Modal } from "antd";
 import "./personalPage.css";
 import moment from "moment";
-import { Field, useFormik } from "formik";
-import { editInfrmation } from "../../api/apiUser";
+import { useFormik } from "formik";
+import { editInfrmation, loginUser } from "../../api/apiUser";
+import { saveLocalStore } from "../../api/localUser";
+import { saveInfoUser } from "../../redux/userSlice";
 const PersonalPage = () => {
   const [isModalOpen, setIsModalOpen] = useState(false);
   const showModal = () => {
@@ -18,6 +19,7 @@ const PersonalPage = () => {
     setIsModalOpen(false);
   };
   const { user } = useSelector((state) => state.userSlice);
+  const dispatch = useDispatch();
   const formik = useFormik({
     enableReinitialize: true,
     initialValues: {
@@ -26,12 +28,18 @@ const PersonalPage = () => {
       email: user.user.email,
       phone: user.user.phone,
       birthday: "",
-      avatar: "",
       gender: user.user.gender,
     },
     onSubmit: (values) => {
-      console.log(values);
-      // editInfrmation.editInfrmation(values)
+      editInfrmation
+        .editInfrmation(user.user.id, values)
+        .then((res) => {
+          console.log(res);
+          localStorage.getItem(values)
+        })
+        .catch((err) => {
+          console.log(err);
+        });
     },
   });
   const {
@@ -46,7 +54,6 @@ const PersonalPage = () => {
   } = formik;
   return (
     <div className="content_personalPage">
-      <Header />
       <div
         className="container"
         style={{
@@ -62,7 +69,7 @@ const PersonalPage = () => {
               }
             }
           >
-            <div className="mt-8 mb-8">
+            <div className=" mb-8">
               <div className="w-5/6 sticky">
                 <div
                   style={{
@@ -78,7 +85,7 @@ const PersonalPage = () => {
                         style={{
                           width: 270,
                           height: 270,
-                          borderRadius: 50,
+                          borderRadius: "50%",
                         }}
                         src={user.user.avatar}
                         alt=""
@@ -103,39 +110,40 @@ const PersonalPage = () => {
                       </svg>
                     )}
                   </div>
-                  {/* edit user */}
-                  <form action="" onSubmit={handleSubmit}>
-                    {" "}
-                    <div
-                      className="underline"
+                  {/* edit user */}{" "}
+                  <div
+                    className="underline"
+                    style={{
+                      textAlign: "center",
+                      marginTop: 20,
+                    }}
+                  >
+                    <a
+                      onClick={showModal}
                       style={{
-                        textAlign: "center",
-                        marginTop: 20,
+                        border: "none",
+                        background: "none",
                       }}
                     >
-                      <a
-                        onClick={showModal}
-                        style={{
-                          border: "none",
-                          background: "none",
-                        }}
-                      >
-                        Chỉnh sửa hồ sơ
-                      </a>{" "}
-                      <i
-                        className="fa-solid fa-pen"
-                        style={{
-                          fontSize: 13,
-                          paddingBottom: 15,
-                        }}
-                      />
-                      <Modal
-                        width={800}
-                        title="Chỉnh sửa hồ sơ"
-                        open={isModalOpen}
-                        onOk={handleOk}
-                        onCancel={handleCancel}
-                      >
+                      Chỉnh sửa hồ sơ
+                    </a>{" "}
+                    <i
+                      className="fa-solid fa-pen"
+                      style={{
+                        fontSize: 13,
+                        paddingBottom: 15,
+                      }}
+                    />
+                    <Modal
+                      width={800}
+                      title="Chỉnh sửa hồ sơ"
+                      open={isModalOpen}
+                      onOk={handleOk}
+                      onCancel={handleCancel}
+                      footer={null}
+                    >
+                      {" "}
+                      <form action="" onSubmit={handleSubmit}>
                         <div
                           className="grid grid-cols-2"
                           style={{ gap: "15px" }}
@@ -326,9 +334,14 @@ const PersonalPage = () => {
                             </div>
                           </div>
                         </div>
-                      </Modal>
-                    </div>
-                  </form>
+                        <div>
+                          <button className="bg-green-500 px-4 py-2 rounded-md font-medium">
+                            Lưu
+                          </button>
+                        </div>
+                      </form>
+                    </Modal>
+                  </div>
                   {/* Xác minh danh tính */}
                   <div
                     style={{
@@ -353,12 +366,15 @@ const PersonalPage = () => {
                                   fillOpacity: 1,
                                   stroke: "none",
                                   strokeWidth: 0,
+                                  fill: "green",
                                 }}
                               />
                             </g>
                           </svg>
                         </div>
-                        <p className="text-red-500">Cập nhập ảnh đại diện</p>
+                        <p className="text-green-500">
+                          Đã cập nhập ảnh đại diện
+                        </p>
                       </div>
                     ) : (
                       <div className="flex space-x-1 items-center my-2">

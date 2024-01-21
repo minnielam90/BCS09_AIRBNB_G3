@@ -34,7 +34,11 @@ export const userRoute = {
   },
   personalPage: {
     path: "/personalPage/:id",
-    element: <PersonalPage />,
+    element: (
+      <HomeIndex>
+        <PersonalPage />
+      </HomeIndex>
+    ),
     id: (id) => `/personalPage/${id}`,
   },
 };
