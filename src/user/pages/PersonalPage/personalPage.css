@@ -1,0 +1,9 @@
+.content_personalPage a:hover {
+  cursor: pointer;
+}
+.content_personalPage .information .gender i {
+  font-size: 22px;
+}
+.content_personalPage .content_birthday .ant-picker-input > input::placeholder {
+  color: red !important;
+}

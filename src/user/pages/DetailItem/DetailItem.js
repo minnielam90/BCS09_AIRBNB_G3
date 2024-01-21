@@ -1465,7 +1465,7 @@ const DetailItem = () => {
                       {item.tenNguoiBinhLuan}
                     </h4>
                     <Rate disabled value={item.saoBinhLuan} />
-                    <p>{moment(binhLuanTime).format("DD-MM-YYYY | HH:mm")}</p>
+                    <p>{moment(binhLuanTime).format("DD/MM/YYYY | HH:mm")}</p>
                     <p>{item.noiDung}</p>
                   </div>
                 </div>
@@ -1514,7 +1514,7 @@ const DetailItem = () => {
                   )}
                 </div>
                 <div>
-                  <h1 className="font-semibold">{user.user.name}</h1>
+                  <h3 className="font-semibold">{user.user.name}</h3>
                 </div>
               </div>
               <div

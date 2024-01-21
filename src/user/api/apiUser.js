@@ -37,3 +37,9 @@ export const postComment = {
     return https.post("/api/binh-luan", data);
   },
 };
+// edit information
+export const editInfrmation = {
+  editInfrmation: (id, data) => {
+    return https.put(`/api/users/${id}`, data);
+  },
+};

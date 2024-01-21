@@ -4,6 +4,7 @@ import HomeIndex from "../layout/HomeIndex";
 import DetailItem from "../pages/DetailItem/DetailItem";
 import Login from "../pages/Login/Login";
 import Register from "../pages/Register/Register";
+import PersonalPage from "../pages/PersonalPage/PersonalPage";
 
 export const userRoute = {
   home: {
@@ -30,5 +31,10 @@ export const userRoute = {
   register: {
     path: "/register",
     element: <Register />,
+  },
+  personalPage: {
+    path: "/personalPage/:id",
+    element: <PersonalPage />,
+    id: (id) => `/personalPage/${id}`,
   },
 };

@@ -9,3 +9,6 @@ button:hover {
   width: 100%;
   bottom: 0;
 }
+ button{
+  background: none !important;
+}

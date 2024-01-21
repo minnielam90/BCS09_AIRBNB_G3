@@ -4,9 +4,13 @@
 :where(.css-dev-only-do-not-override-6j9yrn).ant-btn-primary {
   color: black;
 }
-button,
-[type="button"] {
-  background-color: #ff385c;
+.ant-picker-ok button {
+  background-color: rgb(255, 56, 92) !important;
+  color: white !important;
+}
+.ant-picker-ok button:disabled {
+  background-color: rgb(255, 56, 92, 0.2) !important;
+  color: white !important;
 }
 .dateFromTo {
   width: 100%;
@@ -14,3 +18,11 @@ button,
   margin-top: 20px;
   border: 1px solid black;
 }
+.booKing_Button button {
+  background-color: #e51d55 !important;
+}
+.booKing_Button p {
+  color: gray;
+  text-align: center;
+}
+
