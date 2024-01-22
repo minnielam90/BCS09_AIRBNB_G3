@@ -7,7 +7,10 @@ import { registerPost } from "../../api/apiUser";
 import { NavLink, useNavigate } from "react-router-dom";
 import { saveLocalStore } from "../../api/localUser";
 import { validationUser } from "../../utils/validationUser";
+import { saveInfoUser } from "../../redux/userSlice";
+import { useDispatch } from "react-redux";
 const Register = () => {
+  const dispatch = useDispatch();
   const [messageApi, contextHolder] = message.useMessage();
   const navigate = useNavigate();
   const formik = useFormik({
@@ -28,8 +31,10 @@ const Register = () => {
             type: "success",
             content: "Đăng kí thành công",
           });
+          saveLocalStore(res.data.content, "user_info");
+          dispatch(saveInfoUser(res.data.content));
           setTimeout(() => {
-            navigate("/login");
+            navigate("/");
           }, 1000);
         })
         .catch((err) => {

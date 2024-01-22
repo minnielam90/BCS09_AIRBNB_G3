@@ -96,15 +96,15 @@ const Header = () => {
                     </g>
                   </svg>
                   <div>
-                    <NavLink to={`./personalPage/${user.user.id ? user.id : null}`}>
-                      {user.user.avatar ? (
+                    <NavLink to={`./personalPage/${user.id}`}>
+                      {user.avatar ? (
                         <img
                           style={{
                             width: 30,
                             height: 30,
                             borderRadius: 50,
                           }}
-                          src={user.user.avatar}
+                          src={user.avatar}
                           alt=""
                         />
                       ) : (
@@ -133,7 +133,7 @@ const Header = () => {
                       padding: "5px 15px",
                     }}
                   >
-                    {user.user.name}
+                    {user.name}
                   </p>
                   <button
                     style={{

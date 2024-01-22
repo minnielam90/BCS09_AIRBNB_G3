@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react";
 import { detailRoom, getComment, postComment } from "../../api/apiUser";
 import { useParams } from "react-router-dom";
 import moment from "moment";
-import { Alert, DatePicker, Rate } from "antd";
+import { Rate } from "antd";
 import { useFormik } from "formik";
 import { useSelector } from "react-redux";
 import * as Yup from "yup";
@@ -47,7 +47,7 @@ const DetailItem = () => {
   const formik = useFormik({
     initialValues: {
       maPhong: id,
-      maNguoiBinhLuan: user.user.id,
+      maNguoiBinhLuan: `${user ? user.id : null}`,
       noiDung: "",
       saoBinhLuan: 0,
     },
@@ -1445,15 +1445,33 @@ const DetailItem = () => {
               return (
                 <div key={index} className="flex gap-4">
                   <div>
-                    <img
-                      src={item.avatar}
-                      alt=""
-                      style={{
-                        width: 35,
-                        height: 35,
-                        borderRadius: 50,
-                      }}
-                    />
+                    {item.avatar ? (
+                      <img
+                        style={{
+                          width: 35,
+                          height: 35,
+                          borderRadius: 50,
+                        }}
+                        src={item.avatar}
+                        alt=""
+                      />
+                    ) : (
+                      <svg
+                        className=""
+                        viewBox="0 0 32 32"
+                        xmlns="http://www.w3.org/2000/svg"
+                        aria-hidden="true"
+                        role="presentation"
+                        focusable="false"
+                        style={{
+                          display: "block",
+                          height: "35px",
+                          width: "35px",
+                        }}
+                      >
+                        <path d="m16 .7c-8.437 0-15.3 6.863-15.3 15.3s6.863 15.3 15.3 15.3 15.3-6.863 15.3-15.3-6.863-15.3-15.3-15.3zm0 28c-4.021 0-7.605-1.884-9.933-4.81a12.425 12.425 0 0 1 6.451-4.4 6.507 6.507 0 0 1 -3.018-5.49c0-3.584 2.916-6.5 6.5-6.5s6.5 2.916 6.5 6.5a6.513 6.513 0 0 1 -3.019 5.491 12.42 12.42 0 0 1 6.452 4.4c-2.328 2.925-5.912 4.809-9.933 4.809z" />
+                      </svg>
+                    )}
                   </div>
                   <div className="space-y-2">
                     <h4
@@ -1474,89 +1492,92 @@ const DetailItem = () => {
           </div>
         </div>
         <div>
-          <form action="" onSubmit={handleSubmit}>
-            <div
-              className=" bg-white p-2 pt-4 rounded "
-              style={{
-                marginTop: 15,
-                filter: "drop-shadow(25px 25px 25px rgb(0 0 0 / 0.15))",
-                marginBottom: 15,
-              }}
-            >
-              <div className="flex ml-3 items-center">
-                <div className="mr-3">
-                  {user.user.avatar ? (
-                    <img
-                      style={{
-                        width: 30,
-                        height: 30,
-                        borderRadius: 50,
-                      }}
-                      src={user.user.avatar}
-                      alt=""
-                    />
-                  ) : (
-                    <svg
-                      className=""
-                      viewBox="0 0 32 32"
-                      xmlns="http://www.w3.org/2000/svg"
-                      aria-hidden="true"
-                      role="presentation"
-                      focusable="false"
-                      style={{
-                        display: "block",
-                        height: "50px",
-                        width: "50px",
-                      }}
-                    >
-                      <path d="m16 .7c-8.437 0-15.3 6.863-15.3 15.3s6.863 15.3 15.3 15.3 15.3-6.863 15.3-15.3-6.863-15.3-15.3-15.3zm0 28c-4.021 0-7.605-1.884-9.933-4.81a12.425 12.425 0 0 1 6.451-4.4 6.507 6.507 0 0 1 -3.018-5.49c0-3.584 2.916-6.5 6.5-6.5s6.5 2.916 6.5 6.5a6.513 6.513 0 0 1 -3.019 5.491 12.42 12.42 0 0 1 6.452 4.4c-2.328 2.925-5.912 4.809-9.933 4.809z" />
-                    </svg>
-                  )}
-                </div>
-                <div>
-                  <h3 className="font-semibold">{user.user.name}</h3>
-                </div>
-              </div>
+          {user ? (
+            <form action="" onSubmit={handleSubmit}>
               <div
+                className=" bg-white p-2 pt-4 rounded "
                 style={{
-                  padding: "0 20px",
                   marginTop: 15,
+                  filter: "drop-shadow(25px 25px 25px rgb(0 0 0 / 0.15))",
+                  marginBottom: 15,
                 }}
               >
-                <Rate
-                  value={values.saoBinhLuan}
-                  onBlur={() => handleBlur}
-                  onChange={(value) => {
-                    console.log(value);
-                    setFieldValue("saoBinhLuan", value);
-                  }}
-                />
-              </div>
-              <div className="mt-3 p-3 w-full">
-                <textarea
-                  id="noiDung"
-                  name="noiDung"
-                  rows={3}
-                  className="border p-2 rounded w-full"
-                  placeholder="Write something..."
-                  value={values.noiDung}
-                  onChange={handleChange}
-                  onBlur={handleBlur}
-                />
-                {errors.noiDung && touched.noiDung ? (
-                  <p className="text-red-500 text-xs mt-1">{errors.noiDung}</p>
-                ) : null}
-              </div>
-              <div className="flex justify-between mx-3">
-                <div>
-                  <button className="px-4 py-1 bg-gray-800 text-white rounded font-light hover:bg-gray-700">
-                    Đánh giá
-                  </button>
+                <div className="flex ml-3 items-center">
+                  <div className="mr-3">
+                    {user.avatar ? (
+                      <img
+                        style={{
+                          width: 30,
+                          height: 30,
+                          borderRadius: 50,
+                        }}
+                        src={user.avatar}
+                        alt=""
+                      />
+                    ) : (
+                      <svg
+                        className=""
+                        viewBox="0 0 32 32"
+                        xmlns="http://www.w3.org/2000/svg"
+                        aria-hidden="true"
+                        role="presentation"
+                        focusable="false"
+                        style={{
+                          display: "block",
+                          height: "50px",
+                          width: "50px",
+                        }}
+                      >
+                        <path d="m16 .7c-8.437 0-15.3 6.863-15.3 15.3s6.863 15.3 15.3 15.3 15.3-6.863 15.3-15.3-6.863-15.3-15.3-15.3zm0 28c-4.021 0-7.605-1.884-9.933-4.81a12.425 12.425 0 0 1 6.451-4.4 6.507 6.507 0 0 1 -3.018-5.49c0-3.584 2.916-6.5 6.5-6.5s6.5 2.916 6.5 6.5a6.513 6.513 0 0 1 -3.019 5.491 12.42 12.42 0 0 1 6.452 4.4c-2.328 2.925-5.912 4.809-9.933 4.809z" />
+                      </svg>
+                    )}
+                  </div>
+                  <div>
+                    <h3 className="font-semibold">{user.name}</h3>
+                  </div>
                 </div>
-                <div></div>
+                <div
+                  style={{
+                    padding: "0 20px",
+                    marginTop: 15,
+                  }}
+                >
+                  <Rate
+                    value={values.saoBinhLuan}
+                    onBlur={() => handleBlur}
+                    onChange={(value) => {
+                      setFieldValue("saoBinhLuan", value);
+                    }}
+                  />
+                </div>
+                <div className="mt-3 p-3 w-full">
+                  <textarea
+                    id="noiDung"
+                    name="noiDung"
+                    rows={3}
+                    className="border p-2 rounded w-full"
+                    placeholder="Write something..."
+                    value={values.noiDung}
+                    onChange={handleChange}
+                    onBlur={handleBlur}
+                  />
+                  {errors.noiDung && touched.noiDung ? (
+                    <p className="text-red-500 text-xs mt-1">
+                      {errors.noiDung}
+                    </p>
+                  ) : null}
+                </div>
+                <div className="flex justify-between mx-3">
+                  <div>
+                    <button className="px-4 py-1 bg-gray-800 text-white rounded font-light hover:bg-gray-700">
+                      Đánh giá
+                    </button>
+                  </div>
+                  <div></div>
+                </div>
               </div>
-            </div>
-          </form>
+            </form>
+          ) : null}
         </div>
       </div>
     </div>

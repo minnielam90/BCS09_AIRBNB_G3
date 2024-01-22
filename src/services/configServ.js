@@ -10,6 +10,9 @@ export const https = axios.create({
   timeout: 15000,
   headers: {
     TokenCyberSoft: token,
-    token: `${JSON.parse(localStorage.getItem("user_info"))?.token || ""}`,
+    token: `${
+      JSON.parse(localStorage.getItem("user_info"))?.token ||
+      "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjQ5ODgiLCJlbWFpbCI6Imh1aHVAZ21haWwuY29tIiwicm9sZSI6IlVTRVIiLCJuYmYiOjE3MDU5MDQ0NjgsImV4cCI6MTcwNjUwOTI2OH0.9jPPOUrgxu0DiJPPuO41-l89fZK3igh5gNnx8HfQCH8"
+    }`,
   },
 });
