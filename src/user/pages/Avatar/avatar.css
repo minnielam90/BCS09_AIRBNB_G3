@@ -1,21 +1,41 @@
 .contentAvatar button:hover {
-  background-color: rgb(128, 128, 128, 0.5) !important;
   border-radius: 50%;
-  /* z-index: 9999; */
 }
 .contentAvatar button {
   position: relative;
 }
-.contentAvatar .contentI {
-  position: absolute;
-  overflow: hidden;
-  top: 74%;
-  right: 7%;
-}
 .contentAvatar button i {
   font-size: 25px;
-  /* margin: 20; */
   padding: 10px;
   background-color: gray;
+  border-radius: 50%;
+  position: absolute;
+  top: 42%;
+  left: 42%;
+}
+.contentAvatar img {
+  opacity: 1;
+  transition: 0.5s ease;
+  backface-visibility: hidden;
+}
+.middle {
+  transition: 0.5s ease;
+  opacity: 0;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  -ms-transform: translate(-50%, -50%);
+}
+.contentAvatar button:hover .image {
+  opacity: 0.3 !important;
+}
+.contentAvatar button:hover .middle {
+  opacity: 1;
+}
+.contentAvatar .test_bg {
+  background-color: rgb(128, 128, 128, 0.5);
+  width: 270px;
+  height: 270px;
   border-radius: 50%;
 }

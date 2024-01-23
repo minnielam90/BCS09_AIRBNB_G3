@@ -31,10 +31,8 @@ const Register = () => {
             type: "success",
             content: "Đăng kí thành công",
           });
-          saveLocalStore(res.data.content, "user_info");
-          dispatch(saveInfoUser(res.data.content));
           setTimeout(() => {
-            navigate("/");
+            navigate("/login");
           }, 1000);
         })
         .catch((err) => {

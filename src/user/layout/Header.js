@@ -18,7 +18,6 @@ const items = [
 ];
 const Header = () => {
   const { user } = useSelector((state) => state.userSlice);
-  console.log(user);
   return (
     <header>
       <div className="container">

@@ -10,7 +10,6 @@ import Booking from "../Booking/Booking";
 
 const DetailItem = () => {
   const { user } = useSelector((state) => state.userSlice);
-  console.log(user);
   const { id } = useParams();
   const [listItem, setListItem] = useState([]);
   useEffect(() => {

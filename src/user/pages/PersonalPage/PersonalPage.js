@@ -9,7 +9,7 @@ import { saveInfoUser } from "../../redux/userSlice";
 import Avatar from "../Avatar/Avatar";
 import "./personalPage.css";
 import dayjs from "dayjs";
-// import { ProFormDatePicker } from "@ant-design/pro-components";
+import { validationUser } from "../../utils/validationUser";
 
 const PersonalPage = () => {
   const [messageApi, contextHolder] = message.useMessage();
@@ -22,7 +22,6 @@ const PersonalPage = () => {
   };
   const handleCancel = () => {
     setIsModalOpen(false);
-    resetForm();
   };
   const { user } = useSelector((state) => state.userSlice);
   const dispatch = useDispatch();
@@ -46,8 +45,6 @@ const PersonalPage = () => {
           });
           saveLocalStore(res.data.content, "user_info");
           dispatch(saveInfoUser(res.data.content));
-          // console.log(values);
-          // console.log(res);
         })
         .catch((err) => {
           messageApi.open({
@@ -56,6 +53,7 @@ const PersonalPage = () => {
           });
         });
     },
+    // validationSchema: validationUser,
   });
   const {
     handleChange,
@@ -120,8 +118,8 @@ const PersonalPage = () => {
                         width={800}
                         title="Chỉnh sửa hồ sơ"
                         open={isModalOpen}
-                        onOk={handleOk}
-                        onCancel={handleCancel}
+                        // onOk={handleOk}
+                        // onCancel={handleCancel}
                         footer={null}
                       >
                         {" "}

@@ -1,6 +1,8 @@
 import React from "react";
 import adminRoute from "../../route/adminRoute";
 import "./PageNotFound.css";
+import { NavLink } from "react-router-dom";
+import { userRoute } from "../../../user/route/userRoute";
 
 const PageNotFound = () => {
   return (
@@ -15,9 +17,14 @@ const PageNotFound = () => {
                 <div className="contant_box_404">
                   <h3>Có vẻ như bạn đã đi lạc rồi</h3>
                   <p>Trang này không tồn tại!</p>
-                  <a href={adminRoute.home.path} className="link_404 rounded">
-                    Về trang admin
-                  </a>
+                  <div className="space-x-3">
+                    <a href={adminRoute.home.path} className="link_404 rounded">
+                      Về trang admin
+                    </a>
+                    <a href={userRoute.home.path} className="link_404 rounded">
+                      Về trang chủ
+                    </a>
+                  </div>
                 </div>
               </div>
             </div>

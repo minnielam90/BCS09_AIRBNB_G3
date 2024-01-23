@@ -5,6 +5,7 @@ import DetailItem from "../pages/DetailItem/DetailItem";
 import Login from "../pages/Login/Login";
 import Register from "../pages/Register/Register";
 import PersonalPage from "../pages/PersonalPage/PersonalPage";
+import PageNotFound from "../../admin/pages/404/PageNotFound";
 
 export const userRoute = {
   home: {
@@ -41,4 +42,5 @@ export const userRoute = {
     path: "/register",
     element: <Register />,
   },
+  other: { path: "/*", element: <PageNotFound /> }
 };

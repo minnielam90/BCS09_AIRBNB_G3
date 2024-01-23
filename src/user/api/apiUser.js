@@ -43,3 +43,15 @@ export const editInfrmation = {
     return https.put(`/api/users/${id}`, data);
   },
 };
+// edit avatar
+export const editAvatar = {
+  editAvatar: (data) => {
+    return https.post("/api/users/upload-avatar", data);
+  },
+};
+// vị trí
+export const getLocation = {
+  getLocation: () => {
+    return https.get(`api/vi-tri/phan-trang-tim-kiem?pageIndex=${1}&pageSize=${32}`);
+  },
+};
