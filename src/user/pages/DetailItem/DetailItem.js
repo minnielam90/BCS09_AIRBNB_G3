@@ -10,6 +10,7 @@ import Booking from "../Booking/Booking";
 
 const DetailItem = () => {
   const { user } = useSelector((state) => state.userSlice);
+  console.log(user);
   const { id } = useParams();
   const [listItem, setListItem] = useState([]);
   useEffect(() => {
@@ -56,7 +57,14 @@ const DetailItem = () => {
       postComment
         .postComment(values, { resetForm })
         .then((res) => {
-          window.location.reload();
+          getComment
+            .getComment(id)
+            .then((res) => {
+              setComment(res.data.content);
+            })
+            .catch((err) => {
+              console.log(err);
+            });
           resetForm();
         })
         .catch((err) => {
@@ -1507,8 +1515,8 @@ const DetailItem = () => {
                     {user.avatar ? (
                       <img
                         style={{
-                          width: 30,
-                          height: 30,
+                          width: 50,
+                          height: 50,
                           borderRadius: 50,
                         }}
                         src={user.avatar}

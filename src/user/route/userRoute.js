@@ -24,14 +24,6 @@ export const userRoute = {
     ),
     id: (id) => `/detailItem/${id}`,
   },
-  login: {
-    path: "/login",
-    element: <Login />,
-  },
-  register: {
-    path: "/register",
-    element: <Register />,
-  },
   personalPage: {
     path: "/personalPage/:id",
     element: (
@@ -40,5 +32,13 @@ export const userRoute = {
       </HomeIndex>
     ),
     id: (id) => `/personalPage/${id}`,
+  },
+  login: {
+    path: "/login",
+    element: <Login />,
+  },
+  register: {
+    path: "/register",
+    element: <Register />,
   },
 };

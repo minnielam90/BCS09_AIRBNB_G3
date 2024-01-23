@@ -1,12 +1,16 @@
-import React, { useEffect, useState } from "react";
-import { useDispatch, useSelector } from "react-redux";
 import { DatePicker, Modal, message } from "antd";
-import "./personalPage.css";
-import moment from "moment";
 import { useFormik } from "formik";
-import { editInfrmation, loginUser } from "../../api/apiUser";
+import moment from "moment";
+import React, { useState } from "react";
+import { useDispatch, useSelector } from "react-redux";
+import { editInfrmation } from "../../api/apiUser";
 import { saveLocalStore } from "../../api/localUser";
 import { saveInfoUser } from "../../redux/userSlice";
+import Avatar from "../Avatar/Avatar";
+import "./personalPage.css";
+import dayjs from "dayjs";
+// import { ProFormDatePicker } from "@ant-design/pro-components";
+
 const PersonalPage = () => {
   const [messageApi, contextHolder] = message.useMessage();
   const [isModalOpen, setIsModalOpen] = useState(false);
@@ -18,6 +22,7 @@ const PersonalPage = () => {
   };
   const handleCancel = () => {
     setIsModalOpen(false);
+    resetForm();
   };
   const { user } = useSelector((state) => state.userSlice);
   const dispatch = useDispatch();
@@ -41,6 +46,8 @@ const PersonalPage = () => {
           });
           saveLocalStore(res.data.content, "user_info");
           dispatch(saveInfoUser(res.data.content));
+          // console.log(values);
+          // console.log(res);
         })
         .catch((err) => {
           messageApi.open({
@@ -60,6 +67,8 @@ const PersonalPage = () => {
     setFieldValue,
     resetForm,
   } = formik;
+  const dateFormat = "DD/MM/YYYY";
+  const dateBirthday = dayjs(user.birthday).format(dateFormat);
   return (
     <>
       {contextHolder}
@@ -82,37 +91,7 @@ const PersonalPage = () => {
                     className="mx-auto p-6 shadow-xl border rounded-xl w-full ml-9"
                   >
                     {/* avatar */}
-                    <div>
-                      {user.avatar ? (
-                        <img
-                          style={{
-                            width: 270,
-                            height: 270,
-                            borderRadius: "50%",
-                          }}
-                          src={user.avatar}
-                          alt=""
-                        />
-                      ) : (
-                        <svg
-                          className=""
-                          viewBox="0 0 32 32"
-                          xmlns="http://www.w3.org/2000/svg"
-                          aria-hidden="true"
-                          role="presentation"
-                          focusable="false"
-                          style={{
-                            display: "block",
-                            width: 270,
-                            height: 270,
-                            backgroundColor: "#FF385C",
-                            borderRadius: "50%",
-                          }}
-                        >
-                          <path d="m16 .7c-8.437 0-15.3 6.863-15.3 15.3s6.863 15.3 15.3 15.3 15.3-6.863 15.3-15.3-6.863-15.3-15.3-15.3zm0 28c-4.021 0-7.605-1.884-9.933-4.81a12.425 12.425 0 0 1 6.451-4.4 6.507 6.507 0 0 1 -3.018-5.49c0-3.584 2.916-6.5 6.5-6.5s6.5 2.916 6.5 6.5a6.513 6.513 0 0 1 -3.019 5.491 12.42 12.42 0 0 1 6.452 4.4c-2.328 2.925-5.912 4.809-9.933 4.809z" />
-                        </svg>
-                      )}
-                    </div>
+                    <Avatar />
                     {/* edit user */}{" "}
                     <div
                       className="underline"
@@ -141,6 +120,8 @@ const PersonalPage = () => {
                         width={800}
                         title="Chỉnh sửa hồ sơ"
                         open={isModalOpen}
+                        onOk={handleOk}
+                        onCancel={handleCancel}
                         footer={null}
                       >
                         {" "}
@@ -278,12 +259,12 @@ const PersonalPage = () => {
                                   padding: "10px",
                                   backgroundColor: "#374151",
                                 }}
-                                inputReadOnly
-                                format={"DD/MM/YYYY"}
-                                defaultValue={moment(
-                                  user.birthday,
-                                  // "DD/MM/YYYY"
-                                )}
+                                defaultValue={dayjs(dateBirthday, dateFormat)}
+                                format={dateFormat}
+                                onChange={(date, dateString) => {
+                                  setFieldValue("birthday", date);
+                                }}
+                                onBlur={handleBlur}
                               />
                             </div>
                             {/* Giới tính */}
@@ -336,7 +317,8 @@ const PersonalPage = () => {
                             >
                               Lưu thông tin
                             </button>
-                            <button type="button"
+                            <button
+                              type="button"
                               onClick={() => {
                                 handleCancel();
                               }}
@@ -455,7 +437,7 @@ const PersonalPage = () => {
                 </div>
               </div>
             </div>
-            <div className="basis-9/12">aaaaaaaaaaaaaaaaaaaaa</div>
+            <div className="basis-9/12">aaaaaaaa</div>
           </div>
         </div>
       </div>

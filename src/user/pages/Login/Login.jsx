@@ -9,7 +9,6 @@ import { saveLocalStore } from "../../api/localUser";
 import { NavLink, useNavigate } from "react-router-dom";
 import { useDispatch } from "react-redux";
 import { saveInfoUser } from "../../redux/userSlice";
-import { saveTokenUser } from "../../redux/tokenSlice";
 
 const Login = () => {
   const dispatch = useDispatch();
@@ -28,12 +27,15 @@ const Login = () => {
             type: "success",
             content: "Đăng nhập thành công",
           });
-          saveLocalStore(res.data.content.token, "token_user");
-          dispatch(saveTokenUser(res.data.content.token));
-          saveLocalStore(res.data.content.user, "user_info");
-          dispatch(saveInfoUser(res.data.content.user));
+          let data = {
+            ...res.data.content.user,
+            token: res.data.content.token,
+          };
+          dispatch(saveInfoUser({ ...data }));
+          saveLocalStore({ ...data }, "user_info");
           setTimeout(() => {
             navigate("/");
+            window.location.reload();
           }, 1000);
         })
         .catch((err) => {

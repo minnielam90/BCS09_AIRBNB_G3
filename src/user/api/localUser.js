@@ -4,8 +4,8 @@ export const saveLocalStore = (data, key) => {
   localStorage.setItem(key, dataJson);
 };
 // Lấy data từ local
-export const getLocalStore = (key) => {
-  const data = localStorage.getItem(key);
+export const getLocalStore = () => {
+  const data = localStorage.getItem("user_info");
   return data ? JSON.parse(data) : null;
 };
 //  đăng xuất

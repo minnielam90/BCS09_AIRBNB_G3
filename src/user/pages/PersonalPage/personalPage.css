@@ -7,3 +7,6 @@
 .content_personalPage .content_birthday .ant-picker-input > input::placeholder {
   color: red !important;
 }
+.content_personalPage .ant-picker .ant-picker-input input {
+  background-color: black !important;
+}

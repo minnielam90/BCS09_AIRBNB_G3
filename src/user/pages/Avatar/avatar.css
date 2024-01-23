@@ -1,0 +1,21 @@
+.contentAvatar button:hover {
+  background-color: rgb(128, 128, 128, 0.5) !important;
+  border-radius: 50%;
+  /* z-index: 9999; */
+}
+.contentAvatar button {
+  position: relative;
+}
+.contentAvatar .contentI {
+  position: absolute;
+  overflow: hidden;
+  top: 74%;
+  right: 7%;
+}
+.contentAvatar button i {
+  font-size: 25px;
+  /* margin: 20; */
+  padding: 10px;
+  background-color: gray;
+  border-radius: 50%;
+}

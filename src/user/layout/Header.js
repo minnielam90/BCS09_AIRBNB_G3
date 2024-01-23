@@ -18,6 +18,7 @@ const items = [
 ];
 const Header = () => {
   const { user } = useSelector((state) => state.userSlice);
+  console.log(user);
   return (
     <header>
       <div className="container">
@@ -96,7 +97,7 @@ const Header = () => {
                     </g>
                   </svg>
                   <div>
-                    <NavLink to={`./personalPage/${user.id}`}>
+                    <NavLink to={`/personalPage/${user.id}`}>
                       {user.avatar ? (
                         <img
                           style={{
