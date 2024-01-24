@@ -140,7 +140,7 @@ const Footer = () => {
         </footer>
       </div>
       <div className="px-4 py-2 bg-white  md:flex md:items-center md:justify-between footer">
-        <div className="container flex justify-between items-center">
+        <div className="container flex justify-between items-center footerBot">
           <span className="text-sm text-gray-500 sm:text-center space-x-4">
             <span>© 2022 Airbnb, Inc.</span>
             <button>Quyền riêng tư</button>
