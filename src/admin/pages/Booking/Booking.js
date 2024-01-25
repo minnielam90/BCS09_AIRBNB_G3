@@ -118,10 +118,11 @@ const Booking = () => {
               <Button
                 type="warning"
                 icon={<EditOutlined />}
-                className="mr-2 mb-3 bg-orange-300 hover:bg-orange-400 text-white"
+                className="mr-2 bg-orange-300 hover:bg-orange-400 text-gray-800"
                 onClick={() => handleEditBookingRoom(roomId)}
               ></Button>
               <Button
+                className="bg-red-500 hover:bg-red-600 text-white"
                 type="primary"
                 danger
                 icon={<DeleteOutlined />}
