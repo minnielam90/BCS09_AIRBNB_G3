@@ -22,6 +22,7 @@ const PersonalPage = () => {
   };
   const handleCancel = () => {
     setIsModalOpen(false);
+    resetForm();
   };
   const { user } = useSelector((state) => state.userSlice);
   const dispatch = useDispatch();
@@ -118,8 +119,8 @@ const PersonalPage = () => {
                         width={800}
                         title="Chỉnh sửa hồ sơ"
                         open={isModalOpen}
-                        // onOk={handleOk}
-                        // onCancel={handleCancel}
+                        onOk={handleOk}
+                        onCancel={handleCancel}
                         footer={null}
                       >
                         {" "}

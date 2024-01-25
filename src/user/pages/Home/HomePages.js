@@ -131,7 +131,7 @@ const HomePages = () => {
                   <i class="fa-regular fa-heart"></i>
                   <h4>{item.tenPhong}</h4>
                   <p>
-                    <span>${item.giaTien}</span> đêm
+                    <span>${item.giaTien}.000</span> đêm
                   </p>
                 </div>
               </NavLink>

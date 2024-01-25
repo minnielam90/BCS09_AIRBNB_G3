@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { Button, Modal, message } from "antd";
+import { Modal, message } from "antd";
 import "./avatar.css";
 import { useFormik } from "formik";
 import { editAvatar } from "../../api/apiUser";
@@ -17,6 +17,7 @@ const Avatar = () => {
   };
   const handleCancel = () => {
     setIsModalOpen(false);
+    resetForm();
   };
   const { user } = useSelector((state) => state.userSlice);
   const dispatch = useDispatch();
@@ -38,14 +39,16 @@ const Avatar = () => {
             content: "Cập nhập ảnh thành công",
           });
           resetForm();
-          setavatarUser("");
-          let data = {
-            ...res.data.content,
-            token: res.data.content,
+          setavatarUser(null);
+          const storedDataString = localStorage.getItem("user_info");
+          const storedData = JSON.parse(storedDataString);
+          const newDataToken = {
+            token: storedData.token,
           };
-          console.log(res.data.content)
-          // dispatch(saveInfoUser({ ...data }));
-          // saveLocalStore({ ...data }, "user_info");
+          const newData = res.data.content;
+          const mergedObject = { ...newDataToken, ...newData };
+          dispatch(saveInfoUser(mergedObject));
+          saveLocalStore(mergedObject, "user_info");
         })
         .catch((err) => {
           messageApi.open({
@@ -56,16 +59,8 @@ const Avatar = () => {
     },
   });
   const [avatarUser, setavatarUser] = useState([]);
-  const {
-    handleChange,
-    handleBlur,
-    handleSubmit,
-    values,
-    errors,
-    touched,
-    resetForm,
-    setFieldValue,
-  } = formik;
+
+  const { handleBlur, handleSubmit, resetForm, setFieldValue } = formik;
   return (
     <div>
       {contextHolder}
@@ -75,11 +70,12 @@ const Avatar = () => {
             {user.avatar ? (
               <div>
                 <img
-                  style={{
-                    width: 270,
-                    height: 270,
-                    borderRadius: "50%",
-                  }}
+                  className="w-64 h-64 rounded-full"
+                  // style={{
+                  //   width: 270,
+                  //   height: 270,
+                  //   borderRadius: "50%",
+                  // }}
                   src={user.avatar}
                   alt=""
                 />
@@ -126,16 +122,14 @@ const Avatar = () => {
             <form action="" onSubmit={handleSubmit}>
               <div>
                 {/* Tên người dùng */}
-                <div className="mb-2">
-                  <img
-                    // style={{
-                    //   width: 270,
-                    //   height: 270,
-                    //   borderRadius: "50%",
-                    // }}
-                    src={avatarUser}
-                    alt=""
-                  />
+                <div className="mb-2 grid grid-cols-1">
+                  <div>
+                    <img
+                      className="w-64 h-64 rounded-full mx-auto"
+                      src={avatarUser}
+                      alt=""
+                    />
+                  </div>
                   <input
                     type="file"
                     id="avatar"
@@ -158,13 +152,7 @@ const Avatar = () => {
                     }}
                     accept="image/*"
                     onBlur={handleBlur}
-                    // value={values.avatar.name ? values.avatar.name : ''}
                   />
-                  {/* {errors.name && touched.name ? (
-                                <p className="text-red-500 text-xs mt-1">
-                                  {errors.name}
-                                </p>
-                              ) : null} */}
                 </div>
               </div>
               <div className="flex justify-end gap-3">

@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect, useRef, useState } from "react";
 import { userRoute } from "../route/userRoute";
 import { GlobalOutlined } from "@ant-design/icons";
 import { Button, Dropdown, Space } from "antd";
@@ -17,12 +17,20 @@ const items = [
   },
 ];
 const Header = () => {
+  const handleToggle1 = () => {
+    document.querySelector(".hedCotShow").style.display = "none";
+    document.querySelector(".hedCotHidden").style.display = "block";
+  };
+  const handleToggle2 = () => {
+    document.querySelector(".hedCotShow").style.display = "block";
+    document.querySelector(".hedCotHidden").style.display = "none";
+  };
   const { user } = useSelector((state) => state.userSlice);
   return (
     <header>
       <div className="container">
         {" "}
-        <div className="flex justify-between py-7 items-center">
+        <div className="flex justify-between py-7 items-start ">
           {/* logo */}
           <div className="logo">
             <a href={userRoute.home.path}>
@@ -44,20 +52,49 @@ const Header = () => {
             </a>
           </div>
           {/* search */}
-          <div className="search flex space-x-2 py-2  rounded-full border border-gray-300 px-3 text-base">
-            <div className="diaDiemBatKi">
-              <p>Địa điểm bất kì</p>
-            </div>
-            <div className="tuanBatKi">
-              <p className="border-l border-r border-gray-300 px-2">
-                tuần bất kì
-              </p>
-            </div>
-            <div className="themKhach">
-              <p>Thêm khách</p>
-            </div>
-            <div className="find mx-2 text-sm">
-              <i className="fa-solid fa-magnifying-glass rounded-full bg-red-500 p-2 text-white" />
+          <div className="hedCotShow">
+            <button
+              className=" flex items-center space-x-2 py-2  rounded-full border border-gray-300 px-3 text-base"
+              onClick={handleToggle1}
+            >
+              <div className="diaDiemBatKi">
+                <p>Địa điểm bất kì</p>
+              </div>
+              <div className="tuanBatKi">
+                <p className="border-l border-r border-gray-300 px-2">
+                  tuần bất kì
+                </p>
+              </div>
+              <div className="themKhach">
+                <p>Thêm khách</p>
+              </div>
+              <div className="find mx-2 text-sm">
+                <i className="fa-solid fa-magnifying-glass rounded-full bg-red-500 p-2 text-white" />
+              </div>
+            </button>
+          </div>
+          <div
+            className="hedCotHidden"
+            style={{
+              display: "none",
+            }}
+          >
+            <button
+              className="flex space-x-2 py-2 px-3 text-base"
+              onClick={handleToggle2}
+            >
+              <div className="diaDiemBatKi">
+                <p>Chổ ở</p>
+              </div>
+              <div className="tuanBatKi">
+                <p className="border-gray-300 px-2">Trãi nghiệm</p>
+              </div>
+              <div className="themKhach">
+                <p>Trãi nghiệm trực tuyến</p>
+              </div>
+            </button>
+            <div className="rounded-full border border-gray-300 px-3 text-base py-3 mt-4">
+              ssssssssssssssssssss
             </div>
           </div>
           {/* user */}
