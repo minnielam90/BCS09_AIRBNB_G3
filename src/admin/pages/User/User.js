@@ -47,6 +47,7 @@ const User = () => {
       email: user.email,
       birthday: birthday,
       role: user.role,
+      // avatar: user.avatar,
     };
   });
 
@@ -66,6 +67,19 @@ const User = () => {
         sort: false,
       },
     },
+    // {
+    //   label: "Ảnh đại diện",
+    //   dataIndex: "avatar",
+    //   name: "avatar",
+    //   options: {
+    //     filter: true,
+    //     sort: false,
+    //     customBodyRender: (value, tableMeta) => {
+    //       const imgUrl = value;
+    //       return <img src={imgUrl} width="100" height="100" alt="" />;
+    //     },
+    //   },
+    // },
     {
       label: "Tên tài khoản",
       dataIndex: "name",
@@ -117,10 +131,11 @@ const User = () => {
               <Button
                 type="warning"
                 icon={<EditOutlined />}
-                className="mr-2 mb-3 bg-orange-300 hover:bg-orange-400 text-white"
+                className="mr-2 bg-orange-300 hover:bg-orange-400 text-gray-800"
                 onClick={() => handleEditUser(userId)}
               ></Button>
               <Button
+                className="bg-red-500 hover:bg-red-600 text-white"
                 type="primary"
                 danger
                 icon={<DeleteOutlined />}
