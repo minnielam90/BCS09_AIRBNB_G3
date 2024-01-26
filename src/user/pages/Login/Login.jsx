@@ -199,7 +199,7 @@ const Login = () => {
                       color: "white",
                       fontSize: "15px",
                       border: "none",
-                      borderRadius: "10px",
+                      borderRadius: "50px",
                       backgroundColor: "rgb(239 68 68)",
                       fontWeight: "400",
                       padding: "0.625rem 1.25rem",

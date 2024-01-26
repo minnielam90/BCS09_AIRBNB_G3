@@ -338,7 +338,7 @@ const Register = () => {
                   textAlign: "center",
                 }}
               >
-                <button
+                <button className="btnDangKy"
                   style={{
                     color: "white",
                     fontSize: "15px",

@@ -1,17 +1,20 @@
-.bg_login{
-    background-image: url(./image/logoBG.jpg);
-    height: 100vh;
-    background-repeat: no-repeat;
-    background-size: cover;
+.bg_login {
+  background-image: url(./image/logoBG.jpg);
+  height: 100vh;
+  background-repeat: no-repeat;
+  background-size: cover;
 }
-.btnDangNhap:hover{
-    background-color: #991B1B !important;
+.btnDangNhap:hover {
+  background-color: #991b1b !important;
 }
-.btnQuenMK:hover{
-    color: red !important;
-    border-bottom: 1px solid red;
+.btnQuenMK:hover {
+  color: red !important;
+  border-bottom: 1px solid red;
 }
-.btnDangKyNgay:hover{
-    color: red !important;
-    border-bottom: 1px solid red;
+.btnDangKyNgay:hover {
+  color: red !important;
+  border-bottom: 1px solid red;
+}
+.btnDangNhap {
+  background-color: rgb(239, 68, 68) !important;
 }

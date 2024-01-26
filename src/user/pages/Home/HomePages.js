@@ -79,7 +79,6 @@ const HomePages = () => {
     itemKS
       .getAllItem()
       .then((res) => {
-        console.log(res)
         setListItem(res.data.content);
       })
       .catch((err) => {
@@ -125,7 +124,7 @@ const HomePages = () => {
         <div className="grid grid-cols-4 gap-4">
           {listItem.map((item, index) => {
             return (
-              <NavLink to={`./detailItem/${item.id}`}>
+              <NavLink to={`/detailItem/${item.id}`}>
                 <div className="content_item" key={index}>
                   <img src={item.hinhAnh} alt="" />
                   <i class="fa-regular fa-heart"></i>

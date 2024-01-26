@@ -9,7 +9,6 @@ import { saveInfoUser } from "../../redux/userSlice";
 import Avatar from "../Avatar/Avatar";
 import "./personalPage.css";
 import dayjs from "dayjs";
-import { validationUser } from "../../utils/validationUser";
 
 const PersonalPage = () => {
   const [messageApi, contextHolder] = message.useMessage();
@@ -54,7 +53,6 @@ const PersonalPage = () => {
           });
         });
     },
-    // validationSchema: validationUser,
   });
   const {
     handleChange,

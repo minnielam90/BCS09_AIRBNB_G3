@@ -1,10 +1,13 @@
-.ant-picker .ant-picker-input input{
-    color: white !important;
+.ant-picker .ant-picker-input input {
+  color: white !important;
 }
-.ant-picker .ant-picker-input ::placeholder{
-    color: #9CA3AF !important;
+.ant-picker .ant-picker-input ::placeholder {
+  color: #9ca3af !important;
 }
-.btnDangNhapNgay:hover{
-    color: red !important;
-    border-bottom: 1px solid red;
+.btnDangNhapNgay:hover {
+  color: red !important;
+  border-bottom: 1px solid red;
+}
+.btnDangKy {
+  background-color: rgb(239, 68, 68) !important;
 }

@@ -49,9 +49,25 @@ export const editAvatar = {
     return https.post("/api/users/upload-avatar", data);
   },
 };
-// vị trí
+// vị trí trang home
 export const getLocation = {
   getLocation: () => {
-    return https.get(`api/vi-tri/phan-trang-tim-kiem?pageIndex=${1}&pageSize=${32}`);
+    return https.get(
+      `api/vi-tri/phan-trang-tim-kiem?pageIndex=${1}&pageSize=${32}`
+    );
+  },
+};
+// vị trí filter
+export const getLocationS = {
+  getLocationS: () => {
+    return https.get("/api/vi-tri");
+  },
+};
+// lấy phòng theo vị trí
+export const getRoomLocation = {
+  getRoomLocation: (maViTri) => {
+    return https.get(
+      `/api/phong-thue/lay-phong-theo-vi-tri?maViTri=${maViTri}`
+    );
   },
 };

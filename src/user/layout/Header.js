@@ -1,11 +1,12 @@
 import React, { useEffect, useRef, useState } from "react";
 import { userRoute } from "../route/userRoute";
 import { GlobalOutlined } from "@ant-design/icons";
-import { Button, Dropdown, Space } from "antd";
+import { Button, Dropdown, Select, Space } from "antd";
 import { Link, NavLink } from "react-router-dom";
 import { useSelector } from "react-redux";
 import "./header.css";
 import { logout } from "../api/localUser";
+import { getLocationS } from "../api/apiUser";
 const items = [
   {
     key: "1",
@@ -26,11 +27,26 @@ const Header = () => {
     document.querySelector(".hedCotHidden").style.display = "none";
   };
   const { user } = useSelector((state) => state.userSlice);
+  const [maViTri, setMaViTri] = useState("Chọn thành phố");
+  const handleChange = (value) => {
+    setMaViTri(value);
+  };
+  const [locationS, setLocationS] = useState([]);
+  useEffect(() => {
+    getLocationS
+      .getLocationS()
+      .then((res) => {
+        setLocationS(res.data.content);
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+  }, []);
   return (
     <header>
       <div className="container">
         {" "}
-        <div className="flex justify-between py-7 items-start ">
+        <div className="flex justify-between pt-7 pb-3 items-start ">
           {/* logo */}
           <div className="logo">
             <a href={userRoute.home.path}>
@@ -79,22 +95,52 @@ const Header = () => {
               display: "none",
             }}
           >
-            <button
-              className="flex space-x-2 py-2 px-3 text-base"
-              onClick={handleToggle2}
-            >
-              <div className="diaDiemBatKi">
-                <p>Chổ ở</p>
+            <div className="flex justify-center">
+              <button
+                className="flex space-x-2 py-2 text-base justify-center"
+                onClick={handleToggle2}
+              >
+                <div className="diaDiemBatKi">
+                  <p>Chổ ở</p>
+                </div>
+                <div className="tuanBatKi">
+                  <p className="border-gray-300 px-2">Trãi nghiệm</p>
+                </div>
+                <div className="themKhach">
+                  <p>Trãi nghiệm trực tuyến</p>
+                </div>
+              </button>
+            </div>
+
+            <div className="rounded-full border border-gray-300 text-base py-2 mt-1 flex px-3 items-center">
+              <div>
+                <Select
+                  className="userSelect"
+                  defaultValue={maViTri}
+                  style={{ width: 170 }}
+                  onChange={handleChange}
+                  options={locationS.map((location) => ({
+                    value: location.id,
+                    label: (
+                      <NavLink
+                        to={`/filterLocation/${location.id}`}
+                        activeClassName="active"
+                      >
+                        {location.tinhThanh}
+                      </NavLink>
+                    ),
+                  }))}
+                />
               </div>
-              <div className="tuanBatKi">
-                <p className="border-gray-300 px-2">Trãi nghiệm</p>
+              <div className="">qqqqqqqqqqqqqqqqq</div>
+              <div>
+                {/* <NavLink
+                  to={`/filterLocation/${maViTri}`}
+                  className="rounded-full border border-gray-300 text-base py-1 mt-1 flex px-3 items-center bg-red-500 text-white"
+                >
+                  Search <i className="fa-solid fa-magnifying-glass ml-2" />
+                </NavLink> */}
               </div>
-              <div className="themKhach">
-                <p>Trãi nghiệm trực tuyến</p>
-              </div>
-            </button>
-            <div className="rounded-full border border-gray-300 px-3 text-base py-3 mt-4">
-              ssssssssssssssssssss
             </div>
           </div>
           {/* user */}
