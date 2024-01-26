@@ -1,0 +1,37 @@
+/* responsive */
+/* >lap */
+@media screen and (min-width: 1200px) {
+  .big_header {
+    display: block;
+  }
+  .small_header {
+    display: none;
+  }
+}
+/* lap */
+@media screen and (max-width: 1200px) {
+  .big_header {
+    display: block;
+  }
+  .small_header {
+    display: none;
+  }
+}
+/* tap */
+@media screen and (max-width: 992px) {
+  .big_header {
+    display: block;
+  }
+  .small_header {
+    display: none;
+  }
+}
+/* mobile */
+@media screen and (max-width: 576px) {
+  .big_header {
+    display: none;
+  }
+  .small_header {
+    display: block;
+  }
+}

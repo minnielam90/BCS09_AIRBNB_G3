@@ -3,6 +3,7 @@ import { Carousel } from "antd";
 import "./homePage.css";
 import { getLocation, itemKS } from "../../api/apiUser";
 import { NavLink } from "react-router-dom";
+import "./responsiteHomePage.css";
 const contentStyle = {
   height: "30px",
   color: "gray",
@@ -74,6 +75,26 @@ const HomePages = () => {
     infinite: false,
     speed: "500",
   };
+  const settingMD = {
+    nextArrow: <SampleNextArrow />,
+    prevArrow: <SamplePrevArrow />,
+    slidesToShow: 3,
+    slidesToScroll: 1,
+    arrows: true,
+    dots: false,
+    infinite: false,
+    speed: "500",
+  };
+  const settingSM = {
+    nextArrow: <SampleNextArrow />,
+    prevArrow: <SamplePrevArrow />,
+    slidesToShow: 1,
+    slidesToScroll: 1,
+    arrows: true,
+    dots: false,
+    infinite: false,
+    speed: "500",
+  };
   const [listItem, setListItem] = useState([]);
   useEffect(() => {
     itemKS
@@ -99,7 +120,7 @@ const HomePages = () => {
   }, []);
   return (
     <div className="container">
-      <div className="mt-16 mb-6">
+      <div className="mt-16 mb-6 carouselUserBig">
         <Carousel {...setting}>
           {location.map((item, index) => {
             return (
@@ -120,8 +141,50 @@ const HomePages = () => {
           })}
         </Carousel>
       </div>
+      <div className="mt-24 mb-6 carouselUserMedium">
+        <Carousel {...settingMD}>
+          {location.map((item, index) => {
+            return (
+              <div className="item_nav">
+                <img
+                  src={item.hinhAnh}
+                  style={{
+                    marginLeft: "auto",
+                    marginRight: "auto",
+                    width: 200,
+                    height: 100,
+                    borderRadius: 20,
+                  }}
+                />
+                <h3 style={contentStyle}>{item.tenViTri}</h3>
+              </div>
+            );
+          })}
+        </Carousel>
+      </div>
+      <div className="mt-24 mb-6 carouselUserSmall">
+        <Carousel {...settingSM}>
+          {location.map((item, index) => {
+            return (
+              <div className="item_nav">
+                <img
+                  src={item.hinhAnh}
+                  style={{
+                    marginLeft: "auto",
+                    marginRight: "auto",
+                    width: 200,
+                    height: 100,
+                    borderRadius: 20,
+                  }}
+                />
+                <h3 style={contentStyle}>{item.tenViTri}</h3>
+              </div>
+            );
+          })}
+        </Carousel>
+      </div>
       <div>
-        <div className="grid grid-cols-4 gap-4">
+        <div className="grid grid-cols-4 gap-4 listRoomUser">
           {listItem.map((item, index) => {
             return (
               <NavLink to={`/detailItem/${item.id}`}>

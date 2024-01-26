@@ -1,0 +1,58 @@
+/* responsive */
+/* >lap */
+@media screen and (min-width: 1200px) {
+  .carouselUserBig {
+    display: block;
+  }
+  .carouselUserMedium {
+    display: none;
+  }
+  .carouselUserSmall {
+    display: none;
+  }
+}
+/* lap */
+@media screen and (max-width: 1200px) {
+  .carouselUserBig {
+    display: none;
+  }
+  .carouselUserMedium {
+    display: block;
+  }
+  .carouselUserSmall {
+    display: none;
+  }
+  .listRoomUser {
+    grid-template-columns: 1fr 1fr 1fr !important;
+  }
+}
+/* tap */
+@media screen and (max-width: 992px) {
+  .carouselUserBig {
+    display: none;
+  }
+  .carouselUserMedium {
+    display: block;
+  }
+  .carouselUserSmall {
+    display: none;
+  }
+  .listRoomUser {
+    grid-template-columns: 1fr 1fr !important;
+  }
+}
+/* mobile */
+@media screen and (max-width: 576px) {
+  .carouselUserBig {
+    display: none;
+  }
+  .carouselUserMedium {
+    display: none;
+  }
+  .carouselUserSmall {
+    display: block;
+  }
+  .listRoomUser {
+    grid-template-columns: 1fr !important;
+  }
+}

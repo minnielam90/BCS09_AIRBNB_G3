@@ -9,7 +9,7 @@ import { saveLocalStore } from "../../api/localUser";
 import { NavLink, useNavigate } from "react-router-dom";
 import { useDispatch } from "react-redux";
 import { saveInfoUser } from "../../redux/userSlice";
-
+import './responsiteLogin.css'
 const Login = () => {
   const dispatch = useDispatch();
   const [messageApi, contextHolder] = message.useMessage();
@@ -62,7 +62,7 @@ const Login = () => {
             position: "relative",
           }}
         >
-          <div
+          <div className="loginUser"
             style={{
               position: "absolute",
               top: "50%",
@@ -79,7 +79,7 @@ const Login = () => {
                 borderRadius: "10px",
               }}
             >
-              <div className="flex items-center">
+              <div className="flex items-center titleDangNhapUser">
                 <div>
                   <a href={userRoute.home.path}>
                     <svg

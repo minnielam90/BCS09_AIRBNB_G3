@@ -1,0 +1,20 @@
+/* responsive */
+/* >lap */
+@media screen and (min-width: 1200px) {
+}
+/* lap */
+@media screen and (max-width: 1200px) {
+}
+/* tap */
+@media screen and (max-width: 992px) {
+}
+/* mobile */
+@media screen and (max-width: 576px) {
+  .userFooter {
+    display: grid;
+    grid-template-columns: 1fr;
+  }
+  .userFooter .spanUserFooter {
+    display: none;
+  }
+}
