@@ -1,0 +1,36 @@
+/* responsive */
+/* >lap */
+@media screen and (min-width: 1200px) {
+}
+/* lap */
+@media screen and (max-width: 1200px) {
+  .registerUserTitle h2 {
+    margin-left: 100px !important;
+  }
+}
+/* tap */
+@media screen and (max-width: 992px) {
+  .userRegister {
+    width: 80% !important;
+  }
+  .registerUserTitle h2 {
+    margin-left: -30px !important;
+    font-size: 20px !important;
+  }
+  .titleUserDK {
+    grid-template-columns: 1fr !important;
+  }
+}
+/* mobile */
+@media screen and (max-width: 576px) {
+  .userRegister {
+    width: 80% !important;
+  }
+  .registerUserTitle h2 {
+    margin-left: -30px !important;
+    font-size: 20px !important;
+  }
+  .titleUserDK {
+    grid-template-columns: 1fr !important;
+  }
+}

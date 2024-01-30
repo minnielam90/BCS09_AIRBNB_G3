@@ -71,3 +71,21 @@ export const getRoomLocation = {
     );
   },
 };
+// lấy dat phong
+export const getDatPhong = {
+  getDatPhong: () => {
+    return https.get("/api/dat-phong");
+  },
+};
+// them dat phong
+export const postDatPhong = {
+  postDatPhong: () => {
+    return https.post("/api/dat-phong");
+  },
+};
+// lay theo nguoi dung
+export const layTheoNguoiDung = {
+  layTheoNguoiDung: (id) => {
+    return https.get(`/api/dat-phong/lay-theo-nguoi-dung/${id}`);
+  },
+};

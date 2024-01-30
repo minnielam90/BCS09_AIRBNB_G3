@@ -1,0 +1,46 @@
+/* responsive */
+/* >lap */
+@media screen and (min-width: 1200px) {
+  .contentFilterBig {
+    display: block;
+  }
+  .contentFilterSmall {
+    display: none;
+  }
+}
+/* lap */
+@media screen and (max-width: 1200px) {
+  .contentFilterBig {
+    display: block;
+  }
+  .contentFilterSmall {
+    display: none;
+  }
+}
+/* tap */
+@media screen and (max-width: 992px) {
+  .contentFilterBig {
+    display: none;
+  }
+  .contentFilterSmall {
+    display: block;
+  }
+  .topContentFilter {
+    margin-top: 60px !important;
+  }
+  .contentFilterSmall img {
+    width: 100% !important;
+  }
+}
+/* mobile */
+@media screen and (max-width: 576px) {
+  .contentFilterBig {
+    display: none;
+  }
+  .contentFilterSmall {
+    display: block;
+  }
+  .topContentFilter {
+    margin-top: 100px !important;
+  }
+}

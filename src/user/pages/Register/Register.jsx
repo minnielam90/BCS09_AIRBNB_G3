@@ -5,10 +5,9 @@ import { DatePicker, message } from "antd";
 import "./register.css";
 import { registerPost } from "../../api/apiUser";
 import { NavLink, useNavigate } from "react-router-dom";
-import { saveLocalStore } from "../../api/localUser";
 import { validationUser } from "../../utils/validationUser";
-import { saveInfoUser } from "../../redux/userSlice";
 import { useDispatch } from "react-redux";
+import './reponsiteRegister.css'
 const Register = () => {
   const dispatch = useDispatch();
   const [messageApi, contextHolder] = message.useMessage();
@@ -64,7 +63,7 @@ const Register = () => {
             position: "relative",
           }}
         >
-          <div
+          <div className="userRegister"
             style={{
               position: "absolute",
               top: "50%",
@@ -82,7 +81,7 @@ const Register = () => {
               }}
             >
               <div
-                className="flex items-center"
+                className="flex items-center registerUserTitle"
                 style={{
                   marginBottom: "10px",
                 }}
@@ -117,7 +116,7 @@ const Register = () => {
                   Đăng ký tài khoản
                 </h2>
               </div>
-              <div className="grid grid-cols-2" style={{ gap: "15px" }}>
+              <div className="grid grid-cols-2 titleUserDK" style={{ gap: "15px" }}>
                 {/* Tên người dùng */}
                 <div className="mb-2">
                   <label
@@ -338,7 +337,8 @@ const Register = () => {
                   textAlign: "center",
                 }}
               >
-                <button className="btnDangKy"
+                <button
+                  className="btnDangKy"
                   style={{
                     color: "white",
                     fontSize: "15px",

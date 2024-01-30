@@ -1,9 +1,12 @@
-import React from "react";
-import { DatePicker } from "antd";
+import React, { useEffect, useState } from "react";
+import { DatePicker, Table, theme } from "antd";
 import "./booking.css";
+import { getDatPhong } from "../../api/apiUser";
+import moment from "moment";
 const { RangePicker } = DatePicker;
 
 const Booking = ({ maPhong }) => {
+  console.log(maPhong);
   const onChange = (value, dateString) => {
     console.log("Selected Time: ", value);
     console.log("Formatted Selected Time: ", dateString);
@@ -11,6 +14,118 @@ const Booking = ({ maPhong }) => {
   const onOk = (value) => {
     console.log("onOk: ", value);
   };
+  const [disabledDates, setDisabledDates] = useState([]);
+  useEffect(() => {
+    getDatPhong
+      .getDatPhong()
+      .then((res) => {
+        setDisabledDates(res.data.content);
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+  }, []);
+  const [dateRanges, setDateRanges] = useState(
+    disabledDates.map((item) => ({
+      start: moment(item.ngayDen),
+      end: moment(item.ngayDi),
+    }))
+  );
+  const disabledDate = (current) => {
+    // Xử lý các ngày bị vô hiệu hóa nếu cần
+    return false;
+  };
+  const getObjectById = (maPhong) => {
+    return disabledDates.find((item) => item.maPhong === maPhong);
+  };
+
+  // Lấy đối tượng từ mảng dựa trên id
+  const targetObject = getObjectById(maPhong);
+
+  console.log("Target Object:", targetObject);
+  const { token } = theme.useToken();
+  const style = {
+    border: `1px solid ${token.colorPrimary}`,
+    borderRadius: "50%",
+  };
+  const cellRender = React.useCallback(
+    (current, info) => {
+      if (info.type !== "date") {
+        return info.originNode;
+      }
+      if (typeof current === "number") {
+        return <div className="ant-picker-cell-inner">{current}</div>;
+      }
+
+      // Kiểm tra xem targetObject có tồn tại và có dữ liệu không
+      if (targetObject && typeof targetObject === "object") {
+        // Lấy thông tin từ targetObject dựa trên ngày hiện tại
+        const targetDateInfo = targetObject[current.format("YYYY-MM-DD")];
+
+        if (targetDateInfo) {
+          return (
+            <div className="ant-picker-cell-inner" style={style}>
+              {current.date()}
+            </div>
+          );
+        }
+      }
+    },
+    [targetObject, style]
+  );
+  const data = [];
+  const columns = [
+    {
+      title: "Mã đặt phòng",
+      dataIndex: "id",
+      key: "id",
+      fixed: "left",
+    },
+    {
+      title: "Mã phòng",
+      dataIndex: "maPhong",
+      key: "maPhong",
+      fixed: "left",
+    },
+
+    {
+      title: "Mã người dùng",
+      dataIndex: "maNguoiDung",
+      key: "maNguoiDung",
+      fixed: "left",
+    },
+
+    {
+      title: "Ngày đến",
+      dataIndex: "ngayDen",
+      key: "ngayDen",
+      fixed: "left",
+    },
+    {
+      title: "Ngày đi",
+      dataIndex: "ngayDi",
+      key: "ngayDi",
+      fixed: "left",
+    },
+    {
+      title: "Số khách",
+      dataIndex: "soLuongKhach",
+      key: "soLuongKhach",
+      fixed: "left",
+    },
+    {
+      title: "Trạng thái",
+      dataIndex: "trangThai",
+      key: "trangThai",
+      fixed: "left",
+    },
+    {
+      title: "Thao tác",
+      dataIndex: "action",
+      key: "action",
+      fixed: "right",
+    },
+  ];
   return (
     <div className="booking_content">
       <div>
@@ -35,7 +150,7 @@ const Booking = ({ maPhong }) => {
                 TRẢ PHÒNG
               </h3>
             </div>
-            <RangePicker
+            {/* <RangePicker
               className="dateFromTo"
               style={{
                 color: "red !important",
@@ -48,7 +163,11 @@ const Booking = ({ maPhong }) => {
               format="DD-MM-YYYY | HH:mm"
               onChange={onChange}
               onOk={onOk}
-            />
+              disabledDate={disabledDate}
+              value={dateRanges.map((range) => [range.start, range.end])}
+            /> */}
+            {/* <DatePicker.RangePicker cellRender={cellRender} /> */}
+            <Table columns={columns} dataSource={data} />;
           </div>
           {/* Khách */}
           <div>
