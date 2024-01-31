@@ -229,7 +229,7 @@ const Room = () => {
         setModalEditRoomVisible(true);
       })
       .catch((err) => {
-        // console.log(err);
+        message.error("Không có quyền sửa");
       });
   };
   const handleDeleteRoom = (roomId) => {

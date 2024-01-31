@@ -29,4 +29,10 @@
     }
   }
 
-  
+.ant-popover-content .ant-popover-inner-content .ant-btn {
+  background-color: #FF5A5F !important;
+}
+ 
+.ant-popover-content .ant-popover-inner-content .ant-btn:hover {
+  background-color: #EF4444 !important;
+}
