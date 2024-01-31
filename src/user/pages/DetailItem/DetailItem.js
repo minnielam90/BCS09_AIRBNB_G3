@@ -7,6 +7,7 @@ import { useFormik } from "formik";
 import { useSelector } from "react-redux";
 import * as Yup from "yup";
 import Booking from "../Booking/Booking";
+import BookingRoom from "../BookingRoom/BookingRoom";
 
 const DetailItem = () => {
   const { user } = useSelector((state) => state.userSlice);
@@ -1425,7 +1426,8 @@ const DetailItem = () => {
                 </div>
                 {/* đặt phòng */}
                 <div>
-                  <Booking maPhong={listItem.id} />
+                  {/* <Booking maPhong={listItem.id} /> */}
+                  <BookingRoom />
                 </div>
               </div>
             </div>

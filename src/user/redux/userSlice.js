@@ -3,6 +3,7 @@ import { getLocalStore } from "../api/localUser";
 
 const initialState = {
   user: getLocalStore("user_info"),
+  bookedRooms: [],
 };
 
 const userSlice = createSlice({

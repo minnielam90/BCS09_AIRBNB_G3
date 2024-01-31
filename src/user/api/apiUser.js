@@ -1,5 +1,6 @@
 import React from "react";
 import { https } from "../../services/configServ";
+import { dateFromIsoString } from "../utils/dateUser";
 
 // lấy thông tin phòng thuê
 export const itemKS = {
@@ -89,3 +90,31 @@ export const layTheoNguoiDung = {
     return https.get(`/api/dat-phong/lay-theo-nguoi-dung/${id}`);
   },
 };
+
+// *********************
+export const userServ = {
+  bookedRooms: ({ id }) =>
+    https.get(`/api/dat-phong/lay-theo-nguoi-dung/${id}`),
+};
+
+// api đặt phòng
+export const roomServ = {
+  get: () => https.get("/api/phong-thue"),
+  getDetaiRoomData: ({ id }) => https.get(`/api/phong-thue/${id}`),
+  postBookingRoom: async ({
+    maPhong,
+    ngayDen,
+    ngayDi,
+    soLuongKhach,
+    maNguoiDung,
+  }) => {
+    return https.post("/api/dat-phong", {
+      maPhong,
+      ngayDen: dateFromIsoString(ngayDen),
+      ngayDi: dateFromIsoString(ngayDi),
+      soLuongKhach,
+      maNguoiDung,
+    });
+  },
+};
+//************************ */
