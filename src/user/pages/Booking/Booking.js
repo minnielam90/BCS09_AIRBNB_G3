@@ -1,257 +1,321 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useMemo, useState } from "react";
 import { DatePicker, Table, theme } from "antd";
 import "./booking.css";
-import { getDatPhong } from "../../api/apiUser";
-import moment from "moment";
+import { getDatPhong, postDatPhong } from "../../api/apiUser";
+import {
+  differenceInDays,
+  format,
+  isWithinInterval,
+  parse,
+  parseISO,
+} from "date-fns";
+import { useFormik } from "formik";
+import { useSelector } from "react-redux";
+import axios from "axios";
 const { RangePicker } = DatePicker;
 
-const Booking = ({ maPhong }) => {
-  console.log(maPhong);
-  const onChange = (value, dateString) => {
-    console.log("Selected Time: ", value);
-    console.log("Formatted Selected Time: ", dateString);
-  };
-  const onOk = (value) => {
-    console.log("onOk: ", value);
-  };
+const Booking = ({ data }) => {
+  const { user } = useSelector((state) => state.userSlice);
   const [disabledDates, setDisabledDates] = useState([]);
+  const [filteredDatPhongList, setFilteredDatPhongList] = useState([]);
+  const [totalDays, setTotalDays] = useState(0);
+  const [ngayDenVL, setNgayDenVL] = useState([]);
+  const [ngayDiVL, setNgayDiVL] = useState([]);
+  const [slKhach, setSLKhach] = useState(1);
   useEffect(() => {
     getDatPhong
       .getDatPhong()
       .then((res) => {
         setDisabledDates(res.data.content);
+        const filteredList = res.data.content.filter(
+          (datPhong) => datPhong.maPhong === data.id
+        );
+        setFilteredDatPhongList(filteredList);
       })
       .catch((err) => {
         console.log(err);
       });
-  }, []);
-  const [dateRanges, setDateRanges] = useState(
-    disabledDates.map((item) => ({
-      start: moment(item.ngayDen),
-      end: moment(item.ngayDi),
-    }))
-  );
+  }, [data.id]);
   const disabledDate = (current) => {
-    // Xử lý các ngày bị vô hiệu hóa nếu cần
-    return false;
+    return filteredDatPhongList.some((datPhong) => {
+      const startDate = parseISO(datPhong.ngayDen);
+      const endDate = parseISO(datPhong.ngayDi);
+      return isWithinInterval(current.toDate(), {
+        start: startDate,
+        end: endDate,
+      });
+    });
   };
-  const getObjectById = (maPhong) => {
-    return disabledDates.find((item) => item.maPhong === maPhong);
+  const [count, setCount] = useState(1);
+  const handleMinusClick = (event) => {
+    event.preventDefault();
+    setCount((prevCount) => {
+      const newCount = Math.max(prevCount - 1, 1);
+      setSLKhach(newCount);
+      return newCount;
+    });
   };
 
-  // Lấy đối tượng từ mảng dựa trên id
-  const targetObject = getObjectById(maPhong);
-
-  console.log("Target Object:", targetObject);
-  const { token } = theme.useToken();
-  const style = {
-    border: `1px solid ${token.colorPrimary}`,
-    borderRadius: "50%",
+  const handlePlusClick = (event) => {
+    event.preventDefault();
+    setCount((prevCount) => {
+      const newCount = prevCount + 1;
+      setSLKhach(newCount);
+      return newCount;
+    });
   };
-  const cellRender = React.useCallback(
-    (current, info) => {
-      if (info.type !== "date") {
-        return info.originNode;
-      }
-      if (typeof current === "number") {
-        return <div className="ant-picker-cell-inner">{current}</div>;
-      }
 
-      // Kiểm tra xem targetObject có tồn tại và có dữ liệu không
-      if (targetObject && typeof targetObject === "object") {
-        // Lấy thông tin từ targetObject dựa trên ngày hiện tại
-        const targetDateInfo = targetObject[current.format("YYYY-MM-DD")];
-
-        if (targetDateInfo) {
-          return (
-            <div className="ant-picker-cell-inner" style={style}>
-              {current.date()}
-            </div>
-          );
-        }
-      }
-    },
-    [targetObject, style]
+  const totalPrice = useMemo(
+    () => data.giaTien * totalDays,
+    [data.giaTien, totalDays]
   );
-  const data = [];
-  const columns = [
-    {
-      title: "Mã đặt phòng",
-      dataIndex: "id",
-      key: "id",
-      fixed: "left",
-    },
-    {
-      title: "Mã phòng",
-      dataIndex: "maPhong",
-      key: "maPhong",
-      fixed: "left",
+  const totalPriceVAT = useMemo(() => {
+    // Thực hiện tính toán giá trị VAT (10% của totalPrice)
+    const vatPercentage = 0.1; // 10%
+    const totalPriceWithVAT = totalPrice * (1 + vatPercentage);
+
+    // Làm tròn giá trị tới 3 đơn vị
+    return totalPriceWithVAT.toFixed(3);
+  }, [totalPrice]);
+  const resetFormDate = () => {
+
+  };
+  useEffect(() => {
+    setFieldValue("maPhong", data.id);
+  }, [data.id]);
+  useEffect(() => {
+    setFieldValue("ngayDen", ngayDenVL);
+  }, [ngayDenVL]);
+  useEffect(() => {
+    setFieldValue("ngayDi", ngayDiVL);
+  }, [ngayDiVL]);
+  useEffect(() => {
+    if (slKhach !== undefined && slKhach !== null) {
+      setFieldValue("soLuongKhach", slKhach);
+    }
+  }, [slKhach]);
+  // console.log(filteredDatPhongList);
+  const formik = useFormik({
+    initialValues: {
+      // id: 0,
+      maPhong: data.id,
+      ngayDen: ngayDenVL,
+      ngayDi: ngayDiVL,
+      soLuongKhach: slKhach,
+      maNguoiDung: user.id,
     },
 
-    {
-      title: "Mã người dùng",
-      dataIndex: "maNguoiDung",
-      key: "maNguoiDung",
-      fixed: "left",
+    onSubmit: (values, { resetForm }) => {
+      postDatPhong
+        .postDatPhong(values)
+        .then((res) => {
+          // console.log(res);
+          resetForm();
+        })
+        .catch((err) => {
+          console.log(err);
+        });
     },
-
-    {
-      title: "Ngày đến",
-      dataIndex: "ngayDen",
-      key: "ngayDen",
-      fixed: "left",
-    },
-    {
-      title: "Ngày đi",
-      dataIndex: "ngayDi",
-      key: "ngayDi",
-      fixed: "left",
-    },
-    {
-      title: "Số khách",
-      dataIndex: "soLuongKhach",
-      key: "soLuongKhach",
-      fixed: "left",
-    },
-    {
-      title: "Trạng thái",
-      dataIndex: "trangThai",
-      key: "trangThai",
-      fixed: "left",
-    },
-    {
-      title: "Thao tác",
-      dataIndex: "action",
-      key: "action",
-      fixed: "right",
-    },
-  ];
+  });
+  const {
+    handleChange,
+    handleBlur,
+    handleSubmit,
+    values,
+    errors,
+    touched,
+    resetForm,
+    setFieldValue,
+  } = formik;
   return (
-    <div className="booking_content">
-      <div>
-        <form action="">
-          {/* Date */}
-          <div>
-            <div className="grid grid-cols-2 mt-4">
-              <h3
+    <div className="w-5/6 sticky top-28">
+      <div className="mx-auto p-6 bg-white shadow-xl border rounded-xl w-full ml-9">
+        <div>
+          <div className="flex justify-between">
+            <div className="flex space-x-1 items-end justify-between">
+              <span>$</span>
+              <p
                 style={{
-                  fontSize: 14,
                   fontWeight: "650",
+                  fontSize: 22,
                 }}
               >
-                NHẬN PHÒNG
-              </h3>
-              <h3
-                style={{
-                  fontSize: 14,
-                  fontWeight: "650",
-                }}
-              >
-                TRẢ PHÒNG
-              </h3>
+                {data.giaTien}.000
+              </p>
+              <p>đêm</p>
             </div>
-            {/* <RangePicker
-              className="dateFromTo"
-              style={{
-                color: "red !important",
-                marginTop: 10,
-                padding: 10,
-              }}
-              showTime={{
-                format: "HH:mm",
-              }}
-              format="DD-MM-YYYY | HH:mm"
-              onChange={onChange}
-              onOk={onOk}
-              disabledDate={disabledDate}
-              value={dateRanges.map((range) => [range.start, range.end])}
-            /> */}
-            {/* <DatePicker.RangePicker cellRender={cellRender} /> */}
-            <Table columns={columns} dataSource={data} />;
-          </div>
-          {/* Khách */}
-          <div>
-            {/* number */}
-            <div
-              className="flex items-center"
-              style={{
-                borderRadius: "0 0 10px 10px",
-                border: "1px solid black",
-                borderTop: "none",
-              }}
-            >
-              <label
-                htmlFor="email"
-                className="block"
-                style={{
-                  fontSize: 14,
-                  fontWeight: "650",
-                  padding: 10,
-                }}
-              >
-                KHÁCH
-              </label>
-              <input
-                type="number"
-                id="email"
-                name="email"
-                className=" text-sm  focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5"
-                style={{
-                  fontSize: "20px",
-                  padding: "10px",
-                  borderRadius: "0 0 10px 10px",
-                }}
-                // onChange={handleChange}
-                // onBlur={handleBlur}
-                // value={values.email}
-              />
-              {/* {errors.email && touched.email ? (
-                  <p className="text-red-500 text-xs mt-2">{errors.email}</p>
-                ) : null} */}
+            <div>
+              <p className="underline">đánh giá</p>
             </div>
           </div>
-          {/* Booking */}
-          <div className="booKing_Button space-y-2">
-            <button className="w-full py-3 mt-3 rounded-lg text-white text-lg font-semibold">
-              Đặt phòng
-            </button>
-            <p>Bạn vẫn chưa bị trừ tiền</p>
-          </div>
-          {/* Price */}
-          <div
-            style={{
-              borderBottom: "1px solid #E5E7EB",
-              padding: "20px 0",
-            }}
-          >
-            <div className="flex justify-between">
-              <p>$17.000 / đêm</p>
-              <p>0 $</p>
+        </div>
+        {/* đặt phòng */}
+        <div>
+          <div className="booking_content">
+            <div>
+              <form action="" onSubmit={handleSubmit}>
+                {/* Date */}
+                <div className="userBooking mt-2">
+                  <div className="flex justify-around mt-2">
+                    <h3
+                      style={{
+                        fontSize: 14,
+                        fontWeight: "650",
+                      }}
+                    >
+                      NHẬN PHÒNG
+                    </h3>
+                    <h3
+                      style={{
+                        fontSize: 14,
+                        fontWeight: "650",
+                      }}
+                    >
+                      TRẢ PHÒNG
+                    </h3>
+                  </div>
+                  <DatePicker.RangePicker
+                    className="dateFromTo"
+                    style={{
+                      color: "red !important",
+                      marginTop: 10,
+                      padding: 10,
+                    }}
+                    disabledDate={disabledDate}
+                    format="DD-MM-YYYY"
+                    onChange={(value, dateString) => {
+          
+                      const formattedNgayDen = format(
+                        parse(dateString[0], "dd-MM-yyyy", new Date()),
+                        "yyyy-MM-dd"
+                      );
+                      const formattedNgayDi = format(
+                        parse(dateString[1], "dd-MM-yyyy", new Date()),
+                        "yyyy-MM-dd"
+                      );
+
+                      setNgayDenVL(formattedNgayDen);
+                      setNgayDiVL(formattedNgayDi);
+                      if (dateString && dateString.length === 2) {
+                        const start = parse(
+                          dateString[0],
+                          "dd-MM-yyyy",
+                          new Date()
+                        );
+                        const end = parse(
+                          dateString[1],
+                          "dd-MM-yyyy",
+                          new Date()
+                        );
+                        const days = differenceInDays(end, start);
+                        setTotalDays(days);
+                      } else {
+                        setTotalDays(0);
+                      }
+                    }}
+                  />
+                </div>
+                {/* Khách */}
+                <div>
+                  {/* number */}
+                  <div
+                    style={{
+                      borderRadius: "0 0 10px 10px",
+                      border: "1px solid black",
+                      borderTop: "none",
+                    }}
+                  >
+                    <label
+                      htmlFor="soLuongKhach"
+                      className="block"
+                      style={{
+                        fontSize: 14,
+                        fontWeight: "650",
+                        padding: 10,
+                      }}
+                    >
+                      KHÁCH
+                    </label>
+                    <div className="number flex justify-between">
+                      <button
+                        type="button"
+                        className="minus flex items-center justify-center"
+                        onClick={handleMinusClick}
+                      >
+                        <i className="fa-solid fa-minus text-sm text-white" />
+                      </button>
+                      <div className="flex justify-center">
+                        <input
+                          id="soLuongKhach"
+                          name="soLuongKhach"
+                          type="text"
+                          value={`${count} khách`}
+                          readOnly
+                          onChange={handleChange}
+                          onBlur={handleBlur}
+                        />
+                      </div>
+                      <button
+                        type="button"
+                        className="plus flex items-center justify-center"
+                        onClick={handlePlusClick}
+                      >
+                        <i className="fa-solid fa-plus text-sm text-white" />
+                      </button>
+                    </div>
+                  </div>
+                </div>
+                {/* Booking */}
+                <div className="booKing_Button space-y-2">
+                  <button
+                    onClick={resetFormDate}
+                    className="w-full py-3 mt-3 rounded-lg text-white text-lg font-semibold"
+                  >
+                    Đặt phòng
+                  </button>
+                  <p>Bạn vẫn chưa bị trừ tiền</p>
+                </div>
+                {/* Price */}
+                <div
+                  className="space-y-1"
+                  style={{
+                    borderBottom: "1px solid #E5E7EB",
+                    padding: "20px 0",
+                  }}
+                >
+                  <div className="flex justify-between">
+                    <p>
+                      ${data.giaTien}.000 x {totalDays} đêm
+                    </p>
+                    <p>${totalPrice}.000</p>
+                  </div>
+                  <div className="flex justify-between">
+                    <p>Thuế</p>
+                    <p>10%</p>
+                  </div>
+                </div>
+                <div className="flex justify-between mt-2">
+                  <h3
+                    style={{
+                      fontSize: 20,
+                      fontWeight: "650",
+                    }}
+                  >
+                    Tổng đã có VAT
+                  </h3>
+                  <p
+                    style={{
+                      fontSize: 20,
+                      fontWeight: "650",
+                    }}
+                  >
+                    ${totalPriceVAT}
+                  </p>
+                </div>
+              </form>
             </div>
-            <div className="flex justify-between">
-              <p>Phí dịch vụ</p>
-              <p>0 $</p>
-            </div>
           </div>
-          <div className="flex justify-between mt-2">
-            <h3
-              style={{
-                fontSize: 20,
-                fontWeight: "650",
-              }}
-            >
-              Tổng trước thuế
-            </h3>
-            <p
-              style={{
-                fontSize: 20,
-                fontWeight: "650",
-              }}
-            >
-              0 $
-            </p>
-          </div>
-        </form>
+        </div>
       </div>
     </div>
   );

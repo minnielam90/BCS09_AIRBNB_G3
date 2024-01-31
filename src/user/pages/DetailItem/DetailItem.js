@@ -1402,33 +1402,7 @@ const DetailItem = () => {
           </div>
           {/* Đặt phòng */}
           <div className="basis-5/12">
-            <div className="w-5/6 sticky top-28">
-              <div className="mx-auto p-6 bg-white shadow-xl border rounded-xl w-full ml-9">
-                <div>
-                  <div className="flex justify-between">
-                    <div className="flex space-x-1 items-end">
-                      <span>$</span>
-                      <p
-                        style={{
-                          fontWeight: "650",
-                          fontSize: 22,
-                        }}
-                      >
-                        {listItem.giaTien}.000
-                      </p>
-                      <p>đêm</p>
-                    </div>
-                    <div>
-                      <p className="underline">đánh giá</p>
-                    </div>
-                  </div>
-                </div>
-                {/* đặt phòng */}
-                <div>
-                  <Booking maPhong={listItem.id} />
-                </div>
-              </div>
-            </div>
+            <Booking data={listItem} />
           </div>
         </div>
         <div

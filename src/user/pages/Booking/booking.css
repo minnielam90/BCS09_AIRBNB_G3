@@ -14,9 +14,7 @@
 }
 .dateFromTo {
   width: 100%;
-  border-radius: 10px 10px 0 0;
-  margin-top: 20px;
-  border: 1px solid black;
+  border: none;
 }
 .booKing_Button button {
   background-color: #e51d55 !important;
@@ -25,4 +23,39 @@
   color: gray;
   text-align: center;
 }
+span {
+  cursor: pointer;
+}
+.number {
+  padding-bottom: 5px;
+}
+.minus {
+  margin-left: 20px;
+  border-radius: 15px;
+  padding: 10px;
+  width: 30px;
+  height: 30px;
+  background-color: #b7bac0 !important;
+}
 
+.plus {
+  margin-right: 20px;
+  border-radius: 15px;
+  padding: 10px;
+  width: 30px;
+  height: 30px;
+  background-color: #b7bac0 !important;
+}
+input {
+  height: 34px;
+  width: 100px;
+  text-align: center;
+  font-size: 15px;
+  border-radius: 4px;
+  display: inline-block;
+  vertical-align: middle;
+}
+.userBooking {
+  border: 1px solid black;
+  border-radius: 10px 10px 0 0;
+}

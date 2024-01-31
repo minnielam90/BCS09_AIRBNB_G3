@@ -79,8 +79,8 @@ export const getDatPhong = {
 };
 // them dat phong
 export const postDatPhong = {
-  postDatPhong: () => {
-    return https.post("/api/dat-phong");
+  postDatPhong: (data) => {
+    return https.post("/api/dat-phong", data);
   },
 };
 // lay theo nguoi dung
