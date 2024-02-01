@@ -1,0 +1,19 @@
+/* responsive */
+/* >lap */
+@media screen and (min-width: 1200px) {
+}
+/* lap */
+@media screen and (max-width: 1200px) {
+}
+/* tap */
+@media screen and (max-width: 992px) {
+  /* .content_personalPage .contentPersonalPageUser {
+    display: block !important;
+  } */
+}
+/* mobile */
+@media screen and (max-width: 576px) {
+  .content_personalPage .contentPersonalPageUser {
+    display: block !important;
+  }
+}

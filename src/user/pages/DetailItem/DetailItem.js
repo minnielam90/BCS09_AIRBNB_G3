@@ -7,7 +7,7 @@ import { useFormik } from "formik";
 import { useSelector } from "react-redux";
 import * as Yup from "yup";
 import Booking from "../Booking/Booking";
-
+import "./responsiteDetailItem.css";
 const DetailItem = () => {
   const { user } = useSelector((state) => state.userSlice);
   const { id } = useParams();
@@ -85,15 +85,16 @@ const DetailItem = () => {
     setFieldValue,
   } = formik;
   return (
-    <div>
+    <div className="content_detail_user">
       <div
-        className="container mt-16"
+        className="container mt-16 demoDe"
         style={{
           padding: "10px 40px",
         }}
       >
         <div>
           <h2
+            className="titleNameDetailUserRoom"
             style={{
               margin: 15,
               fontSize: 30,
@@ -113,14 +114,14 @@ const DetailItem = () => {
           />
         </div>
         <div
-          className="flex"
+          className="flex contentMoTaUser"
           style={{
             borderBottom: "1px solid #E5E7EB",
             paddingBottom: 20,
           }}
         >
           <div
-            className="basis-7/12"
+            className="basis-7/12 contentLeftDetail"
             style={{
               padding: "0 15px",
             }}
@@ -142,7 +143,7 @@ const DetailItem = () => {
                   >
                     Toàn bộ căn hộ
                   </h3>
-                  <div className="flex space-x-3">
+                  <div className="flex space-x-3 tienIchRoomDetailUserBG">
                     <p>{listItem.khach} khách</p>
                     <span> . </span>
                     <p>{listItem.giuong} giường</p>
@@ -151,6 +152,12 @@ const DetailItem = () => {
                     <span> . </span>
                     <p>{listItem.phongTam} phòng tắm</p>
                     <span> . </span>
+                  </div>
+                  <div className="grid grid-cols-2 gap-2 tienIchRoomDetailUserSM">
+                    <p>{listItem.khach} khách</p>
+                    <p>{listItem.giuong} giường</p>
+                    <p>{listItem.phongNgu} phòng ngủ</p>
+                    <p>{listItem.phongTam} phòng tắm</p>
                   </div>
                 </div>
                 <div
@@ -336,7 +343,7 @@ const DetailItem = () => {
                   marginTop: 20,
                 }}
               >
-                <div className="flex">
+                <div className="flex hienThiNgonNguUser">
                   <svg
                     viewBox="0 0 16 16"
                     xmlns="http://www.w3.org/2000/svg"
@@ -1401,7 +1408,7 @@ const DetailItem = () => {
             </div>
           </div>
           {/* Đặt phòng */}
-          <div className="basis-5/12">
+          <div className="basis-5/12 contentRightDetail">
             <Booking data={listItem} />
           </div>
         </div>
@@ -1421,10 +1428,10 @@ const DetailItem = () => {
           >
             Đánh giá
           </h3>
-          <div className="grid grid-cols-2 gap-4">
+          <div className="grid grid-cols-2 gap-4 binhLuanUser">
             {binhLuan.map((item, index) => {
               return (
-                <div key={index} className="flex gap-4">
+                <div key={index} className="flex gap-4 renderBinhLuanUser">
                   <div>
                     {item.avatar ? (
                       <img

@@ -9,8 +9,8 @@ import { saveInfoUser } from "../../redux/userSlice";
 import Avatar from "../Avatar/Avatar";
 import "./personalPage.css";
 import dayjs from "dayjs";
-import { useLocation } from "react-router-dom";
 import HistoryUser from "../HistoryUser/HistoryUser";
+import './responsitePersonalPage.css'
 
 const PersonalPage = () => {
   const [messageApi, contextHolder] = message.useMessage();
@@ -78,16 +78,16 @@ const PersonalPage = () => {
             paddingTop: 100,
           }}
         >
-          <div className="flex">
+          <div className="flex contentPersonalPageUser">
             <div className="basis-3/12">
-              <div className=" mb-8">
-                <div className="w-5/6 sticky">
+              <div className=" mb-8 sticky top-28 bottom-40">
+                <div className="w-5/6">
                   <div
                     style={{
-                      height: "100vh",
+                      height: "80vh",
                       backgroundColor: "white",
                     }}
-                    className="mx-auto p-6 shadow-xl border rounded-xl w-full ml-9"
+                    className="mx-auto p-6 shadow-xl border rounded-xl w-full ml-9 "
                   >
                     {/* avatar */}
                     <Avatar />

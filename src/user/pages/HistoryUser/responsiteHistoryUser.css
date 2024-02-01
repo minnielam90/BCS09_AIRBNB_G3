@@ -1,0 +1,111 @@
+/* responsive */
+/* >lap */
+@media screen and (min-width: 1200px) {
+  .nhuCauRoomUserBG {
+    display: flex !important;
+  }
+  .nhuCauRoomUserSM {
+    display: none !important;
+  }
+}
+/* lap */
+@media screen and (max-width: 1200px) {
+  .nhuCauRoomUserBG {
+    display: flex !important;
+  }
+  .nhuCauRoomUserSM {
+    display: none !important;
+  }
+}
+/* tap */
+@media screen and (max-width: 992px) {
+  .content_personalPage .contentPersonalPageUser .contentHistoryUser {
+    display: block !important;
+    width: 85%;
+  }
+  .content_personalPage .contentPersonalPageUser .contentHistoryUser img {
+    width: 100% !important;
+  }
+  .contentHistoryUserL {
+    width: 100% !important;
+  }
+  .contentHistoryUserR {
+    width: 100% !important;
+    padding: 0 15px;
+  }
+  .titlePersonalRoom {
+    display: block !important;
+  }
+  .titlePersonalRoom h3 {
+    font-size: 20px !important;
+  }
+  .titlePersonalRoom i {
+    display: none !important;
+  }
+  .contentHistoryUserR .nameRooom {
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }
+  .contentHistoryUserR .fa-heart {
+  }
+  .userRooomTienIch span {
+    display: none;
+  }
+  .nhuCauRoomUserBG {
+    display: none !important;
+  }
+  .nhuCauRoomUserSM {
+    display: grid !important;
+  }
+  .thongTinDatPhongUser {
+    grid-template-columns: 1fr 1fr !important;
+    gap: 5px !important;
+  }
+}
+/* mobile */
+@media screen and (max-width: 576px) {
+  .content_personalPage .contentPersonalPageUser .contentHistoryUser {
+    display: block !important;
+    width: 95%;
+  }
+  .content_personalPage .contentPersonalPageUser .contentHistoryUser img {
+    width: 100% !important;
+  }
+  .contentHistoryUserL {
+    width: 100% !important;
+  }
+  .contentHistoryUserR {
+    width: 100% !important;
+    padding: 0 15px;
+  }
+  .titlePersonalRoom {
+    display: block !important;
+  }
+  .titlePersonalRoom h3 {
+    font-size: 20px !important;
+  }
+  .titlePersonalRoom i {
+    display: none !important;
+  }
+  .contentHistoryUserR .nameRooom {
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }
+  .contentHistoryUserR .fa-heart {
+  }
+  .userRooomTienIch span {
+    display: none;
+  }
+  .nhuCauRoomUserBG {
+    display: none !important;
+  }
+  .nhuCauRoomUserSM {
+    display: grid !important;
+  }
+  .thongTinDatPhongUser {
+    grid-template-columns: 1fr 1fr !important;
+    gap: 5px !important;
+  }
+}

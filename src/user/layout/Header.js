@@ -142,7 +142,16 @@ const Header = () => {
                     }))}
                   />
                 </div>
-                <div className="">qqqqqqqqqqqqqqqqq</div>
+                <div className="ml-2">
+                  {" "}
+                  Địa điểm khám phá{" "}
+                  <i
+                    className="fa-solid fa-plane-departure"
+                    style={{
+                      color: "#FF385C",
+                    }}
+                  />
+                </div>
                 <div>
                   {/* <NavLink
                   to={`/filterLocation/${maViTri}`}
@@ -529,7 +538,15 @@ const Header = () => {
                     }))}
                   />
                 </div>
-                <div className="">qqqqqqqqqqqqqqqqq</div>
+                <div className="">
+                  Địa điểm khám phá
+                  <i
+                    className="fa-solid fa-plane-departure"
+                    style={{
+                      color: "#FF385C",
+                    }}
+                  ></i>
+                </div>
                 <div>
                   {/* <NavLink
                   to={`/filterLocation/${maViTri}`}

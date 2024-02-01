@@ -1,0 +1,37 @@
+/* responsive */
+/* >lap */
+@media screen and (min-width: 1200px) {
+}
+/* lap */
+@media screen and (max-width: 1200px) {
+  .wBS {
+    width: 100% !important;
+    margin-top: 20px;
+  }
+  .contentBookingUser {
+    width: 100% !important;
+    margin: 0 !important;
+  }
+}
+/* tap */
+@media screen and (max-width: 992px) {
+  .wBS {
+    width: 100% !important;
+    margin-top: 20px;
+  }
+  .contentBookingUser {
+    width: 100% !important;
+    margin: 0 !important;
+  }
+}
+/* mobile */
+@media screen and (max-width: 576px) {
+  .wBS {
+    width: 100% !important;
+    margin-top: 20px;
+  }
+  .contentBookingUser {
+    width: 100% !important;
+    margin: 0 !important;
+  }
+}

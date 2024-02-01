@@ -55,4 +55,11 @@
   .listRoomUser {
     grid-template-columns: 1fr !important;
   }
+  .content_item img {
+    object-fit: cover;
+    object-position: 0% 50%;
+    width: 390px;
+    height: 300px;
+    border-radius: 10px;
+  }
 }

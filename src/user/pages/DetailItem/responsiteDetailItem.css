@@ -1,0 +1,73 @@
+/* responsive */
+/* >lap */
+@media screen and (min-width: 1200px) {
+  .content_detail_user .tienIchRoomDetailUserBG {
+    display: flex !important;
+  }
+  .content_detail_user .tienIchRoomDetailUserSM {
+    display: none !important;
+  }
+}
+/* lap */
+@media screen and (max-width: 1200px) {
+  .content_detail_user .tienIchRoomDetailUserBG {
+    display: flex !important;
+  }
+  .content_detail_user .tienIchRoomDetailUserSM {
+    display: none !important;
+  }
+}
+/* tap */
+@media screen and (max-width: 992px) {
+  .content_detail_user .demoDe .titleNameDetailUserRoom {
+    margin: 15px 0 !important;
+    white-space: nowrap; /* Ngăn chặn ngắt dòng tự động */
+    overflow: hidden; /* Ẩn phần vượt quá chiều rộng */
+    text-overflow: ellipsis;
+  }
+  .content_detail_user .tienIchRoomDetailUserBG {
+    display: none !important;
+  }
+  .content_detail_user .tienIchRoomDetailUserSM {
+    display: grid !important;
+  }
+}
+/* mobile */
+@media screen and (max-width: 576px) {
+  .contentMoTaUser {
+    display: block !important;
+  }
+  .content_detail_user .demoDe .titleNameDetailUserRoom {
+    font-size: 15px !important;
+    margin: 15px 0 !important;
+    white-space: nowrap; /* Ngăn chặn ngắt dòng tự động */
+    overflow: hidden; /* Ẩn phần vượt quá chiều rộng */
+    text-overflow: ellipsis;
+  }
+  .content_detail_user img {
+    margin-bottom: 15px !important;
+    height: 150px;
+  }
+  .content_detail_user h3 {
+    font-size: 15px !important;
+  }
+  .content_detail_user .tienIchRoomDetailUserBG {
+    display: none !important;
+  }
+  .content_detail_user .tienIchRoomDetailUserSM {
+    display: grid !important;
+  }
+  .hienThiNgonNguUser {
+    display: block !important;
+  }
+  .contentRightDetail {
+    width: 100% !important;
+  }
+  .binhLuanUser {
+    grid-template-columns: 1fr !important;
+  }
+  .renderBinhLuanUser {
+    justify-content: center;
+    margin: 0 !important;
+  }
+}

@@ -12,6 +12,7 @@ import {
 import { useFormik } from "formik";
 import { useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
+import "./responsiteBooking.css";
 const { RangePicker } = DatePicker;
 
 const Booking = ({ data }) => {
@@ -95,16 +96,22 @@ const Booking = ({ data }) => {
       setFieldValue("soLuongKhach", slKhach);
     }
   }, [slKhach]);
+  // const maNguoiDungID = user.id
   const formik = useFormik({
     initialValues: {
       maPhong: data.id,
       ngayDen: ngayDenVL,
       ngayDi: ngayDiVL,
       soLuongKhach: slKhach,
-      maNguoiDung: user.id,
+      maNguoiDung: user ? user.id : null,
     },
 
     onSubmit: (values, { resetForm }) => {
+      if (values.maNguoiDung === null) {
+        // Nếu maNguoiDung là null, chuyển hướng về trang đăng nhập
+        navigate("/login"); // Điều này giả sử bạn đã cấu hình định tuyến cho trang đăng nhập
+        return; // Dừng xử lý onSubmit ngay tại đây để không tiếp tục đặt phòng
+      }
       postDatPhong
         .postDatPhong(values)
         .then((res) => {
@@ -122,7 +129,7 @@ const Booking = ({ data }) => {
             });
           }, 1000);
           setTimeout(() => {
-            // navigate(`/personalPage/${user.id}`);
+            navigate(`/personalPage/${user.id}`);
           }, 2000);
           // resetForm();
         })
@@ -142,9 +149,10 @@ const Booking = ({ data }) => {
     setFieldValue,
   } = formik;
   return (
-    <div className="w-5/6 sticky top-28">
+    <div className="w-5/6 sticky top-28 wBS">
       {contextHolder}
-      <div className="mx-auto p-6 bg-white shadow-xl border rounded-xl w-full ml-9">
+
+      <div className="mx-auto p-6 bg-white shadow-xl border rounded-xl w-full ml-9 contentBookingUser">
         <div>
           <div className="flex justify-between">
             <div className="flex space-x-1 items-end justify-between">
@@ -199,33 +207,6 @@ const Booking = ({ data }) => {
                     disabledDate={disabledDate}
                     format="DD-MM-YYYY"
                     onChange={(value, dateString) => {
-                      // const formattedNgayDen = format(
-                      //   parse(dateString[0], "dd-MM-yyyy", new Date()),
-                      //   "yyyy-MM-dd"
-                      // );
-                      // const formattedNgayDi = format(
-                      //   parse(dateString[1], "dd-MM-yyyy", new Date()),
-                      //   "yyyy-MM-dd"
-                      // );
-
-                      // setNgayDenVL(formattedNgayDen);
-                      // setNgayDiVL(formattedNgayDi);
-                      // if (dateString && dateString.length === 2) {
-                      //   const start = parse(
-                      //     dateString[0],
-                      //     "dd-MM-yyyy",
-                      //     new Date()
-                      //   );
-                      //   const end = parse(
-                      //     dateString[1],
-                      //     "dd-MM-yyyy",
-                      //     new Date()
-                      //   );
-                      //   const days = differenceInDays(end, start);
-                      //   setTotalDays(days);
-                      // } else {
-                      //   setTotalDays(0);
-                      // }
                       if (
                         dateString &&
                         dateString.length === 2 &&
