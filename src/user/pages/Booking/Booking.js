@@ -179,11 +179,12 @@ const Booking = ({ data }) => {
               <form action="" onSubmit={handleSubmit}>
                 {/* Date */}
                 <div className="userBooking mt-2">
-                  <div className="flex justify-around mt-2">
+                  <div className="grid grid-cols-2 mt-2">
                     <h3
                       style={{
                         fontSize: 14,
                         fontWeight: "650",
+                        paddingLeft: 10,
                       }}
                     >
                       NHẬN PHÒNG
@@ -276,6 +277,7 @@ const Booking = ({ data }) => {
                       </button>
                       <div className="flex justify-center">
                         <input
+                          className="soLuongKhachBooking"
                           id="soLuongKhach"
                           name="soLuongKhach"
                           type="text"
