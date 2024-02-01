@@ -111,7 +111,6 @@ const HomePages = () => {
     getLocation
       .getLocation()
       .then((res) => {
-        // console.log(res)
         setLocation(res.data.content.data);
       })
       .catch((err) => {

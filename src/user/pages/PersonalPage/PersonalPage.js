@@ -1,7 +1,7 @@
 import { DatePicker, Modal, message } from "antd";
 import { useFormik } from "formik";
 import moment from "moment";
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { editInfrmation } from "../../api/apiUser";
 import { saveLocalStore } from "../../api/localUser";
@@ -9,6 +9,8 @@ import { saveInfoUser } from "../../redux/userSlice";
 import Avatar from "../Avatar/Avatar";
 import "./personalPage.css";
 import dayjs from "dayjs";
+import { useLocation } from "react-router-dom";
+import HistoryUser from "../HistoryUser/HistoryUser";
 
 const PersonalPage = () => {
   const [messageApi, contextHolder] = message.useMessage();
@@ -434,7 +436,9 @@ const PersonalPage = () => {
                 </div>
               </div>
             </div>
-            <div className="basis-9/12">aaaaaaaa</div>
+            <div className="basis-9/12">
+              <HistoryUser />
+            </div>
           </div>
         </div>
       </div>

@@ -1,5 +1,5 @@
 import React, { useEffect, useMemo, useState } from "react";
-import { DatePicker, Table, theme } from "antd";
+import { DatePicker, Table, message, theme } from "antd";
 import "./booking.css";
 import { getDatPhong, postDatPhong } from "../../api/apiUser";
 import {
@@ -11,7 +11,7 @@ import {
 } from "date-fns";
 import { useFormik } from "formik";
 import { useSelector } from "react-redux";
-import axios from "axios";
+import { useNavigate } from "react-router-dom";
 const { RangePicker } = DatePicker;
 
 const Booking = ({ data }) => {
@@ -22,6 +22,9 @@ const Booking = ({ data }) => {
   const [ngayDenVL, setNgayDenVL] = useState([]);
   const [ngayDiVL, setNgayDiVL] = useState([]);
   const [slKhach, setSLKhach] = useState(1);
+  const [messageApi, contextHolder] = message.useMessage();
+  const navigate = useNavigate();
+  const key = "updatable";
   useEffect(() => {
     getDatPhong
       .getDatPhong()
@@ -77,9 +80,7 @@ const Booking = ({ data }) => {
     // Làm tròn giá trị tới 3 đơn vị
     return totalPriceWithVAT.toFixed(3);
   }, [totalPrice]);
-  const resetFormDate = () => {
-
-  };
+  const resetFormDate = () => {};
   useEffect(() => {
     setFieldValue("maPhong", data.id);
   }, [data.id]);
@@ -94,10 +95,8 @@ const Booking = ({ data }) => {
       setFieldValue("soLuongKhach", slKhach);
     }
   }, [slKhach]);
-  // console.log(filteredDatPhongList);
   const formik = useFormik({
     initialValues: {
-      // id: 0,
       maPhong: data.id,
       ngayDen: ngayDenVL,
       ngayDi: ngayDiVL,
@@ -109,8 +108,23 @@ const Booking = ({ data }) => {
       postDatPhong
         .postDatPhong(values)
         .then((res) => {
-          // console.log(res);
-          resetForm();
+          messageApi.open({
+            key,
+            type: "loading",
+            content: "Đang đặt phòng...",
+          });
+          setTimeout(() => {
+            messageApi.open({
+              key,
+              type: "success",
+              content: "Đặt phòng thành công",
+              duration: 2,
+            });
+          }, 1000);
+          setTimeout(() => {
+            // navigate(`/personalPage/${user.id}`);
+          }, 2000);
+          // resetForm();
         })
         .catch((err) => {
           console.log(err);
@@ -129,6 +143,7 @@ const Booking = ({ data }) => {
   } = formik;
   return (
     <div className="w-5/6 sticky top-28">
+      {contextHolder}
       <div className="mx-auto p-6 bg-white shadow-xl border rounded-xl w-full ml-9">
         <div>
           <div className="flex justify-between">
@@ -184,19 +199,50 @@ const Booking = ({ data }) => {
                     disabledDate={disabledDate}
                     format="DD-MM-YYYY"
                     onChange={(value, dateString) => {
-          
-                      const formattedNgayDen = format(
-                        parse(dateString[0], "dd-MM-yyyy", new Date()),
-                        "yyyy-MM-dd"
-                      );
-                      const formattedNgayDi = format(
-                        parse(dateString[1], "dd-MM-yyyy", new Date()),
-                        "yyyy-MM-dd"
-                      );
+                      // const formattedNgayDen = format(
+                      //   parse(dateString[0], "dd-MM-yyyy", new Date()),
+                      //   "yyyy-MM-dd"
+                      // );
+                      // const formattedNgayDi = format(
+                      //   parse(dateString[1], "dd-MM-yyyy", new Date()),
+                      //   "yyyy-MM-dd"
+                      // );
 
-                      setNgayDenVL(formattedNgayDen);
-                      setNgayDiVL(formattedNgayDi);
-                      if (dateString && dateString.length === 2) {
+                      // setNgayDenVL(formattedNgayDen);
+                      // setNgayDiVL(formattedNgayDi);
+                      // if (dateString && dateString.length === 2) {
+                      //   const start = parse(
+                      //     dateString[0],
+                      //     "dd-MM-yyyy",
+                      //     new Date()
+                      //   );
+                      //   const end = parse(
+                      //     dateString[1],
+                      //     "dd-MM-yyyy",
+                      //     new Date()
+                      //   );
+                      //   const days = differenceInDays(end, start);
+                      //   setTotalDays(days);
+                      // } else {
+                      //   setTotalDays(0);
+                      // }
+                      if (
+                        dateString &&
+                        dateString.length === 2 &&
+                        dateString.every(Boolean)
+                      ) {
+                        const formattedNgayDen = format(
+                          parse(dateString[0], "dd-MM-yyyy", new Date()),
+                          "yyyy-MM-dd"
+                        );
+                        const formattedNgayDi = format(
+                          parse(dateString[1], "dd-MM-yyyy", new Date()),
+                          "yyyy-MM-dd"
+                        );
+
+                        setNgayDenVL(formattedNgayDen);
+                        setNgayDiVL(formattedNgayDi);
+
                         const start = parse(
                           dateString[0],
                           "dd-MM-yyyy",
@@ -210,6 +256,9 @@ const Booking = ({ data }) => {
                         const days = differenceInDays(end, start);
                         setTotalDays(days);
                       } else {
+                        // Handle the case when values are cleared
+                        setNgayDenVL(""); // Reset to your default value or an empty string
+                        setNgayDiVL(""); // Reset to your default value or an empty string
                         setTotalDays(0);
                       }
                     }}
@@ -267,10 +316,7 @@ const Booking = ({ data }) => {
                 </div>
                 {/* Booking */}
                 <div className="booKing_Button space-y-2">
-                  <button
-                    onClick={resetFormDate}
-                    className="w-full py-3 mt-3 rounded-lg text-white text-lg font-semibold"
-                  >
+                  <button className="w-full py-3 mt-3 rounded-lg text-white text-lg font-semibold">
                     Đặt phòng
                   </button>
                   <p>Bạn vẫn chưa bị trừ tiền</p>
