@@ -8,6 +8,7 @@ import "./header.css";
 import { logout } from "../api/localUser";
 import { getLocationS } from "../api/apiUser";
 import "./responsiteHeader.css";
+import adminRoute from "../../admin/route/adminRoute";
 const items = [
   {
     key: "1",
@@ -166,7 +167,13 @@ const Header = () => {
             <div className="flex space-x-7 items-center">
               {/* admin */}
               <div>
-                <p>Trở thành chủ nhà</p>
+                <a
+                  className="btnFromUserToAdmin flex items-center gap-1"
+                  href={adminRoute.home.path}
+                >
+                  <i className="fa-solid fa-house-user" />
+                  Trở thành chủ nhà
+                </a>
               </div>
               {/* language */}
               <GlobalOutlined />
@@ -238,6 +245,7 @@ const Header = () => {
                       {user.name}
                     </p>
                     <button
+                      className="btnDangXuatUser"
                       style={{
                         padding: "5px 15px",
                       }}

@@ -7,4 +7,6 @@
 .content_personalPage .content_birthday .ant-picker-input > input::placeholder {
   color: red !important;
 }
-
+.editUserHoSo:hover {
+  color: #ff385c;
+}

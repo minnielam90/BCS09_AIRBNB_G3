@@ -26,7 +26,7 @@ const Avatar = () => {
     initialValues: {
       avatar: "",
     },
-    onSubmit: (values) => {
+    onSubmit: (values, { resetForm }) => {
       const formData = new FormData();
       for (let key in values) {
         formData.append("formFile", values[key]);
@@ -39,7 +39,7 @@ const Avatar = () => {
             content: "Cập nhập ảnh thành công",
           });
           resetForm();
-          setavatarUser(null);
+          setavatarUser([]);
           const storedDataString = localStorage.getItem("user_info");
           const storedData = JSON.parse(storedDataString);
           const newDataToken = {
@@ -58,9 +58,10 @@ const Avatar = () => {
         });
     },
   });
-  const [avatarUser, setavatarUser] = useState([]);
 
-  const { handleBlur, handleSubmit, resetForm, setFieldValue } = formik;
+  const [avatarUser, setavatarUser] = useState([]);
+  // console.log(avatarUser);
+  const { handleBlur, handleSubmit, resetForm, values, setFieldValue } = formik;
   return (
     <div>
       {contextHolder}
@@ -71,11 +72,6 @@ const Avatar = () => {
               <div>
                 <img
                   className="w-64 h-64 rounded-full"
-                  // style={{
-                  //   width: 270,
-                  //   height: 270,
-                  //   borderRadius: "50%",
-                  // }}
                   src={user.avatar}
                   alt=""
                 />
@@ -124,11 +120,13 @@ const Avatar = () => {
                 {/* Tên người dùng */}
                 <div className="mb-2 grid grid-cols-1">
                   <div>
-                    <img
-                      className="w-64 h-64 rounded-full mx-auto"
-                      src={avatarUser}
-                      alt=""
-                    />
+                    {avatarUser.length === 0 ? null : (
+                      <img
+                        className="w-64 h-64 rounded-full mx-auto"
+                        src={avatarUser}
+                        alt=""
+                      />
+                    )}
                   </div>
                   <input
                     type="file"

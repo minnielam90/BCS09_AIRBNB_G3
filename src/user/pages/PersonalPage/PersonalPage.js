@@ -10,7 +10,7 @@ import Avatar from "../Avatar/Avatar";
 import "./personalPage.css";
 import dayjs from "dayjs";
 import HistoryUser from "../HistoryUser/HistoryUser";
-import './responsitePersonalPage.css'
+import "./responsitePersonalPage.css";
 
 const PersonalPage = () => {
   const [messageApi, contextHolder] = message.useMessage();
@@ -93,7 +93,7 @@ const PersonalPage = () => {
                     <Avatar />
                     {/* edit user */}{" "}
                     <div
-                      className="underline"
+                      className="underline editUserHoSo"
                       style={{
                         textAlign: "center",
                         marginTop: 20,

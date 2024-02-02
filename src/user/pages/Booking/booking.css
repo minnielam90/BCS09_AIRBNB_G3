@@ -19,6 +19,9 @@
 .booKing_Button button {
   background-color: #e51d55 !important;
 }
+.booKing_Button button:hover {
+  background-color: #921136 !important;
+}
 .booKing_Button p {
   color: gray;
   text-align: center;
@@ -37,6 +40,9 @@ span {
   height: 30px;
   background-color: #b7bac0 !important;
 }
+.minus:hover {
+  background-color: #757a85 !important;
+}
 
 .plus {
   margin-right: 20px;
@@ -45,6 +51,9 @@ span {
   width: 30px;
   height: 30px;
   background-color: #b7bac0 !important;
+}
+.plus:hover {
+  background-color: #757a85 !important;
 }
 .soLuongKhachBooking {
   height: 34px;
