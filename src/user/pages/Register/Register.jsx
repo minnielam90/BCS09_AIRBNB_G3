@@ -7,9 +7,8 @@ import { registerPost } from "../../api/apiUser";
 import { NavLink, useNavigate } from "react-router-dom";
 import { validationUser } from "../../utils/validationUser";
 import { useDispatch } from "react-redux";
-import './reponsiteRegister.css'
+import "./reponsiteRegister.css";
 const Register = () => {
-  const dispatch = useDispatch();
   const [messageApi, contextHolder] = message.useMessage();
   const navigate = useNavigate();
   const formik = useFormik({
@@ -50,7 +49,6 @@ const Register = () => {
     values,
     errors,
     touched,
-    reset,
     setFieldValue,
   } = formik;
   return (
@@ -63,7 +61,8 @@ const Register = () => {
             position: "relative",
           }}
         >
-          <div className="userRegister"
+          <div
+            className="userRegister"
             style={{
               position: "absolute",
               top: "50%",
@@ -116,7 +115,10 @@ const Register = () => {
                   Đăng ký tài khoản
                 </h2>
               </div>
-              <div className="grid grid-cols-2 titleUserDK" style={{ gap: "15px" }}>
+              <div
+                className="grid grid-cols-2 titleUserDK"
+                style={{ gap: "15px" }}
+              >
                 {/* Tên người dùng */}
                 <div className="mb-2">
                   <label

@@ -27,6 +27,7 @@ const PersonalPage = () => {
   };
   const { user } = useSelector((state) => state.userSlice);
   const dispatch = useDispatch();
+  // editInfoUser
   const formik = useFormik({
     enableReinitialize: true,
     initialValues: {

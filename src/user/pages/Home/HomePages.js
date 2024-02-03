@@ -102,9 +102,7 @@ const HomePages = () => {
       .then((res) => {
         setListItem(res.data.content);
       })
-      .catch((err) => {
-        console.log(err);
-      });
+      .catch((err) => {});
   }, []);
   const [location, setLocation] = useState([]);
   useEffect(() => {
@@ -113,9 +111,7 @@ const HomePages = () => {
       .then((res) => {
         setLocation(res.data.content.data);
       })
-      .catch((err) => {
-        console.log(err);
-      });
+      .catch((err) => {});
   }, []);
   return (
     <div className="container">
@@ -123,7 +119,7 @@ const HomePages = () => {
         <Carousel {...setting}>
           {location.map((item, index) => {
             return (
-              <div className="item_nav">
+              <div className="item_nav" key={index}>
                 <img
                   src={item.hinhAnh}
                   style={{
@@ -144,7 +140,7 @@ const HomePages = () => {
         <Carousel {...settingMD}>
           {location.map((item, index) => {
             return (
-              <div className="item_nav">
+              <div className="item_nav" key={index}>
                 <img
                   src={item.hinhAnh}
                   style={{
@@ -165,7 +161,7 @@ const HomePages = () => {
         <Carousel {...settingSM}>
           {location.map((item, index) => {
             return (
-              <div className="item_nav">
+              <div className="item_nav" key={index}>
                 <img
                   src={item.hinhAnh}
                   style={{
@@ -186,8 +182,8 @@ const HomePages = () => {
         <div className="grid grid-cols-4 gap-4 listRoomUser">
           {listItem.map((item, index) => {
             return (
-              <NavLink to={`/detailItem/${item.id}`}>
-                <div className="content_item" key={index}>
+              <NavLink to={`/detailItem/${item.id}`} key={index}>
+                <div className="content_item">
                   <img src={item.hinhAnh} alt="" />
                   <i class="fa-regular fa-heart"></i>
                   <h4>{item.tenPhong}</h4>

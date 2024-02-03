@@ -42,15 +42,14 @@ const Header = () => {
     setMaViTri(value);
   };
   const [locationS, setLocationS] = useState([]);
+  // getLocation
   useEffect(() => {
     getLocationS
       .getLocationS()
       .then((res) => {
         setLocationS(res.data.content);
       })
-      .catch((err) => {
-        console.log(err);
-      });
+      .catch((err) => {});
   }, []);
   return (
     <header>
@@ -152,14 +151,6 @@ const Header = () => {
                       color: "#FF385C",
                     }}
                   />
-                </div>
-                <div>
-                  {/* <NavLink
-                  to={`/filterLocation/${maViTri}`}
-                  className="rounded-full border border-gray-300 text-base py-1 mt-1 flex px-3 items-center bg-red-500 text-white"
-                >
-                  Search <i className="fa-solid fa-magnifying-glass ml-2" />
-                </NavLink> */}
                 </div>
               </div>
             </div>
@@ -554,14 +545,6 @@ const Header = () => {
                       color: "#FF385C",
                     }}
                   ></i>
-                </div>
-                <div>
-                  {/* <NavLink
-                  to={`/filterLocation/${maViTri}`}
-                  className="rounded-full border border-gray-300 text-base py-1 mt-1 flex px-3 items-center bg-red-500 text-white"
-                >
-                  Search <i className="fa-solid fa-magnifying-glass ml-2" />
-                </NavLink> */}
                 </div>
               </div>
             </div>

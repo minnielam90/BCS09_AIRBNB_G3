@@ -21,6 +21,7 @@ const Avatar = () => {
   };
   const { user } = useSelector((state) => state.userSlice);
   const dispatch = useDispatch();
+  // addImg
   const formik = useFormik({
     enableReinitialize: true,
     initialValues: {
@@ -60,8 +61,7 @@ const Avatar = () => {
   });
 
   const [avatarUser, setavatarUser] = useState([]);
-  // console.log(avatarUser);
-  const { handleBlur, handleSubmit, resetForm, values, setFieldValue } = formik;
+  const { handleBlur, handleSubmit, resetForm, setFieldValue } = formik;
   return (
     <div>
       {contextHolder}
@@ -94,7 +94,6 @@ const Avatar = () => {
                     display: "block",
                     width: 270,
                     height: 270,
-                    //   backgroundColor: "#FF385C",
                     borderRadius: "50%",
                   }}
                 >
@@ -117,7 +116,7 @@ const Avatar = () => {
           >
             <form action="" onSubmit={handleSubmit}>
               <div>
-                {/* Tên người dùng */}
+                {/* Img */}
                 <div className="mb-2 grid grid-cols-1">
                   <div>
                     {avatarUser.length === 0 ? null : (

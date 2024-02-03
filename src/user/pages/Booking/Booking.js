@@ -1,5 +1,5 @@
 import React, { useEffect, useMemo, useState } from "react";
-import { DatePicker, Table, message, theme } from "antd";
+import { DatePicker, message } from "antd";
 import "./booking.css";
 import { getDatPhong, postDatPhong } from "../../api/apiUser";
 import {
@@ -26,6 +26,7 @@ const Booking = ({ data }) => {
   const [messageApi, contextHolder] = message.useMessage();
   const navigate = useNavigate();
   const key = "updatable";
+  // getDatPhong
   useEffect(() => {
     getDatPhong
       .getDatPhong()
@@ -36,10 +37,9 @@ const Booking = ({ data }) => {
         );
         setFilteredDatPhongList(filteredList);
       })
-      .catch((err) => {
-        console.log(err);
-      });
+      .catch((err) => {});
   }, [data.id]);
+  // chuyenDoiDate
   const disabledDate = (current) => {
     return filteredDatPhongList.some((datPhong) => {
       const startDate = parseISO(datPhong.ngayDen);
@@ -51,6 +51,7 @@ const Booking = ({ data }) => {
     });
   };
   const [count, setCount] = useState(1);
+  // - khach
   const handleMinusClick = (event) => {
     event.preventDefault();
     setCount((prevCount) => {
@@ -59,7 +60,7 @@ const Booking = ({ data }) => {
       return newCount;
     });
   };
-
+  // + khach
   const handlePlusClick = (event) => {
     event.preventDefault();
     setCount((prevCount) => {
@@ -68,7 +69,7 @@ const Booking = ({ data }) => {
       return newCount;
     });
   };
-
+  // totalDay
   const totalPrice = useMemo(
     () => data.giaTien * totalDays,
     [data.giaTien, totalDays]
@@ -81,7 +82,6 @@ const Booking = ({ data }) => {
     // Làm tròn giá trị tới 3 đơn vị
     return totalPriceWithVAT.toFixed(3);
   }, [totalPrice]);
-  const resetFormDate = () => {};
   useEffect(() => {
     setFieldValue("maPhong", data.id);
   }, [data.id]);
@@ -96,7 +96,7 @@ const Booking = ({ data }) => {
       setFieldValue("soLuongKhach", slKhach);
     }
   }, [slKhach]);
-  // const maNguoiDungID = user.id
+  // booking
   const formik = useFormik({
     initialValues: {
       maPhong: data.id,
@@ -105,11 +105,10 @@ const Booking = ({ data }) => {
       soLuongKhach: slKhach,
       maNguoiDung: user ? user.id : null,
     },
-
     onSubmit: (values, { resetForm }) => {
       if (values.maNguoiDung === null) {
         // Nếu maNguoiDung là null, chuyển hướng về trang đăng nhập
-        navigate("/login"); // Điều này giả sử bạn đã cấu hình định tuyến cho trang đăng nhập
+        navigate("/login");
         return; // Dừng xử lý onSubmit ngay tại đây để không tiếp tục đặt phòng
       }
       postDatPhong
@@ -133,9 +132,7 @@ const Booking = ({ data }) => {
           }, 2000);
           // resetForm();
         })
-        .catch((err) => {
-          console.log(err);
-        });
+        .catch((err) => {});
     },
   });
   const {
@@ -238,9 +235,8 @@ const Booking = ({ data }) => {
                         const days = differenceInDays(end, start);
                         setTotalDays(days);
                       } else {
-                        // Handle the case when values are cleared
-                        setNgayDenVL(""); // Reset to your default value or an empty string
-                        setNgayDiVL(""); // Reset to your default value or an empty string
+                        setNgayDenVL(""); 
+                        setNgayDiVL(""); 
                         setTotalDays(0);
                       }
                     }}

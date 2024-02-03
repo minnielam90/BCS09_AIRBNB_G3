@@ -8,16 +8,16 @@ const HistoryUser = () => {
   const { user } = useSelector((state) => state.userSlice);
   const [filteredRooms, setFilteredRooms] = useState([]);
   const [listItemHU, setListItemHU] = useState([]);
+  // getInfoRoom
   useEffect(() => {
     itemKS
       .getAllItem()
       .then((res) => {
         setListItemHU(res.data.content);
       })
-      .catch((err) => {
-        console.log(err);
-      });
+      .catch((err) => {});
   }, []);
+  // getRoomBooking
   const [listRoomBooking, setListRoomBooking] = useState([]);
   useEffect(() => {
     layTheoNguoiDung
@@ -25,10 +25,9 @@ const HistoryUser = () => {
       .then((res) => {
         setListRoomBooking(res.data.content);
       })
-      .catch((err) => {
-        console.log(err);
-      });
+      .catch((err) => {});
   }, []);
+  // Filter Room
   useEffect(() => {
     // Lọc ra những phòng có trong cả listItemHU và listRoomBooking
     const filteredRooms = listItemHU.filter((item) => {
@@ -53,7 +52,7 @@ const HistoryUser = () => {
         {filteredRooms.map((item, index) => {
           return (
             <div
-              key={item.id}
+              key={index}
               className="bg-white shadow-xl border rounded-xl flex space-y-3 contentHistoryUser"
             >
               <div

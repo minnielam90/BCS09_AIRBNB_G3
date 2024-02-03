@@ -11,6 +11,7 @@ import "./responsiteDetailItem.css";
 const DetailItem = () => {
   const { user } = useSelector((state) => state.userSlice);
   const { id } = useParams();
+  // listRoom
   const [listItem, setListItem] = useState([]);
   useEffect(() => {
     detailRoom
@@ -19,9 +20,9 @@ const DetailItem = () => {
         setListItem(res.data.content);
       })
       .catch((err) => {
-        console.log(err);
       });
   }, []);
+  // listComment
   const [binhLuan, setComment] = useState([]);
   useEffect(() => {
     getComment
@@ -30,9 +31,9 @@ const DetailItem = () => {
         setComment(res.data.content);
       })
       .catch((err) => {
-        console.log(err);
       });
   }, []);
+  // timeComment
   const [binhLuanTime, setCommentTime] = useState([]);
   useEffect(() => {
     getComment
@@ -41,9 +42,9 @@ const DetailItem = () => {
         setCommentTime(res.data.dataTime);
       })
       .catch((err) => {
-        console.log(err);
       });
   }, []);
+  // getComment
   const formik = useFormik({
     initialValues: {
       maPhong: id,
@@ -62,12 +63,10 @@ const DetailItem = () => {
               setComment(res.data.content);
             })
             .catch((err) => {
-              console.log(err);
             });
           resetForm();
         })
         .catch((err) => {
-          console.log(err);
         });
     },
     validationSchema: Yup.object({

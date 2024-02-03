@@ -5,15 +5,14 @@ import "./responsiteFilterLocation.css";
 const FilterLocation = () => {
   const { id } = useParams();
   const [roomLocation, setRoomLocation] = useState([]);
+  // getRoomLocation
   useEffect(() => {
     getRoomLocation
       .getRoomLocation(id)
       .then((res) => {
         setRoomLocation(res.data.content);
       })
-      .catch((err) => {
-        console.log(err);
-      });
+      .catch((err) => {});
   }, [id]);
   return (
     <div className="container">
@@ -21,7 +20,10 @@ const FilterLocation = () => {
         <div className="contentFilterBig space-y-6">
           {roomLocation.map((item, index) => {
             return (
-              <div className="bg-white shadow-xl border rounded-xl flex space-y-3 contentFilterLocation">
+              <div
+                className="bg-white shadow-xl border rounded-xl flex space-y-3 contentFilterLocation"
+                key={index}
+              >
                 <div
                   className="w-4/12"
                   style={{
@@ -1111,6 +1113,7 @@ const FilterLocation = () => {
                 style={{
                   width: "100%",
                 }}
+                key={index}
               >
                 <div
                   style={{
