@@ -25,6 +25,9 @@
   .listRoomUser {
     grid-template-columns: 1fr 1fr 1fr !important;
   }
+  .content_item img {
+    width: 340px;
+  }
 }
 /* tap */
 @media screen and (max-width: 992px) {
@@ -39,6 +42,9 @@
   }
   .listRoomUser {
     grid-template-columns: 1fr 1fr !important;
+  }
+  .content_item img {
+    width: 370px;
   }
 }
 /* mobile */
