@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useRef, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { Modal, message } from "antd";
 import "./avatar.css";
@@ -7,6 +7,7 @@ import { editAvatar } from "../../api/apiUser";
 import { saveLocalStore } from "../../api/localUser";
 import { saveInfoUser } from "../../redux/userSlice";
 const Avatar = () => {
+  const fileInputRef = useRef(null);
   const [messageApi, contextHolder] = message.useMessage();
   const [isModalOpen, setIsModalOpen] = useState(false);
   const showModal = () => {
@@ -14,16 +15,18 @@ const Avatar = () => {
   };
   const handleOk = () => {
     setIsModalOpen(false);
+    fileInputRef.current.value = null;
+    setavatarUser([]);
   };
   const handleCancel = () => {
     setIsModalOpen(false);
-    resetForm();
+    fileInputRef.current.value = null;
+    setavatarUser([]);
   };
   const { user } = useSelector((state) => state.userSlice);
   const dispatch = useDispatch();
   // addImg
   const formik = useFormik({
-    enableReinitialize: true,
     initialValues: {
       avatar: "",
     },
@@ -39,8 +42,6 @@ const Avatar = () => {
             type: "success",
             content: "Cập nhập ảnh thành công",
           });
-          resetForm();
-          setavatarUser([]);
           const storedDataString = localStorage.getItem("user_info");
           const storedData = JSON.parse(storedDataString);
           const newDataToken = {
@@ -48,8 +49,9 @@ const Avatar = () => {
           };
           const newData = res.data.content;
           const mergedObject = { ...newDataToken, ...newData };
-          dispatch(saveInfoUser(mergedObject));
           saveLocalStore(mergedObject, "user_info");
+          dispatch(saveInfoUser(mergedObject));
+          resetForm();
         })
         .catch((err) => {
           messageApi.open({
@@ -114,7 +116,7 @@ const Avatar = () => {
             onCancel={handleCancel}
             footer={null}
           >
-            <form action="" onSubmit={handleSubmit}>
+            <form onSubmit={handleSubmit}>
               <div>
                 {/* Img */}
                 <div className="mb-2 grid grid-cols-1">
@@ -129,9 +131,11 @@ const Avatar = () => {
                   </div>
                   <input
                     type="file"
-                    id="avatar"
                     name="avatar"
+                    ref={fileInputRef}
                     className="border border-gray-300 text-white-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5"
+                    accept="image/*"
+                    onBlur={handleBlur}
                     style={{
                       borderRadius: "5px",
                       fontSize: "20px",
@@ -147,13 +151,12 @@ const Avatar = () => {
                       }
                       setFieldValue("avatar", img);
                     }}
-                    accept="image/*"
-                    onBlur={handleBlur}
                   />
                 </div>
               </div>
               <div className="flex justify-end gap-3">
                 <button
+                  type="submit"
                   onClick={() => {
                     handleOk();
                   }}
