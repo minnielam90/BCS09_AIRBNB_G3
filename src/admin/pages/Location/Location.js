@@ -14,14 +14,9 @@ const Location = () => {
   const [listLocation, setListLocation] = useState([]);
 
   const getData = () => {
-    locationServ
-      .getList()
-      .then((res) => {
-        setListLocation(res.data.content);
-      })
-      .catch((err) => {
-        // console.log(err);
-      });
+    locationServ.getList().then((res) => {
+      setListLocation(res.data.content);
+    });
   };
 
   useEffect(() => {
@@ -127,15 +122,10 @@ const Location = () => {
   ];
 
   const handleEditLocation = (locationId) => {
-    locationServ
-      .getDetailLocation(locationId)
-      .then((res) => {
-        setEditData(res.data.content);
-        setIsOpen(true);
-      })
-      .catch((err) => {
-        // console.log(err);
-      });
+    locationServ.getDetailLocation(locationId).then((res) => {
+      setEditData(res.data.content);
+      setIsOpen(true);
+    });
   };
   const handleDeleteLocation = (locationId) => {
     locationServ
@@ -149,7 +139,6 @@ const Location = () => {
       })
       .catch((err) => {
         message.error("Xảy ra lỗi");
-        // console.log(err);
       });
   };
 

@@ -36,3 +36,8 @@
 .ant-popover-content .ant-popover-inner-content .ant-btn:hover {
   background-color: #EF4444 !important;
 }
+
+li.ant-menu-overflow-item.ant-menu-submenu.ant-menu-submenu-horizontal.pr-60::after {
+  display: none !important;
+}
+

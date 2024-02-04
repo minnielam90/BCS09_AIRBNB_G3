@@ -15,14 +15,9 @@ const Booking = () => {
   const [listBookingRoom, setListBookingRoom] = useState([]);
 
   const getData = () => {
-    bookingRoomServ
-      .getList()
-      .then((res) => {
-        setListBookingRoom(res.data.content);
-      })
-      .catch((err) => {
-        // console.log(err);
-      });
+    bookingRoomServ.getList().then((res) => {
+      setListBookingRoom(res.data.content);
+    });
   };
 
   useEffect(() => {
@@ -136,24 +131,19 @@ const Booking = () => {
   ];
 
   const handleEditBookingRoom = (roomId) => {
-    bookingRoomServ
-      .getDetailBookingRoom(roomId)
-      .then((res) => {
-        const editedNgayDen = moment(res.data.content.ngayDen).startOf("day");
-        const editedNgayDi = moment(res.data.content.ngayDi).startOf("day");
+    bookingRoomServ.getDetailBookingRoom(roomId).then((res) => {
+      const editedNgayDen = moment(res.data.content.ngayDen).startOf("day");
+      const editedNgayDi = moment(res.data.content.ngayDi).startOf("day");
 
-        const editedData = {
-          ...res.data.content,
-          ngayDen: editedNgayDen,
-          ngayDi: editedNgayDi,
-        };
+      const editedData = {
+        ...res.data.content,
+        ngayDen: editedNgayDen,
+        ngayDi: editedNgayDi,
+      };
 
-        setEditData(editedData);
-        setIsOpen(true);
-      })
-      .catch((err) => {
-        console.log(err);
-      });
+      setEditData(editedData);
+      setIsOpen(true);
+    });
   };
   const handleDeleteBookingRoom = (roomId) => {
     bookingRoomServ
@@ -167,7 +157,6 @@ const Booking = () => {
       })
       .catch((err) => {
         message.error("Xảy ra lỗi!");
-        console.log(err);
       });
   };
 

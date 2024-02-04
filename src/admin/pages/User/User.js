@@ -15,14 +15,9 @@ const User = () => {
   const [editUser, setEditUser] = useState({});
 
   const getData = () => {
-    userServ
-      .getList()
-      .then((res) => {
-        setListUsers(res.data.content);
-      })
-      .catch((err) => {
-        // console.log(err);
-      });
+    userServ.getList().then((res) => {
+      setListUsers(res.data.content);
+    });
   };
 
   useEffect(() => {
@@ -47,7 +42,6 @@ const User = () => {
       email: user.email,
       birthday: birthday,
       role: user.role,
-      // avatar: user.avatar,
     };
   });
 
@@ -67,19 +61,6 @@ const User = () => {
         sort: false,
       },
     },
-    // {
-    //   label: "Ảnh đại diện",
-    //   dataIndex: "avatar",
-    //   name: "avatar",
-    //   options: {
-    //     filter: true,
-    //     sort: false,
-    //     customBodyRender: (value, tableMeta) => {
-    //       const imgUrl = value;
-    //       return <img src={imgUrl} width="100" height="100" alt="" />;
-    //     },
-    //   },
-    // },
     {
       label: "Tên tài khoản",
       dataIndex: "name",
@@ -149,29 +130,19 @@ const User = () => {
   ];
 
   const handleDeleteUser = (userId) => {
-    userServ
-      .deleteUser(userId)
-      .then(() => {
-        setListUsers((prevListUsers) =>
-          prevListUsers.filter((user) => user.id !== userId)
-        );
-        message.success("Xóa thành công");
-        getData();
-      })
-      .catch((err) => {
-        // console.log(err);
-      });
+    userServ.deleteUser(userId).then(() => {
+      setListUsers((prevListUsers) =>
+        prevListUsers.filter((user) => user.id !== userId)
+      );
+      message.success("Xóa thành công");
+      getData();
+    });
   };
   const handleEditUser = (userId) => {
-    userServ
-      .getDetailUser(userId)
-      .then((res) => {
-        setEditUser(res.data.content);
-        setIsOpen(true);
-      })
-      .catch((err) => {
-        // console.log(err);
-      });
+    userServ.getDetailUser(userId).then((res) => {
+      setEditUser(res.data.content);
+      setIsOpen(true);
+    });
   };
 
   return (
