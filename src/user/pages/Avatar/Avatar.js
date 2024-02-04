@@ -30,7 +30,7 @@ const Avatar = () => {
     initialValues: {
       avatar: "",
     },
-    onSubmit: (values, { resetForm }) => {
+    onSubmit: (values) => {
       const formData = new FormData();
       for (let key in values) {
         formData.append("formFile", values[key]);
@@ -51,7 +51,6 @@ const Avatar = () => {
           const mergedObject = { ...newDataToken, ...newData };
           saveLocalStore(mergedObject, "user_info");
           dispatch(saveInfoUser(mergedObject));
-          resetForm();
         })
         .catch((err) => {
           messageApi.open({
@@ -63,7 +62,7 @@ const Avatar = () => {
   });
 
   const [avatarUser, setavatarUser] = useState([]);
-  const { handleBlur, handleSubmit, resetForm, setFieldValue } = formik;
+  const { handleBlur, handleSubmit, setFieldValue } = formik;
   return (
     <div>
       {contextHolder}
