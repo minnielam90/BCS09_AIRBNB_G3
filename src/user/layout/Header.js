@@ -1,8 +1,8 @@
-import React, { useEffect, useRef, useState } from "react";
+import React, { useEffect, useState } from "react";
 import { userRoute } from "../route/userRoute";
 import { GlobalOutlined } from "@ant-design/icons";
 import { Button, Dropdown, Select, Space } from "antd";
-import { Link, NavLink } from "react-router-dom";
+import { NavLink } from "react-router-dom";
 import { useSelector } from "react-redux";
 import "./header.css";
 import { logout } from "../api/localUser";

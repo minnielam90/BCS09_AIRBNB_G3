@@ -6,7 +6,6 @@ import "./register.css";
 import { registerPost } from "../../api/apiUser";
 import { NavLink, useNavigate } from "react-router-dom";
 import { validationUser } from "../../utils/validationUser";
-import { useDispatch } from "react-redux";
 import "./reponsiteRegister.css";
 const Register = () => {
   const [messageApi, contextHolder] = message.useMessage();
