@@ -8,7 +8,6 @@ import "./header.css";
 import { loginAdmin, logout } from "../api/localUser";
 import { getLocationS } from "../api/apiUser";
 import "./responsiteHeader.css";
-import adminRoute from "../../admin/route/adminRoute";
 const items = [
   {
     key: "1",
