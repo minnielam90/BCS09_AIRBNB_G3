@@ -2157,7 +2157,7 @@ const HistoryUser = () => {
                             </p>
                             <p>Số lượng khách: {booking.soLuongKhach}</p>
                             <p>
-                              Đơn giá: {item.giaTien}.000 x{" "}
+                              Đơn giá: ${item.giaTien}.000 x{" "}
                               {soNgay === 0 ? 1 : soNgay} đêm
                             </p>
                             <p>Thuế: 10%</p>
@@ -2167,7 +2167,7 @@ const HistoryUser = () => {
                                 fontWeight: "650",
                               }}
                             >
-                              Thành tiền: {thanhTien}
+                              Thành tiền: ${thanhTien}
                             </p>
                           </div>
                         </div>
