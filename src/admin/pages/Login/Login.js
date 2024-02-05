@@ -7,7 +7,7 @@ import { userServ } from "../../api/apiAdmin";
 import { useDispatch } from "react-redux";
 import { setLogin } from "../../redux/adminSlice";
 import { userLocalStorage } from "../../api/localServiceAdmin";
-import { useNavigate } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { message } from "antd";
 import { userRoute } from "../../../user/route/userRoute";
 import adminRoute from "../../route/adminRoute";
@@ -59,7 +59,7 @@ export default function Login() {
     } else if (user && user.role === "ADMIN") {
       navigate(adminRoute.home.path);
     }
-  }, [user]);
+  }, [user, navigate]);
 
   return (
     !user && (
@@ -108,6 +108,14 @@ export default function Login() {
                 Đăng nhập
               </button>
             </form>
+
+            {/* Link to the home page */}
+            <p className="mt-4 text-white text-center">
+              Bạn không phải là quản trị viên?{" "}
+              <Link to={userRoute.home.path} className="text-blue-500">
+                Trở về trang chủ
+              </Link>
+            </p>
           </div>
         </div>
       </>

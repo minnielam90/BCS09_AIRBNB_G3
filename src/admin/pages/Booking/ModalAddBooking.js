@@ -60,8 +60,6 @@ const ModalAddBooking = ({ getData }) => {
   };
 
   const onSubmit = (values) => {
-    // console.log("Booking Data:", values);
-
     bookingRoomServ
       .addBookingRoom(values)
       .then((res) => {
@@ -70,7 +68,6 @@ const ModalAddBooking = ({ getData }) => {
         methods.reset();
       })
       .catch((err) => {
-        // console.error("Error adding booking:", err);
         message.error("Thêm đặt phòng thất bại");
       });
 

@@ -63,8 +63,6 @@ const ModalAddLocation = ({ getData }) => {
     setIsOpen(true);
   }
 
-  // const [image, setImage] = useState("");
-
   return (
     <div>
       <div className="items-center justify-center mb-5">

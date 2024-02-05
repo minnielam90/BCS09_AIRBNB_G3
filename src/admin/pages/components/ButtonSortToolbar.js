@@ -11,7 +11,6 @@ const ButtonSortToolbar = ({ reverseData }) => {
   return (
     <Tooltip title="Sort STT">
       <IconButton onClick={reverseData}>
-        {/* <FontAwesomeIcon icon={faSort} style={{ fontSize: 18 }} /> */}
         <i className="fas fa-sort"></i>
       </IconButton>
     </Tooltip>
