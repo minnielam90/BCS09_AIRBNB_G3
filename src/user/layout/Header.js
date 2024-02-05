@@ -308,7 +308,7 @@ const Header = () => {
           </div>
         </div>
         <div className="small_header">
-          <div className="flex mx-4 mt-4 justify-center items-center">
+          <div className="flex mx-4 mt-4 justify-between items-center">
             {/* logo */}
             <div className="logo">
               <a href={userRoute.home.path}>
@@ -330,148 +330,155 @@ const Header = () => {
               </a>
             </div>
             {/* user */}
-            <div className="flex space-x-7 items-center">
-              {/* admin */}
-              <div>
-                <p>Trở thành chủ nhà</p>
-              </div>
-              {/* language */}
-              <GlobalOutlined />
-              {/* user */}
-              {user ? (
-                <div className="dropdown">
-                  <button className="dropbtn flex space-x-2 items-center">
-                    <svg
-                      viewBox="0 0 32 32"
-                      xmlns="http://www.w3.org/2000/svg"
-                      aria-hidden="true"
-                      role="presentation"
-                      focusable="false"
-                      style={{
-                        display: "block",
-                        fill: "none",
-                        height: 16,
-                        width: 16,
-                        stroke: "currentcolor",
-                        strokeWidth: 3,
-                        overflow: "visible",
-                        color: "black",
-                      }}
-                    >
-                      <g fill="none" fillRule="nonzero">
-                        <path d="m2 16h28" />
-                        <path d="m2 24h28" />
-                        <path d="m2 8h28" />
-                      </g>
-                    </svg>
-                    <div>
-                      <NavLink to={`/personalPage/${user.id}`}>
-                        {user.avatar ? (
-                          <img
-                            style={{
-                              width: 30,
-                              height: 30,
-                              borderRadius: 50,
-                            }}
-                            src={user.avatar}
-                            alt=""
-                          />
-                        ) : (
-                          <svg
-                            className=""
-                            viewBox="0 0 32 32"
-                            xmlns="http://www.w3.org/2000/svg"
-                            aria-hidden="true"
-                            role="presentation"
-                            focusable="false"
-                            style={{
-                              display: "block",
-                              height: "30px",
-                              width: "30px",
-                            }}
-                          >
-                            <path d="m16 .7c-8.437 0-15.3 6.863-15.3 15.3s6.863 15.3 15.3 15.3 15.3-6.863 15.3-15.3-6.863-15.3-15.3-15.3zm0 28c-4.021 0-7.605-1.884-9.933-4.81a12.425 12.425 0 0 1 6.451-4.4 6.507 6.507 0 0 1 -3.018-5.49c0-3.584 2.916-6.5 6.5-6.5s6.5 2.916 6.5 6.5a6.513 6.513 0 0 1 -3.019 5.491 12.42 12.42 0 0 1 6.452 4.4c-2.328 2.925-5.912 4.809-9.933 4.809z" />
-                          </svg>
-                        )}
-                      </NavLink>
-                    </div>
-                  </button>
-                  <div className="dropdown-content">
-                    <p
-                      style={{
-                        padding: "5px 15px",
-                      }}
-                    >
-                      {user.name}
-                    </p>
-                    <button
-                      style={{
-                        padding: "5px 15px",
-                      }}
-                      onClick={() => {
-                        logout();
-                      }}
-                    >
-                      Đăng xuất
-                    </button>
-                  </div>
-                </div>
-              ) : (
-                <div>
-                  <Space direction="vertical">
-                    <Space wrap>
-                      <Dropdown
-                        menu={{
-                          items,
-                        }}
-                        placement="bottomLeft"
-                      >
-                        <Button className="rounded-full flex items-center py-5">
-                          <svg
-                            viewBox="0 0 32 32"
-                            xmlns="http://www.w3.org/2000/svg"
-                            aria-hidden="true"
-                            role="presentation"
-                            focusable="false"
-                            style={{
-                              display: "block",
-                              fill: "none",
-                              height: 16,
-                              width: 16,
-                              stroke: "currentcolor",
-                              strokeWidth: 3,
-                              overflow: "visible",
-                            }}
-                          >
-                            <g fill="none" fillRule="nonzero">
-                              <path d="m2 16h28" />
-                              <path d="m2 24h28" />
-                              <path d="m2 8h28" />
-                            </g>
-                          </svg>
-                          <svg
-                            className="ml-3"
-                            viewBox="0 0 32 32"
-                            xmlns="http://www.w3.org/2000/svg"
-                            aria-hidden="true"
-                            role="presentation"
-                            focusable="false"
-                            style={{
-                              display: "block",
-                              height: "30px",
-                              width: "30px",
-                              fill: "currentcolor",
-                            }}
-                          >
-                            <path d="m16 .7c-8.437 0-15.3 6.863-15.3 15.3s6.863 15.3 15.3 15.3 15.3-6.863 15.3-15.3-6.863-15.3-15.3-15.3zm0 28c-4.021 0-7.605-1.884-9.933-4.81a12.425 12.425 0 0 1 6.451-4.4 6.507 6.507 0 0 1 -3.018-5.49c0-3.584 2.916-6.5 6.5-6.5s6.5 2.916 6.5 6.5a6.513 6.513 0 0 1 -3.019 5.491 12.42 12.42 0 0 1 6.452 4.4c-2.328 2.925-5.912 4.809-9.933 4.809z" />
-                          </svg>
-                        </Button>
-                      </Dropdown>
-                    </Space>
-                  </Space>
-                </div>
-              )}
+
+            {/* admin */}
+            <div>
+              <button
+                className="btnFromUserToAdmin flex items-center gap-1"
+                onClick={() => {
+                  loginAdmin();
+                }}
+              >
+                <i className="fa-solid fa-house-user" />
+                Trở thành chủ nhà
+              </button>
             </div>
+            {/* language */}
+            <GlobalOutlined />
+            {/* user */}
+            {user ? (
+              <div className="dropdown">
+                <button className="dropbtn flex space-x-2 items-center">
+                  <svg
+                    viewBox="0 0 32 32"
+                    xmlns="http://www.w3.org/2000/svg"
+                    aria-hidden="true"
+                    role="presentation"
+                    focusable="false"
+                    style={{
+                      display: "block",
+                      fill: "none",
+                      height: 16,
+                      width: 16,
+                      stroke: "currentcolor",
+                      strokeWidth: 3,
+                      overflow: "visible",
+                      color: "black",
+                    }}
+                  >
+                    <g fill="none" fillRule="nonzero">
+                      <path d="m2 16h28" />
+                      <path d="m2 24h28" />
+                      <path d="m2 8h28" />
+                    </g>
+                  </svg>
+                  <div>
+                    <NavLink to={`/personalPage/${user.id}`}>
+                      {user.avatar ? (
+                        <img
+                          style={{
+                            width: 30,
+                            height: 30,
+                            borderRadius: 50,
+                          }}
+                          src={user.avatar}
+                          alt=""
+                        />
+                      ) : (
+                        <svg
+                          className=""
+                          viewBox="0 0 32 32"
+                          xmlns="http://www.w3.org/2000/svg"
+                          aria-hidden="true"
+                          role="presentation"
+                          focusable="false"
+                          style={{
+                            display: "block",
+                            height: "30px",
+                            width: "30px",
+                          }}
+                        >
+                          <path d="m16 .7c-8.437 0-15.3 6.863-15.3 15.3s6.863 15.3 15.3 15.3 15.3-6.863 15.3-15.3-6.863-15.3-15.3-15.3zm0 28c-4.021 0-7.605-1.884-9.933-4.81a12.425 12.425 0 0 1 6.451-4.4 6.507 6.507 0 0 1 -3.018-5.49c0-3.584 2.916-6.5 6.5-6.5s6.5 2.916 6.5 6.5a6.513 6.513 0 0 1 -3.019 5.491 12.42 12.42 0 0 1 6.452 4.4c-2.328 2.925-5.912 4.809-9.933 4.809z" />
+                        </svg>
+                      )}
+                    </NavLink>
+                  </div>
+                </button>
+                <div className="dropdown-content">
+                  <p
+                    style={{
+                      padding: "5px 15px",
+                    }}
+                  >
+                    {user.name}
+                  </p>
+                  <button
+                    style={{
+                      padding: "5px 15px",
+                    }}
+                    onClick={() => {
+                      logout();
+                    }}
+                  >
+                    Đăng xuất
+                  </button>
+                </div>
+              </div>
+            ) : (
+              <div>
+                <Space direction="vertical">
+                  <Space wrap>
+                    <Dropdown
+                      menu={{
+                        items,
+                      }}
+                      placement="bottomLeft"
+                    >
+                      <Button className="rounded-full flex items-center py-5">
+                        <svg
+                          viewBox="0 0 32 32"
+                          xmlns="http://www.w3.org/2000/svg"
+                          aria-hidden="true"
+                          role="presentation"
+                          focusable="false"
+                          style={{
+                            display: "block",
+                            fill: "none",
+                            height: 16,
+                            width: 16,
+                            stroke: "currentcolor",
+                            strokeWidth: 3,
+                            overflow: "visible",
+                          }}
+                        >
+                          <g fill="none" fillRule="nonzero">
+                            <path d="m2 16h28" />
+                            <path d="m2 24h28" />
+                            <path d="m2 8h28" />
+                          </g>
+                        </svg>
+                        <svg
+                          className="ml-3"
+                          viewBox="0 0 32 32"
+                          xmlns="http://www.w3.org/2000/svg"
+                          aria-hidden="true"
+                          role="presentation"
+                          focusable="false"
+                          style={{
+                            display: "block",
+                            height: "30px",
+                            width: "30px",
+                            fill: "currentcolor",
+                          }}
+                        >
+                          <path d="m16 .7c-8.437 0-15.3 6.863-15.3 15.3s6.863 15.3 15.3 15.3 15.3-6.863 15.3-15.3-6.863-15.3-15.3-15.3zm0 28c-4.021 0-7.605-1.884-9.933-4.81a12.425 12.425 0 0 1 6.451-4.4 6.507 6.507 0 0 1 -3.018-5.49c0-3.584 2.916-6.5 6.5-6.5s6.5 2.916 6.5 6.5a6.513 6.513 0 0 1 -3.019 5.491 12.42 12.42 0 0 1 6.452 4.4c-2.328 2.925-5.912 4.809-9.933 4.809z" />
+                        </svg>
+                      </Button>
+                    </Dropdown>
+                  </Space>
+                </Space>
+              </div>
+            )}
           </div>
           <div className="flex justify-center mt-3 mb-3">
             {/* search */}

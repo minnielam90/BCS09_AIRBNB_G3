@@ -25,6 +25,10 @@
   .small_header {
     display: none;
   }
+  .btnFromUserToAdmin {
+    font-size: 15px;
+    gap: 0 !important;
+  }
 }
 /* mobile */
 @media screen and (max-width: 576px) {
@@ -33,5 +37,9 @@
   }
   .small_header {
     display: block;
+  }
+  .btnFromUserToAdmin {
+    font-size: 15px;
+    gap: 0 !important;
   }
 }
