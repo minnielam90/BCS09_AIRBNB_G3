@@ -8,9 +8,6 @@ import * as yup from "yup";
 import { userServ } from "../../api/apiAdmin";
 import { yupResolver } from "@hookform/resolvers/yup";
 import "./ModalUser.css";
-import { saveLocalStore } from "../../../user/api/localUser";
-import { saveInfoUser } from "../../../user/redux/userSlice";
-import { useDispatch, useSelector } from "react-redux";
 
 const validationSchema = yup.object().shape({
   name: yup.string().required("Vui lòng nhập tên tài khoản"),
@@ -25,9 +22,6 @@ const validationSchema = yup.object().shape({
 });
 
 const ModalEditUser = ({ setIsOpen, isOpen, editUser, getData }) => {
-  const dispatch = useDispatch();
-  const user = useSelector((state) => state.user);
-
   const methods = useForm({
     defaultValues: {
       name: "",
@@ -37,7 +31,6 @@ const ModalEditUser = ({ setIsOpen, isOpen, editUser, getData }) => {
       gender: " ",
       role: "",
     },
-    // onsubmit phải ở đây chứ  cái này khác nha, thư viện khác nó cấu trúc khác
     resolver: yupResolver(validationSchema),
   });
 
@@ -58,77 +51,7 @@ const ModalEditUser = ({ setIsOpen, isOpen, editUser, getData }) => {
 
   const formattedGender = editUser.gender ? "Nam" : "Nữ";
 
-  const onSubmit = (values) => {
-    console.log(values);
-    const storedDataString = localStorage.getItem("user_info");
-    const storedData = JSON.parse(storedDataString);
-    const { token } = storedData;
-
-    // Combine token and form values
-    const requestData = {
-      ...values,
-      gender: values.gender === "Nam" ? true : false,
-      // token: token, // Include the token in the request
-    };
-
-    // const formattedValues = {
-    //   ...values,
-    //   gender: values.gender === "Nam" ? true : false,
-    // };
-    console.log(requestData);
-    userServ
-      // .editUser(id, formattedValues)
-      .editUser(id, requestData)
-      .then((res) => {
-        // console.log("Updated user data:", res.data.content);
-        // message.success("Cập nhật người dùng thành công");
-        // setIsOpen(false);
-        // getData();
-
-        // const storedDataString = localStorage.getItem("user_info");
-        // const storedData = JSON.parse(storedDataString);
-        // const newDataToken = {
-        //   token: storedData.token,
-        // };
-        // const newData = res.data.content;
-        // const mergedObject = { ...newDataToken, ...newData };
-        // dispatch(saveInfoUser(mergedObject));
-        // saveLocalStore(mergedObject, "user_info");
-
-        console.log("Updated user data:", res.data.content);
-
-        // Combine token and new data for local storage
-        const newData = res.data.content;
-        const mergedObject = { ...newData, ...token }; // chỗ này nek chị
-
-        // console.log("Updated user data from API:", newData);
-        console.log(newData);
-        console.log(mergedObject);
-
-        // Save merged data to local storage and dispatch the action
-        // Lưu local trước r ms cập nhập nó
-
-        saveLocalStore(mergedObject, "user_info");
-        dispatch(saveInfoUser(mergedObject));
-        message.success("Cập nhật người dùng thành công");
-        // window.location.reload();
-        // setIsOpen(false);
-        getData();
-      })
-      .catch((err) => {
-        console.log(err);
-        message.error("Cập nhật người dùng thất bại");
-        setIsOpen(false);
-      });
-  };
-
   useEffect(() => {
-    // console.log("Current Redux user state:", user);
-  }, [user]);
-
-  useEffect(() => {
-    console.log("Existing User Info:", editUser);
-    // đoạn này chị gọi j v
     if (editUser) {
       reset({
         id: editUser.id,
@@ -143,11 +66,30 @@ const ModalEditUser = ({ setIsOpen, isOpen, editUser, getData }) => {
   }, [editUser, reset]);
 
   useEffect(() => {
-    // console.log("Registering form fields");
     register("birthday", { required: "Vui lòng chọn!" });
     register("gender", { required: "Vui lòng chọn!" });
     register("role", { required: "Vui lòng chọn!" });
   }, []);
+
+  const onSubmit = (values) => {
+    const formattedValues = {
+      ...values,
+      gender: values.gender === "Nam" ? true : false,
+    };
+
+    userServ
+      .editUser(id, formattedValues)
+
+      .then((res) => {
+        message.success("Cập nhật người dùng thành công");
+        setIsOpen(false);
+        getData();
+      })
+      .catch((err) => {
+        message.error("Cập nhật người dùng thất bại");
+        setIsOpen(false);
+      });
+  };
 
   const handleBirthday = (dateString) => {
     setValue("birthday", dateString);

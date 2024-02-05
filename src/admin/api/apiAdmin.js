@@ -1,6 +1,7 @@
 import { https } from "../../services/configServ";
 
 export const userServ = {
+  login: (info) => https.post(`/api/auth/signin`, info),
   getList: () => {
     return https.get("/api/users");
   },

@@ -6,50 +6,63 @@ import Location from "../pages/Location/Location";
 import Room from "../pages/Room/Room";
 import User from "../pages/User/User";
 import PageNotFound from "../pages/404/PageNotFound";
+import PrivateRoute from "./PrivateRoute";
+import Login from "../pages/Login/Login";
 
 export const adminRoute = {
+  login: { path: "/admin/login", element: <Login /> },
   home: {
     path: "/admin",
     element: (
-      <AdminIndex>
-        <Home />
-      </AdminIndex>
+      <PrivateRoute>
+        <AdminIndex>
+          <Home />
+        </AdminIndex>
+      </PrivateRoute>
     ),
   },
 
   booking: {
     path: "/admin/booking",
     element: (
-      <AdminIndex>
-        <Booking />
-      </AdminIndex>
+      <PrivateRoute>
+        <AdminIndex>
+          <Booking />
+        </AdminIndex>
+      </PrivateRoute>
     ),
   },
 
   location: {
     path: "/admin/location",
     element: (
-      <AdminIndex>
-        <Location />
-      </AdminIndex>
+      <PrivateRoute>
+        <AdminIndex>
+          <Location />
+        </AdminIndex>
+      </PrivateRoute>
     ),
   },
 
   room: {
     path: "/admin/room",
     element: (
-      <AdminIndex>
-        <Room />
-      </AdminIndex>
+      <PrivateRoute>
+        <AdminIndex>
+          <Room />
+        </AdminIndex>
+      </PrivateRoute>
     ),
   },
 
   user: {
     path: "/admin/user",
     element: (
-      <AdminIndex>
-        <User />
-      </AdminIndex>
+      <PrivateRoute>
+        <AdminIndex>
+          <User />
+        </AdminIndex>
+      </PrivateRoute>
     ),
   },
   other: { path: "admin/*", element: <PageNotFound /> },

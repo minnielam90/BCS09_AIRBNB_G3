@@ -37,7 +37,10 @@
   background-color: #EF4444 !important;
 }
 
-li.ant-menu-overflow-item.ant-menu-submenu.ant-menu-submenu-horizontal.pr-60::after {
-  display: none !important;
+:where(.css-dev-only-do-not-override-6j9yrn).ant-btn-primary.ant-btn-dangerous{
+  background-color: #FF5A5F !important;
 }
 
+:where(.css-dev-only-do-not-override-6j9yrn).ant-btn-primary.ant-btn-dangerous:hover{
+  background-color: #EF4444 !important;
+}
