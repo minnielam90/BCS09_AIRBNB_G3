@@ -52,10 +52,7 @@ const HeaderAdmin = ({ setCollapsed, collapsed }) => {
             {user.user.name}
           </span>
           <Button
-            style={{
-              backgroundColor: "#ff4d4f !important",
-              borderColor: "#ff4d4f",
-            }}
+            className="button-header-admin"
             type="primary"
             danger
             onClick={() => handleLogout()}

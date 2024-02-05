@@ -8,9 +8,6 @@ import { userReducer } from "./user/redux/userReducer";
 // redux
 import { Provider } from "react-redux";
 import { configureStore } from "@reduxjs/toolkit";
-// import { store } from "./redux/configStore";
-
-//react router-dom
 
 const root = ReactDOM.createRoot(document.getElementById("root"));
 

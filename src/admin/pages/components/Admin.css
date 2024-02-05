@@ -37,10 +37,10 @@
   background-color: #EF4444 !important;
 }
 
-:where(.css-dev-only-do-not-override-6j9yrn).ant-btn-primary.ant-btn-dangerous{
+.ant-layout-header :where(.css-dev-only-do-not-override-6j9yrn).ant-btn-primary.ant-btn-dangerous.button-header-admin{
   background-color: #FF5A5F !important;
 }
 
-:where(.css-dev-only-do-not-override-6j9yrn).ant-btn-primary.ant-btn-dangerous:hover{
+.ant-layout-header :where(.css-dev-only-do-not-override-6j9yrn).ant-btn-primary.ant-btn-dangerous.button-header-admin:hover{
   background-color: #EF4444 !important;
 }
