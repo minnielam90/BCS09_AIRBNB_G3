@@ -5,7 +5,7 @@ import { Button, Dropdown, Select, Space } from "antd";
 import { NavLink } from "react-router-dom";
 import { useSelector } from "react-redux";
 import "./header.css";
-import { logout } from "../api/localUser";
+import { loginAdmin, logout } from "../api/localUser";
 import { getLocationS } from "../api/apiUser";
 import "./responsiteHeader.css";
 import adminRoute from "../../admin/route/adminRoute";
@@ -158,13 +158,15 @@ const Header = () => {
             <div className="flex space-x-7 items-center">
               {/* admin */}
               <div>
-                <a
+                <button
                   className="btnFromUserToAdmin flex items-center gap-1"
-                  href={adminRoute.home.path}
+                  onClick={() => {
+                    loginAdmin();
+                  }}
                 >
                   <i className="fa-solid fa-house-user" />
                   Trở thành chủ nhà
-                </a>
+                </button>
               </div>
               {/* language */}
               <GlobalOutlined />

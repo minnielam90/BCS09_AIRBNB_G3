@@ -13,3 +13,8 @@ export const logout = () => {
   localStorage.clear();
   window.location.href = "/login";
 };
+// login ADMIN
+export const loginAdmin = () => {
+  localStorage.clear();
+  window.location.href = "/admin/login";
+};
