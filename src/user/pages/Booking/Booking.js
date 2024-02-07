@@ -130,7 +130,6 @@ const Booking = ({ data }) => {
           setTimeout(() => {
             navigate(`/personalPage/${user.id}`);
           }, 2000);
-          // resetForm();
         })
         .catch((err) => {});
     },
