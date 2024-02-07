@@ -1,6 +1,7 @@
 # Phân chia nhiệm vụ:
 
 **Lê Ngọc Vinh**
+[user + responsive]
 - Đăng nhập
 - Đăng kí
 - Trang chủ
