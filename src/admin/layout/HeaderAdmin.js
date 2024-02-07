@@ -5,20 +5,21 @@ import { useSelector } from "react-redux";
 import { Link } from "react-router-dom";
 import "../pages/components/Admin.css";
 import { adminRoute } from "../route/adminRoute";
-import { saveAdminLocalStore } from "../api/localServiceAdmin";
+import { adminLogout } from "../api/localServiceAdmin";
+import { userRoute } from "../../user/route/userRoute";
 
 const { Header } = Layout;
 
 const HeaderAdmin = ({ setCollapsed, collapsed }) => {
-  const { user } = useSelector((state) => state.adminSlice);
+  const { admin } = useSelector((state) => state.adminSlice);
 
   const {
     token: { colorBgContainer },
   } = theme.useToken();
 
   const handleLogout = () => {
-    saveAdminLocalStore.remove();
-    window.location.href = adminRoute.home.path;
+    adminLogout();
+    window.location.href = userRoute.home.path;
   };
 
   return (
@@ -46,9 +47,11 @@ const HeaderAdmin = ({ setCollapsed, collapsed }) => {
         />
       </div>
 
-      {user ? (
+      {admin ? (
         <div className="pr-60">
-          <span className="mr-2 text-[#ff4d4f] font-semibold">{user.name}</span>
+          <span className="mr-2 text-[#ff4d4f] font-semibold">
+            {admin.name}
+          </span>
           <Button
             className="button-header-admin"
             type="primary"
