@@ -1,4 +1,3 @@
-import React from "react";
 import { https } from "../../services/configServ";
 
 // lấy thông tin phòng thuê

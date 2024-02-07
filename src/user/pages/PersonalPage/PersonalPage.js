@@ -1,7 +1,7 @@
 import { DatePicker, Modal, message } from "antd";
 import { useFormik } from "formik";
 import moment from "moment";
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { editInfrmation } from "../../api/apiUser";
 import { saveLocalStore } from "../../api/localUser";
