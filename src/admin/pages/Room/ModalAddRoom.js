@@ -115,10 +115,8 @@ const ModalAddRoom = ({ getData }) => {
         getData();
         methods.reset();
       })
-      .catch((err) => {
+      .catch(() => {
         message.error("Thêm phòng thất bại");
-        // console.error("API Error:", err.response.data);
-        // console.log(err);
       });
     setIsOpen(false);
   };

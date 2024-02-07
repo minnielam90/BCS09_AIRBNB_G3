@@ -75,8 +75,7 @@ const ModalAddUser = ({ getData }) => {
         getData();
         methods.reset();
       })
-      .catch((err) => {
-        console.log(err);
+      .catch(() => {
         message.error("Không có quyền thêm người dùng");
       });
     setIsOpen(false);

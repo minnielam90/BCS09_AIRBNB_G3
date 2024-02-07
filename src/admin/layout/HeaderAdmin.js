@@ -5,7 +5,7 @@ import { useSelector } from "react-redux";
 import { Link } from "react-router-dom";
 import "../pages/components/Admin.css";
 import { adminRoute } from "../route/adminRoute";
-import { userLocalStorage } from "../api/localServiceAdmin";
+import { saveAdminLocalStore } from "../api/localServiceAdmin";
 
 const { Header } = Layout;
 
@@ -17,7 +17,7 @@ const HeaderAdmin = ({ setCollapsed, collapsed }) => {
   } = theme.useToken();
 
   const handleLogout = () => {
-    userLocalStorage.remove();
+    saveAdminLocalStore.remove();
     window.location.href = adminRoute.home.path;
   };
 
@@ -48,9 +48,7 @@ const HeaderAdmin = ({ setCollapsed, collapsed }) => {
 
       {user ? (
         <div className="pr-60">
-          <span className="mr-2 text-[#ff4d4f] font-semibold">
-            {user.user.name}
-          </span>
+          <span className="mr-2 text-[#ff4d4f] font-semibold">{user.name}</span>
           <Button
             className="button-header-admin"
             type="primary"

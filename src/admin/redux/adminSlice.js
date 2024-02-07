@@ -1,19 +1,20 @@
 import { createSlice } from "@reduxjs/toolkit";
-import { userLocalStorage } from "../api/localServiceAdmin";
+import { getAdminLocalStore } from "../api/localServiceAdmin";
 
 const initialState = {
-  user: userLocalStorage?.get(),
+  admin: getAdminLocalStore("admin_info"),
 };
 
 const adminSlice = createSlice({
-  name: "adminSlice",
+  name: "admin",
   initialState,
   reducers: {
-    setLogin: (state, action) => {
+    saveInfoAdmin: (state, action) => {
       state.user = action.payload;
     },
   },
 });
 
-export const { setLogin } = adminSlice.actions;
+export const { saveInfoAdmin } = adminSlice.actions;
+
 export default adminSlice.reducer;

@@ -31,15 +31,10 @@ const Room = () => {
   };
 
   const getData = () => {
-    roomServ
-      .getList()
-      .then((res) => {
-        setListRooms(res.data.content);
-        setIsOpen(true);
-      })
-      .catch((err) => {
-        console.log(err);
-      });
+    roomServ.getList().then((res) => {
+      setListRooms(res.data.content);
+      setIsOpen(true);
+    });
   };
 
   useEffect(() => {

@@ -49,7 +49,7 @@ const ModalAddBooking = ({ getData }) => {
 
   useEffect(() => {
     register("ngayDen", { required: "Vui lòng chọn!" });
-  }, []);
+  }, [register]);
 
   const handleDate = (dateTarget, date) => {
     let convertDate = dayjs(date).isValid()
@@ -62,12 +62,12 @@ const ModalAddBooking = ({ getData }) => {
   const onSubmit = (values) => {
     bookingRoomServ
       .addBookingRoom(values)
-      .then((res) => {
+      .then(() => {
         getData();
         message.success("Thêm đặt phòng thành công");
         methods.reset();
       })
-      .catch((err) => {
+      .catch(() => {
         message.error("Thêm đặt phòng thất bại");
       });
 

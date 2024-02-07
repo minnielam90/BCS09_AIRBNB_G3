@@ -1,7 +1,13 @@
 import { https } from "../../services/configServ";
 
+// Đăng nhập
+export const loginAdmin = {
+  loginAdmin: (data) => {
+    return https.post("/api/auth/signin", data);
+  },
+};
+
 export const userServ = {
-  login: (info) => https.post(`/api/auth/signin`, info),
   getList: () => {
     return https.get("/api/users");
   },

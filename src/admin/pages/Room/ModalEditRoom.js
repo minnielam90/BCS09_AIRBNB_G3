@@ -86,13 +86,10 @@ const ModalEditRoom = ({ getData, editData, isOpen, setIsOpen }) => {
 
       message.success("Cập nhật hình ảnh thành công");
     } catch (err) {
-      // console.error("Error uploading image:", err);
-
       if (err.response && err.response.status === 403) {
         // Handle 403 error (Forbidden)
         message.warning("Không có quyền cập nhật hình ảnh");
       } else {
-        // Log the error, but continue with the flow (assuming the image is still updated correctly)
         message.success("Hãy reload trang để hình ảnh được cập nhật");
       }
     }
@@ -114,7 +111,6 @@ const ModalEditRoom = ({ getData, editData, isOpen, setIsOpen }) => {
           // Handle 403 error (Forbidden)
           message.warning("Không có quyền cập nhật phòng");
         } else message.error("Cập nhật phòng thất bại");
-        // console.log(err);
       });
   };
 

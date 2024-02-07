@@ -48,9 +48,8 @@ const ModalAddLocation = ({ getData }) => {
         message.success("Thêm vị trí thành công");
         methods.reset();
       })
-      .catch((err) => {
+      .catch(() => {
         message.error("Thêm vị trí thất bại");
-        console.log(err);
       });
     setIsOpen(false);
   };
