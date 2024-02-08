@@ -185,7 +185,7 @@ const HomePages = () => {
               <NavLink to={`/detailItem/${item.id}`} key={index}>
                 <div className="content_item">
                   <img src={item.hinhAnh} alt="" />
-                  <i class="fa-regular fa-heart"></i>
+                  <i className="fa-regular fa-heart"></i>
                   <h4>{item.tenPhong}</h4>
                   <p>
                     <span>${item.giaTien}.000</span> đêm

@@ -87,7 +87,7 @@ const Header = () => {
                 </div>
                 <div className="tuanBatKi">
                   <p className="border-l border-r border-gray-300 px-2">
-                    tuần bất kì
+                    Tuần bất kì
                   </p>
                 </div>
                 <div className="themKhach">
@@ -113,10 +113,10 @@ const Header = () => {
                     <p>Chổ ở</p>
                   </div>
                   <div className="tuanBatKi">
-                    <p className="border-gray-300 px-2">Trãi nghiệm</p>
+                    <p className="border-gray-300 px-2">Trải nghiệm</p>
                   </div>
                   <div className="themKhach">
-                    <p>Trãi nghiệm trực tuyến</p>
+                    <p>Trải nghiệm trực tuyến</p>
                   </div>
                 </button>
               </div>
