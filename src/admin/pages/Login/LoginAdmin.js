@@ -23,25 +23,33 @@ const LoginAdmin = () => {
       loginAdmin
         .loginAdmin(values)
         .then((res) => {
-          messageApi.open({
-            type: "success",
-            content: "Đăng nhập thành công",
-          });
           let data = {
             ...res.data.content.user,
             token: res.data.content.token,
           };
+
+          if (data.role !== "ADMIN") {
+            message.error("Tài khoản không có quyền truy cập trang quản trị!");
+            return;
+          }
+
           dispatch(saveInfoAdmin({ ...data }));
           saveAdminLocalStore({ ...data }, "admin_info");
+
+          messageApi.open({
+            type: "success",
+            content: "Đăng nhập thành công",
+          });
+
           setTimeout(() => {
             navigate("/admin");
             window.location.reload();
           }, 1000);
         })
-        .catch((err) => {
+        .catch(() => {
           messageApi.open({
             type: "error",
-            content: err.response.data.content,
+            content: "Tài khoản hoặc mật khẩu không đúng!",
           });
         });
     },
