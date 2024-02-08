@@ -1,4 +1,4 @@
-import { https } from "../../services/configServ";
+import { https } from "./configAdmin";
 
 // Đăng nhập
 export const loginAdmin = {
