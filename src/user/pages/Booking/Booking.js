@@ -13,11 +13,9 @@ import { useFormik } from "formik";
 import { useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
 import "./responsiteBooking.css";
-const { RangePicker } = DatePicker;
 
 const Booking = ({ data }) => {
   const { user } = useSelector((state) => state.userSlice);
-  const [disabledDates, setDisabledDates] = useState([]);
   const [filteredDatPhongList, setFilteredDatPhongList] = useState([]);
   const [totalDays, setTotalDays] = useState(0);
   const [ngayDenVL, setNgayDenVL] = useState([]);
@@ -31,7 +29,6 @@ const Booking = ({ data }) => {
     getDatPhong
       .getDatPhong()
       .then((res) => {
-        setDisabledDates(res.data.content);
         const filteredList = res.data.content.filter(
           (datPhong) => datPhong.maPhong === data.id
         );
@@ -134,16 +131,7 @@ const Booking = ({ data }) => {
         .catch((err) => {});
     },
   });
-  const {
-    handleChange,
-    handleBlur,
-    handleSubmit,
-    values,
-    errors,
-    touched,
-    resetForm,
-    setFieldValue,
-  } = formik;
+  const { handleChange, handleBlur, handleSubmit, setFieldValue } = formik;
   return (
     <div className="w-5/6 sticky top-28 wBS">
       {contextHolder}
@@ -234,8 +222,8 @@ const Booking = ({ data }) => {
                         const days = differenceInDays(end, start);
                         setTotalDays(days);
                       } else {
-                        setNgayDenVL(""); 
-                        setNgayDiVL(""); 
+                        setNgayDenVL("");
+                        setNgayDiVL("");
                         setTotalDays(0);
                       }
                     }}

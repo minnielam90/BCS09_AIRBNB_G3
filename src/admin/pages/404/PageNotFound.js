@@ -1,7 +1,6 @@
 import React from "react";
 import adminRoute from "../../route/adminRoute";
 import "./PageNotFound.css";
-import { NavLink } from "react-router-dom";
 import { userRoute } from "../../../user/route/userRoute";
 
 const PageNotFound = () => {
