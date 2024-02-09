@@ -19,8 +19,7 @@ const DetailItem = () => {
       .then((res) => {
         setListItem(res.data.content);
       })
-      .catch((err) => {
-      });
+      .catch((err) => {});
   }, []);
   // listComment
   const [binhLuan, setComment] = useState([]);
@@ -30,8 +29,7 @@ const DetailItem = () => {
       .then((res) => {
         setComment(res.data.content);
       })
-      .catch((err) => {
-      });
+      .catch((err) => {});
   }, []);
   // timeComment
   const [binhLuanTime, setCommentTime] = useState([]);
@@ -41,8 +39,7 @@ const DetailItem = () => {
       .then((res) => {
         setCommentTime(res.data.dataTime);
       })
-      .catch((err) => {
-      });
+      .catch((err) => {});
   }, []);
   // getComment
   const formik = useFormik({
@@ -62,12 +59,10 @@ const DetailItem = () => {
             .then((res) => {
               setComment(res.data.content);
             })
-            .catch((err) => {
-            });
+            .catch((err) => {});
           resetForm();
         })
-        .catch((err) => {
-        });
+        .catch((err) => {});
     },
     validationSchema: Yup.object({
       noiDung: Yup.string().required("Bạn chưa có nội dung đánh giá"),
@@ -317,7 +312,7 @@ const DetailItem = () => {
               >
                 <img
                   src="https://a0.muscache.com/im/pictures/54e427bb-9cb7-4a81-94cf-78f19156faad.jpg"
-                  alt
+                  alt=""
                   className="h-7 mb-4"
                 />
                 <p>
@@ -399,7 +394,7 @@ const DetailItem = () => {
                 >
                   Hiển thị thêm
                 </button>
-                <i class="fa-solid fa-angle-right"></i>
+                <i className="fa-solid fa-angle-right"></i>
               </div>
               <div>
                 <h3
@@ -1444,7 +1439,6 @@ const DetailItem = () => {
                       />
                     ) : (
                       <svg
-                        className=""
                         viewBox="0 0 32 32"
                         xmlns="http://www.w3.org/2000/svg"
                         aria-hidden="true"

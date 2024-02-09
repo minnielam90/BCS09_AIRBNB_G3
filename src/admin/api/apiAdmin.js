@@ -23,13 +23,6 @@ export const userServ = {
   editUser: (id, values) => {
     return https.put(`/api/users/${id}`, values);
   },
-  editAvatar: (formFile) => {
-    return https.post(("/api/users/upload-avatar", formFile), {
-      headers: {
-        "Content-Type": "multipart/form-data",
-      },
-    });
-  },
 };
 
 export const roomServ = {
